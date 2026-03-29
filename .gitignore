@@ -1,0 +1,20 @@
+# Large archives and local distribution bundles
+*.zip
+*.rar
+
+# Local/obsolete runtime copies
+pokemon-essentials-v21.1-gen9/
+pokem-runtime/
+
+# Generated/runtime save and compile artifacts
+Game.rxdata
+Game.rxdata.bak
+**/PluginScripts.rxdata
+
+# Local Obsidian UI state
+obsidian-vault/.obsidian/workspace.json
+obsidian-vault/.obsidian/appearance.json
+obsidian-vault/.obsidian/graph.json
+
+# Common local dependency folders
+node_modules/

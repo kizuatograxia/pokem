@@ -1,0 +1,12 @@
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:13:  FONT_NAME                = "Power Green"
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:14:  FONT_SIZE                = 27
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:16:  SMALL_FONT_NAME          = "Power Green Small"
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:17:  SMALL_FONT_SIZE          = 21
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:19:  NARROW_FONT_NAME         = "Power Green Narrow"
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:20:  NARROW_FONT_SIZE         = 27
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:117:    return MessageConfig.pbTryFonts(FONT_NAME)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:121:    return MessageConfig.pbTryFonts(SMALL_FONT_NAME)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:125:    return MessageConfig.pbTryFonts(NARROW_FONT_NAME)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:417:  bitmap.font.size = MessageConfig::FONT_SIZE
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:424:  bitmap.font.size = MessageConfig::SMALL_FONT_SIZE
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:431:  bitmap.font.size = MessageConfig::NARROW_FONT_SIZE

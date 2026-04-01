@@ -85,6 +85,24 @@ Mitigacao:
 
 - definir estado, comando e evento antes de polir UI
 
+## Risco 6: instabilidade operacional do gateway de automacao
+
+Descricao:
+
+O gateway local do OpenClaw apresentou intermitencia (`gateway closed 1000`) em comandos de cron e probe, com comportamento inconsistente entre checks sucessivos.
+
+Impacto:
+
+- jobs automatizados podem falhar de forma silenciosa
+- loops de tentativas e ruido operacional em chat
+- perda de confianca no fluxo de delegacao entre agentes
+
+Mitigacao:
+
+- manter configuracao de gateway sem ambiguidades local/remote
+- adotar janela de validacao antes de religar cron
+- definir playbook de desligamento rapido de jobs quando houver erro recorrente
+
 ## Unknowns importantes
 
 ### Qual sera o stack final do cliente moderno

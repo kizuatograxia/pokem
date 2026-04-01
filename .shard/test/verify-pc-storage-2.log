@@ -1,0 +1,5 @@
+title
+hub
+{"scene":"battle-tower-lobby","coordinateSystem":"origin at top-left; x grows right; y grows down","dialogueOpen":false,"map":{"name":"Battle Tower Lobby","widthTiles":20,"heightTiles":15,"tileSize":32},"player":{"tileX":16,"tileY":12,"worldX":512,"worldY":368,"facing":"right","moving":false,"queuedDirection":null,"running":false},"npcs":[{"id":"single-battles-clerk","tileX":2,"tileY":3,"facing":"down"},{"id":"double-battles-clerk","tileX":16,"tileY":3,"facing":"down"},{"id":"nurse","tileX":9,"tileY":7,"facing":"down"},{"id":"single-battles-door","tileX":2,"tileY":1,"facing":"down"},{"id":"double-battles-door","tileX":16,"tileY":1,"facing":"down"}]}
+waiting menu
+Timed out waiting for text: BILL'S PC

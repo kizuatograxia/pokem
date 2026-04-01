@@ -70,13 +70,27 @@ Entregas:
 - confirmar se `backend-monero` sera mantido, arquivado ou substituido por modulo mais apropriado
 - garantir que scripts e docs antigos apontem para os caminhos oficiais atuais
 
+## Frente operacional transversal: estabilizacao de automacao (OpenClaw)
+
+Entregas:
+
+- playbook curto de diagnostico do gateway (`status`, `gateway status`, `gateway probe`)
+- criterio objetivo de estabilidade antes de religar cron worker
+- fluxo de rollback rapido para disable de cron em caso de erro intermitente
+
+Criterio de pronto:
+
+- gateway sem erro `closed 1000` em janela de observacao definida
+- automacao de tasks roda sem loop e sem duplicacao
+
 ## Proxima sequencia sugerida
 
-1. inventariar scripts de batalha
-2. inventariar PBS
-3. escolher o lugar do importador
-4. criar schema inicial
-5. registrar decisoes novas em ADR se necessario
+1. estabilizar gateway e playbook operacional
+2. inventariar scripts de batalha
+3. inventariar PBS
+4. escolher o lugar do importador
+5. criar schema inicial
+6. registrar decisoes novas em ADR se necessario
 
 ## O que nao deveria entrar agora
 

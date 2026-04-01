@@ -1,0 +1,271 @@
+{
+  "initialState": {
+    "scene": "battle-tower-lobby",
+    "coordinateSystem": "origin at top-left; x grows right; y grows down",
+    "map": {
+      "name": "Battle Tower Lobby",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "tileSize": 32
+    },
+    "player": {
+      "tileX": 9,
+      "tileY": 12,
+      "worldX": 288,
+      "worldY": 368,
+      "facing": "up",
+      "moving": false,
+      "queuedDirection": null,
+      "running": false
+    },
+    "npcs": [
+      {
+        "id": "single-battles-clerk",
+        "tileX": 2,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-clerk",
+        "tileX": 16,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "nurse",
+        "tileX": 9,
+        "tileY": 7,
+        "facing": "down"
+      },
+      {
+        "id": "single-battles-door",
+        "tileX": 2,
+        "tileY": 1,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-door",
+        "tileX": 16,
+        "tileY": 1,
+        "facing": "down"
+      }
+    ]
+  },
+  "walkState": {
+    "scene": "battle-tower-lobby",
+    "coordinateSystem": "origin at top-left; x grows right; y grows down",
+    "map": {
+      "name": "Battle Tower Lobby",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "tileSize": 32
+    },
+    "player": {
+      "tileX": 10,
+      "tileY": 12,
+      "worldX": 328,
+      "worldY": 368,
+      "facing": "right",
+      "moving": true,
+      "queuedDirection": null,
+      "running": false
+    },
+    "npcs": [
+      {
+        "id": "single-battles-clerk",
+        "tileX": 2,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-clerk",
+        "tileX": 16,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "nurse",
+        "tileX": 9,
+        "tileY": 7,
+        "facing": "down"
+      },
+      {
+        "id": "single-battles-door",
+        "tileX": 2,
+        "tileY": 1,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-door",
+        "tileX": 16,
+        "tileY": 1,
+        "facing": "down"
+      }
+    ]
+  },
+  "runState": {
+    "scene": "battle-tower-lobby",
+    "coordinateSystem": "origin at top-left; x grows right; y grows down",
+    "map": {
+      "name": "Battle Tower Lobby",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "tileSize": 32
+    },
+    "player": {
+      "tileX": 11,
+      "tileY": 12,
+      "worldX": 357,
+      "worldY": 368,
+      "facing": "right",
+      "moving": true,
+      "queuedDirection": null,
+      "running": true
+    },
+    "npcs": [
+      {
+        "id": "single-battles-clerk",
+        "tileX": 2,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-clerk",
+        "tileX": 16,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "nurse",
+        "tileX": 9,
+        "tileY": 7,
+        "facing": "down"
+      },
+      {
+        "id": "single-battles-door",
+        "tileX": 2,
+        "tileY": 1,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-door",
+        "tileX": 16,
+        "tileY": 1,
+        "facing": "down"
+      }
+    ]
+  },
+  "beforeBlockedState": {
+    "scene": "battle-tower-lobby",
+    "coordinateSystem": "origin at top-left; x grows right; y grows down",
+    "map": {
+      "name": "Battle Tower Lobby",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "tileSize": 32
+    },
+    "player": {
+      "tileX": 12,
+      "tileY": 9,
+      "worldX": 384,
+      "worldY": 272,
+      "facing": "up",
+      "moving": false,
+      "queuedDirection": null,
+      "running": false
+    },
+    "npcs": [
+      {
+        "id": "single-battles-clerk",
+        "tileX": 2,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-clerk",
+        "tileX": 16,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "nurse",
+        "tileX": 9,
+        "tileY": 7,
+        "facing": "down"
+      },
+      {
+        "id": "single-battles-door",
+        "tileX": 2,
+        "tileY": 1,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-door",
+        "tileX": 16,
+        "tileY": 1,
+        "facing": "down"
+      }
+    ]
+  },
+  "blockedState": {
+    "scene": "battle-tower-lobby",
+    "coordinateSystem": "origin at top-left; x grows right; y grows down",
+    "map": {
+      "name": "Battle Tower Lobby",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "tileSize": 32
+    },
+    "player": {
+      "tileX": 12,
+      "tileY": 9,
+      "worldX": 384,
+      "worldY": 272,
+      "facing": "up",
+      "moving": false,
+      "queuedDirection": null,
+      "running": false
+    },
+    "npcs": [
+      {
+        "id": "single-battles-clerk",
+        "tileX": 2,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-clerk",
+        "tileX": 16,
+        "tileY": 3,
+        "facing": "down"
+      },
+      {
+        "id": "nurse",
+        "tileX": 9,
+        "tileY": 7,
+        "facing": "down"
+      },
+      {
+        "id": "single-battles-door",
+        "tileX": 2,
+        "tileY": 1,
+        "facing": "down"
+      },
+      {
+        "id": "double-battles-door",
+        "tileX": 16,
+        "tileY": 1,
+        "facing": "down"
+      }
+    ]
+  },
+  "consoleErrors": [],
+  "assertions": {
+    "walkMovedOneTileRight": true,
+    "runMovedOneTileRight": true,
+    "runStayedInSameRow": true,
+    "blockedAtLobbyCounter": true,
+    "facingPersistsAfterBlockedMove": true,
+    "noConsoleErrors": true
+  }
+}

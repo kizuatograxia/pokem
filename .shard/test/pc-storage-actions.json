@@ -1,0 +1,27 @@
+{
+  "steps": [
+    { "buttons": ["enter"], "frames": 6 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["down"], "frames": 4 },
+    { "buttons": [], "frames": 8 },
+    { "buttons": ["enter"], "frames": 18 },
+    { "buttons": [], "frames": 16 },
+    { "buttons": ["right"], "frames": 72 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["enter"], "frames": 10 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["enter"], "frames": 10 },
+    { "buttons": [], "frames": 16 },
+    { "buttons": ["z"], "frames": 6 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["x"], "frames": 6 },
+    { "buttons": [], "frames": 8 },
+    { "buttons": ["down"], "frames": 4 },
+    { "buttons": [], "frames": 8 },
+    { "buttons": ["z"], "frames": 6 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["z"], "frames": 6 },
+    { "buttons": [], "frames": 12 },
+    { "buttons": ["x"], "frames": 6 }
+  ]
+}

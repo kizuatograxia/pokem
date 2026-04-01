@@ -21,7 +21,9 @@ Registrar o estado real do workspace no momento em que o vault foi criado, para 
 ### Workspace principal
 
 - `backend-monero`
+- `client`
 - `docs`
+- `.shard`
 - `sources`
 - `tools`
 - `pokemon-essentials-v21.1-gen9`
@@ -49,6 +51,9 @@ Essa escolha nao e estetica; ela resolve um problema operacional real. Durante o
 - o plugin de hotfix necessario para a Gen 9 foi aplicado
 - o fluxo de primeira compilacao de plugins foi ajustado para nao falhar quando `PluginScripts.rxdata` ainda nao existe
 - a build oficial boota com sucesso
+- o runtime agora recompila os `.dat` no primeiro boot apos rebuild via `Data\force_compile`
+- o problema de `Party 0` no `New Game` foi resolvido depois da recompilacao efetiva dos dados Gen 9
+- o vault agora possui um ponto de entrada local para abrir o cofre e acionar o CLI oficial do Obsidian
 
 ## O que significa cada camada
 
@@ -68,6 +73,11 @@ Subcamadas relevantes:
 
 Contem automacoes locais do workspace. O principal artefato atual e o script de rebuild da build oficial.
 
+Tambem passa a concentrar o suporte local ao vault em:
+
+- `tools\obsidian-cli\open-project-vault.bat`
+- `tools\obsidian-cli\obsidian-cli.bat`
+
 ### `docs`
 
 Contem a documentacao operacional inicial produzida antes do vault.
@@ -75,6 +85,59 @@ Contem a documentacao operacional inicial produzida antes do vault.
 ### `pokemon-essentials-v21.1-gen9`
 
 Esta pasta existe no workspace, mas nao deve ser tratada como runtime oficial de execucao. Ela se tornou obsoleta como alvo de teste principal depois que a build consolidada sem acento foi criada.
+
+### `client`
+
+Essa pasta passou a concentrar tres papeis diferentes:
+
+- `client\\web`
+  - frontend web ativo do workspace
+  - contem a title screen, menu, hub Phaser, componentes pixel-perfect e assets sincronizados
+- `client\\genesis`
+  - repositorio de referencia pratica para assets, mapas e composicao visual usados no frontend web
+  - serviu como fonte principal para portar o lobby da Battle Tower e sincronizar `public\\assets`
+- `client\\project-genesis`
+  - referencia adicional de UI, especialmente para title screen e organizacao de assets de interface
+
+### `.shard`
+
+`.shard\\test` se tornou uma area operacional relevante durante o trabalho multiagente no `client/web`.
+
+Ela concentra:
+
+- tarefas delegadas aos workers
+- logs cronologicos do shard
+- resultados por agente
+- screenshots de smoke test
+- scripts auxiliares para subir Vite e automatizar validacao com Playwright
+
+Esse material nao substitui o vault, mas passou a ser uma fonte primaria de evidencia operacional.
+
+## Atualizacao de 2026-03-31 - client/web
+
+O estado atual do frontend web, depois da rodada multiagente mais recente, pode ser resumido assim:
+
+- o `client\\web` saiu de uma base placeholder e hoje tem fluxo navegavel de `TitleScreen -> MainMenuScreen -> Battle Tower`
+- a title screen usa assets reais sincronizados em `client\\web\\public\\assets\\reference-ui\\titles\\`
+- o menu principal expoe a entrada `Battle Tower`
+- o hub Phaser foi convertido para o lobby da Battle Tower usando assets vindos de `client\\genesis`
+- a trilha de audio `.ogg` do hub foi gerada e colocada em `client\\web\\public\\assets\\hub\\bgm\\`
+- houve sync pontual de assets do Essentials para `client\\web\\public\\assets\\essentials\\`
+- a UI React recebeu uma rodada de pixel-perfect com `PixelScreen`, `PixelButton`, `PixelDialogueBox` e `PixelFrame`
+
+Os caminhos mais relevantes dessa rodada sao:
+
+- `client\\web\\src\\screens\\TitleScreen.tsx`
+- `client\\web\\src\\screens\\MainMenuScreen.tsx`
+- `client\\web\\src\\hub\\HubScene.ts`
+- `client\\web\\src\\hub\\HubGame.tsx`
+- `client\\web\\src\\components\\ui-pixel\\`
+- `client\\web\\public\\assets\\`
+- `.shard\\test\\`
+
+Para o historico detalhado dessa rodada, consultar:
+
+- [[07 Sessions/2026-03-31 Multi-Agent Progress Consolidation]]
 
 ## Mudancas tecnicas importantes ja aplicadas
 
@@ -103,6 +166,14 @@ O Pack Gen 9 exigia o plugin `v21.1 Hotfixes`. Esse requisito foi atendido na bu
 - parte das regras da Gen 9 ainda precisa ser tratada como material de validacao/importacao, nao como contrato definitivo do sistema futuro
 - a estrategia de extracao da engine de batalha ainda precisa ser executada de forma sistematica
 
+## Aprendizado operacional importante
+
+Foi confirmado na pratica que apenas copiar `PBS` para o runtime nao basta. Sem recompilacao real, o jogo continua lendo `Data/*.dat` antigos. Isso significa:
+
+- qualquer alteracao relevante em species, moves, items, metadata ou outros dados compilados precisa passar pela etapa de recompilacao do runtime
+- `timestamp` dos `.dat` virou um sinal operacional util para validar se a mudanca entrou de verdade
+- falhas aparentes de gameplay podem, na verdade, ser falhas de pipeline de compilacao
+
 ## Proximas observacoes que devem entrar aqui
 
 Esta nota deve ser atualizada quando houver:
@@ -111,3 +182,4 @@ Esta nota deve ser atualizada quando houver:
 - mudanca da build oficial
 - alteracao do fluxo de rebuild
 - descoberta de novos artefatos obsoletos ou perigosos
+- mudanca do papel canonico de `client\\web`, `client\\genesis` ou `client\\project-genesis`

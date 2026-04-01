@@ -1,0 +1,19 @@
+{
+  "menuText": "BILL'S PC\nORGANIZE BOXES\nWITHDRAW POKEMON\nDEPOSIT POKEMON\nSEE YA!\nOrganize the Pokemon in Boxes and in your party.",
+  "organizeText": "Box 01\nParty: 3\nExit\nVenusaur\nM\n52\nOvergrow\nMiracle Seed\nOrganize the Pokemon in Boxes and in your party.\nZ: Pick up\nX: Back\nQ/W: Change Box",
+  "organizeHeldText": "Box 01\nParty: 3\nExit\nBack\nVenusaur\nM\n52\nOvergrow\nMiracle Seed\nVenusaur was selected.\nZ: Place\nX: Cancel\nQ/W: Change Box",
+  "withdrawBeforeText": "Box 01\nParty: 3\nExit\nVenusaur\nM\n52\nOvergrow\nMiracle Seed\nMove Pokemon stored in Boxes to your party.\nZ: Withdraw\nX: Back\nQ/W: Change Box",
+  "withdrawAfterText": "Box 01\nParty: 4\nExit\nVenusaur was withdrawn.\nZ: Withdraw\nX: Back\nQ/W: Change Box",
+  "depositBeforeText": "Box 01\nParty: 4\nExit\nBack\nPikachu\nM\n50\nStatic\nLight Ball\nStore Pokemon in your party in Boxes.\nZ: Store\nX: Back\nQ/W: Change Box",
+  "depositAfterText": "Box 01\nParty: 3\nExit\nBack\nCharizard\nM\n58\nBlaze\nCharcoal\nPikachu was stored in Box 01.\nZ: Store\nX: Back\nQ/W: Change Box",
+  "previewImages": [],
+  "consoleErrors": [],
+  "assertions": {
+    "menuOpened": true,
+    "organizeOpened": true,
+    "organizePickWorked": true,
+    "withdrawRaisedPartyCount": true,
+    "depositLoweredPartyCount": true,
+    "noConsoleErrors": true
+  }
+}

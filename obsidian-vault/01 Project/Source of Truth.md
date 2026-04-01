@@ -109,6 +109,13 @@ Motivo:
 
 - documentacao tecnica previa em `docs`
 - documentacao organizacional e estrategica no `obsidian-vault`
+- wrappers locais do Obsidian em `tools\obsidian-cli`
+
+### Operacao do vault
+
+- abrir o vault oficial por `tools\obsidian-cli\open-project-vault.bat`
+- usar o CLI oficial por `tools\obsidian-cli\obsidian-cli.bat`
+- manter regras operacionais em [[06 Operations/Obsidian Vault Workflow]]
 
 ## Sinais de que voce esta no lugar errado
 

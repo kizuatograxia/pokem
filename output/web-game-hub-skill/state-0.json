@@ -1,0 +1,1 @@
+{"scene":"hub-test","coordinateSystem":"origin at top-left; x grows right; y grows down","map":{"widthTiles":15,"heightTiles":10,"tileSize":32,"blockedTiles":"outer-border"},"player":{"tileX":7,"tileY":6,"worldX":240,"worldY":188,"facing":"up","moving":true,"queuedDirection":"up","running":false}}

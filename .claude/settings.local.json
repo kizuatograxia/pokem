@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(openclaw cron:*)",
+      "Bash(openclaw gateway:*)",
+      "Bash(schtasks /Query /FO LIST)",
+      "Bash(schtasks /Query /FO CSV)",
+      "Bash(cmd.exe /c \"schtasks /Query /FO CSV 2>&1\")",
+      "Bash(powershell.exe -Command \"Get-ScheduledTask | Where-Object { \\\\$_.TaskName -match 'openclaw|shard|claw' } | Select-Object TaskName, State\" 2>&1)",
+      "Bash(\"/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -Command \"Get-ScheduledTask | Where-Object { \\\\$_.TaskName -match 'openclaw|shard|claw|OpenClaw' } | Select-Object TaskName, State | Format-List\" 2>&1)",
+      "Bash(openclaw --version)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''''channels'''',{}\\), indent=2\\)\\)\")",
+      "Bash(tasklist.exe)",
+      "Bash(netstat.exe -an)",
+      "Bash(\"/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"Get-ScheduledTask | Where-Object { \\\\$_.TaskName -like '*OpenClaw*' -or \\\\$_.TaskName -like '*openclaw*' } | Select-Object TaskName,State | ConvertTo-Json\" 2>&1)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}

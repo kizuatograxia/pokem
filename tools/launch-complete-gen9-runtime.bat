@@ -11,5 +11,12 @@ if not exist "%TARGET%\Game.exe" (
   exit /b 1
 )
 
-cd /d "%TARGET%"
-start "" "Game.exe"
+if not exist "%TARGET%\Data\Animations.rxdata" (
+  echo Runtime is incomplete. Missing:
+  echo %TARGET%\Data\Animations.rxdata
+  echo.
+  echo Run tools\rebuild-complete-gen9-runtime.bat first.
+  exit /b 1
+)
+
+start "" /D "%TARGET%" "%TARGET%\Game.exe"

@@ -30,6 +30,10 @@ These are the source inputs used to rebuild the official runtime:
   - rebuilds the official runtime from the source layers
 - `C:\Users\hedge\OneDrive\Desktop\pokém\tools\launch-complete-gen9-runtime.bat`
   - launches the official runtime
+- `C:\Users\hedge\OneDrive\Desktop\pokém\tools\obsidian-cli\open-project-vault.bat`
+  - opens the project Obsidian vault in the installed desktop app
+- `C:\Users\hedge\OneDrive\Desktop\pokém\tools\obsidian-cli\obsidian-cli.bat`
+  - forwards commands to the installed Obsidian CLI wrapper (`Obsidian.com`); if commands fail, enable `Settings > General > Advanced > Command line interface` in the app
 - `C:\Users\hedge\OneDrive\Desktop\pokém\launch-gen9-game.bat`
   - convenience launcher from the workspace root
 

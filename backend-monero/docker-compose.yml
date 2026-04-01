@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  monerod:
+    image: sethsimmons/simple-monerod:latest
+    restart: unless-stopped
+    ports:
+      - "38081:38081" # Stagenet P2P
+      - "38089:38089" # Stagenet RPC
+    volumes:
+      - ./monero-data:/home/monero/.bitmonero
+    command: >
+      --stagenet
+      --rpc-bind-ip=0.0.0.0
+      --rpc-bind-port=38089
+      --confirm-external-bind
+      --non-interactive
+
+  monero-wallet-rpc:
+    image: sethsimmons/simple-monerod:latest
+    restart: unless-stopped
+    ports:
+      - "38088:38088" # Wallet RPC
+    volumes:
+      - ./wallet-data:/home/monero/wallet
+    depends_on:
+      - monerod
+    command: >
+      monero-wallet-rpc
+      --stagenet
+      --daemon-address monerod:38089
+      --rpc-bind-ip 0.0.0.0
+      --rpc-bind-port 38088
+      --wallet-file /home/monero/wallet/pokemon_betting_wallet
+      --password "super_secret_password_123"
+      --disable-rpc-login
+      --confirm-external-bind

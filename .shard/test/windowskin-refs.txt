@@ -1,0 +1,183 @@
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\001_Settings.rb:380:  # Available speech frames. These are graphic files in "Graphics/Windowskins/".
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\001_Settings.rb:381:  SPEECH_WINDOWSKINS = [
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\001_Settings.rb:405:  # Available menu frames. These are graphic files in "Graphics/Windowskins/".
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\001_Settings.rb:406:  MENU_WINDOWSKINS = [
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\003_Game processing\004_Interpreter_Commands.rb:48:    when 131 then return command_131   # Change Windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\003_Game processing\004_Interpreter_Commands.rb:669:  # * Change Windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\003_Game processing\004_Interpreter_Commands.rb:672:    Settings::SPEECH_WINDOWSKINS.length.times do |i|
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\003_Game processing\004_Interpreter_Commands.rb:673:      next if Settings::SPEECH_WINDOWSKINS[i] != @parameters[0]
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\003_Game processing\004_Interpreter_Commands.rb:675:      MessageConfig.pbSetSpeechFrame("Graphics/Windowskins/" + Settings::SPEECH_WINDOWSKINS[i])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\004_Game classes\002_Game_System.rb:267:  def windowskin_name
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\004_Game classes\002_Game_System.rb:268:    return $data_system.windowskin_name if @windowskin_name.nil?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\004_Game classes\002_Game_System.rb:269:    return @windowskin_name
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\004_Game classes\002_Game_System.rb:272:  attr_writer :windowskin_name
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:37:      return pbResolveBitmap("Graphics/Windowskins/" + Settings::MENU_WINDOWSKINS[$PokemonSystem.frame]) || ""
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:39:      return pbResolveBitmap("Graphics/Windowskins/" + Settings::MENU_WINDOWSKINS[0]) || ""
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:45:      return pbResolveBitmap("Graphics/Windowskins/" + Settings::SPEECH_WINDOWSKINS[$PokemonSystem.textskin]) || ""
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:47:      return pbResolveBitmap("Graphics/Windowskins/" + Settings::SPEECH_WINDOWSKINS[0]) || ""
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:51:  def self.pbDefaultWindowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:52:    skin = ($data_system) ? $data_system.windowskin_name : nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:54:      skin = pbResolveBitmap("Graphics/Windowskins/" + skin) || ""
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:57:    skin = pbResolveBitmap("Graphics/Windowskins/001-Blue01") if nil_or_empty?(skin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:64:      skin = MessageConfig.pbDefaultWindowskin if nil_or_empty?(skin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:73:      skin = MessageConfig.pbDefaultWindowskin if nil_or_empty?(skin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:316:def isDarkWindowskin(windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:317:  return true if !windowskin || windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:318:  if windowskin.width == 192 && windowskin.height == 128
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:319:    return isDarkBackground(windowskin, Rect.new(0, 0, 128, 128))
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:320:  elsif windowskin.width == 128 && windowskin.height == 128
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:321:    return isDarkBackground(windowskin, Rect.new(0, 0, 64, 64))
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:322:  elsif windowskin.width == 96 && windowskin.height == 48
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:323:    return isDarkBackground(windowskin, Rect.new(32, 16, 16, 16))
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:325:    clr = windowskin.get_pixel(windowskin.width / 2, windowskin.height / 2)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:333:def getSkinColor(windowskin, color, isDarkSkin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:334:  if !windowskin || windowskin.disposed? ||
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:335:     windowskin.width != 128 || windowskin.height != 128
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:336:    # Base color, shadow color (these are reversed on dark windowskins)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:367:  else   # VX windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:371:    pixel = windowskin.get_pixel(x, y)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:376:def getDefaultTextColors(windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:377:  if !windowskin || windowskin.disposed? ||
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:378:     windowskin.width != 128 || windowskin.height != 128
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:379:    if isDarkWindowskin(windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:384:  else   # VX windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:385:    color = windowskin.get_pixel(64, 96)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:749:      spr.windowskin = nil if spr.is_a?(Window)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\002_MessageConfig.rb:769:      spr.windowskin = nil if spr.is_a?(Window)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:81:  def windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:82:    @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:107:    @_windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:148:      @_windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:198:  def windowskin=(value)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:199:    @_windowskin = value
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:361:      @sprites["corner#{i}"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:362:      @sprites["scroll#{i}"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:364:    @sprites["pause"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:366:    if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:508:    if changeBitmap && @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:533:        @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[8])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:534:        @cursorbitmap.blt(0, 0, @_windowskin, cursorrects[4])   # top left
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:535:        @cursorbitmap.blt(width - margin, 0, @_windowskin, cursorrects[5])   # top right
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:536:        @cursorbitmap.blt(0, height - margin, @_windowskin, cursorrects[6])   # bottom right
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:537:        @cursorbitmap.blt(width - margin, height - margin, @_windowskin, cursorrects[7])   # bottom left
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:539:        @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[0])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:541:        @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[1])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:543:        @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[2])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:545:        @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[3])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:558:          @sidebitmaps[i].stretch_blt(@sprites["side#{i}"].src_rect, @_windowskin, sideRects[i])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:569:          @backbitmap.stretch_blt(@sprites["back"].src_rect, @_windowskin, backRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:571:          tileBitmap(@backbitmap, @sprites["back"].src_rect, @_windowskin, backRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\003_Window.rb:574:          tileBitmap(@backbitmap, @sprites["back"].src_rect, @_windowskin, blindsRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:33:  def windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:34:    @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:78:    @_windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:128:      @_windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:327:    if (self.windowskin.width == 80 || self.windowskin.width == 96) &&
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:328:       self.windowskin.height == 48
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:329:      # Body = X, Y, width, height of body rectangle within windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:331:      # Trim = X, Y, width, height of trim rectangle within windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:333:    elsif self.windowskin.width == 80 && self.windowskin.height == 80
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:339:  def windowskin=(value)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:340:    oldSkinWidth = (@_windowskin && !@_windowskin.disposed?) ? @_windowskin.width : -1
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:341:    oldSkinHeight = (@_windowskin && !@_windowskin.disposed?) ? @_windowskin.height : -1
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:342:    @_windowskin = value
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:345:      if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:346:        if @_windowskin.width != oldSkinWidth || @_windowskin.height != oldSkinHeight
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:347:          # Update skinrect and trim if windowskin's dimensions have changed
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:348:          @skinrect.set((@_windowskin.width - 16) / 2, (@_windowskin.height - 16) / 2, 16, 16)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:380:    if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:381:      return @trim[0] + (@_windowskin.width - @trim[2] - @trim[0])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:388:    if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:389:      return @trim[1] + (@_windowskin.height - @trim[3] - @trim[1])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:475:    haveskin = @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:477:      @sprites["corner#{i}"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:478:      @sprites["scroll#{i}"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:480:    @sprites["pause"].bitmap = @_windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:566:      if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:598:      if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:606:        endX = (!@_windowskin || @_windowskin.disposed?) ? @skinrect.x : @_windowskin.width - cx
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:608:        endY = (!@_windowskin || @_windowskin.disposed?) ? @skinrect.y : @_windowskin.height - cy
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:631:       @_windowskin && !@_windowskin.disposed? &&
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:638:    if @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:676:    if changeBitmap && @_windowskin && !@_windowskin.disposed?
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:704:          @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[8])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:705:          @cursorbitmap.blt(0, 0, @_windowskin, cursorrects[4])   # top left
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:706:          @cursorbitmap.blt(width - margin, 0, @_windowskin, cursorrects[5])   # top right
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:707:          @cursorbitmap.blt(0, height - margin, @_windowskin, cursorrects[6])   # bottom right
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:708:          @cursorbitmap.blt(width - margin, height - margin, @_windowskin, cursorrects[7])   # bottom left
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:710:          @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[0])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:712:          @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[1])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:714:          @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[2])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:716:          @cursorbitmap.stretch_blt(rect, @_windowskin, cursorrects[3])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:745:                                        @_windowskin, sideRects[i])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:748:                       @_windowskin, sideRects[i])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:766:          @backbitmap.stretch_blt(@sprites["back"].src_rect, @_windowskin, backRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:768:          tileBitmap(@backbitmap, @sprites["back"].src_rect, @_windowskin, backRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:771:          tileBitmap(@backbitmap, @sprites["back"].src_rect, @_windowskin, blindsRect)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:830:    __setWindowskin(@sysframe.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:835:  def __setWindowskin(skin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:836:    if skin && ((skin.width == 192 && skin.height == 128) ||   # RPGXP Windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:837:       (skin.width == 128 && skin.height == 128))              # RPGVX Windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:842:    self.windowskin = skin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:855:  # Filename of windowskin to apply. Supports XP, VX, and animated skins.
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:863:    __setWindowskin(@customskin.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:873:    __setWindowskin(@sysframe.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:879:    if self.windowskin
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:883:          __setWindowskin(@customskin.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:888:          __setWindowskin(@sysframe.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\004_SpriteWindow.rb:899:        __setWindowskin(@sysframe.bitmap)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:33:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:91:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:145:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:269:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:639:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:1065:    if isDarkWindowskin(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:1073:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:1123:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:1178:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\005_SpriteWindow_text.rb:1287:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:317:  goldwindow.setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:333:  coinwindow.setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:349:  pointswindow.setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:447:      msgwindow.windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:449:      msgwindow.setSkin("Graphics/Windowskins/#{w}", false)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:453:  isDarkSkin = isDarkWindowskin(msgwindow.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:455:    next getSkinColor(msgwindow.windowskin, $1.to_i, isDarkSkin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:472:    colortag = getSkinColor(msgwindow.windowskin, 0, true)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\011_Messages.rb:474:    colortag = getSkinColor(msgwindow.windowskin, 0, isDarkSkin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\012_TextEntry.rb:88:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\007_Objects and windows\012_TextEntry.rb:267:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\011_Battle\004_Scene\005_Battle_Scene_Menus.rb:124:    @msgBox.windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\002_UI_Pokedex_Menu.rb:14:    self.windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\002_UI_Pokedex_Menu.rb:57:    @sprites["headings"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\003_UI_Pokedex_Main.rb:13:    self.windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\005_UI_Party.rb:502:    @sprites["storagetext"].windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\007_UI_Bag.rb:17:    self.windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\007_UI_Bag.rb:213:    @sprites["itemtext"].windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\010_UI_Phone.rb:41:    @sprites["list"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\010_UI_Phone.rb:61:    @sprites["header"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\010_UI_Phone.rb:64:    @sprites["info"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\010_UI_Phone.rb:71:    @sprites["bottom"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\011_UI_Jukebox.rb:21:    @sprites["header"].windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\011_UI_Jukebox.rb:25:    @sprites["commands"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:25:    @frame         = 0     # Default window frame (see also Settings::MENU_WINDOWSKINS)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:496:  "parameters"  => 1..Settings::SPEECH_WINDOWSKINS.length,
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:501:    MessageConfig.pbSetSpeechFrame("Graphics/Windowskins/" + Settings::SPEECH_WINDOWSKINS[value])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:502:    # Change the windowskin of the options text box to selected one
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:511:  "parameters"  => 1..Settings::MENU_WINDOWSKINS.length,
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:516:    MessageConfig.pbSetSystemFrame("Graphics/Windowskins/" + Settings::MENU_WINDOWSKINS[value])
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\015_UI_Options.rb:517:    # Change the windowskin of the options text box to selected one
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\018_UI_ItemStorage.rb:19:    self.windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\018_UI_ItemStorage.rb:96:    @sprites["itemtextwindow"].windowskin  = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\020_UI_PokeMart.rb:187:    self.windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\020_UI_PokeMart.rb:266:    @sprites["itemtextwindow"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\020_UI_PokeMart.rb:274:    @sprites["moneywindow"].setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\020_UI_PokeMart.rb:285:    @sprites["qtywindow"].setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\020_UI_PokeMart.rb:331:    @sprites["moneywindow"].setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\021_UI_BattlePointShop.rb:102:    self.windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\021_UI_BattlePointShop.rb:181:    @sprites["itemtextwindow"].windowskin = nil
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\021_UI_BattlePointShop.rb:189:    @sprites["battlepointwindow"].setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\021_UI_BattlePointShop.rb:200:    @sprites["qtywindow"].setSkin("Graphics/Windowskins/goldskin")
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\016_UI\025_UI_TextEntry.rb:13:    colors = getDefaultTextColors(self.windowskin)
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\020_Debug\002_Editor_DataTypes.rb:402:module WindowskinProperty
+C:\Users\hedge\OneDrive\Desktop\pokém\sources\pokemon-essentials-21.1\Data\Scripts\020_Debug\002_Editor_DataTypes.rb:404:    chosenmap = pbListScreen(settingname, GraphicsLister.new("Graphics/Windowskins/", oldsetting))

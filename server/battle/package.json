@@ -1,0 +1,23 @@
+{
+  "name": "battle-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/gateway/server.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@pkmn/sim": "^0.10.7",
+    "@pkmn/data": "^0.10.7",
+    "@pkmn/dex": "^0.10.7",
+    "@types/ws": "^8.5.14",
+    "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "@types/node": "^22.15.3"
+  }
+}

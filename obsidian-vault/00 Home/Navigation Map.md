@@ -44,6 +44,7 @@ Esta pagina funciona como mapa mestre do vault. A ideia e que qualquer pessoa co
 ## 06 Operations
 
 - [[06 Operations/Build and Runtime Workflow]]: rebuild, launch, validacao e disciplina operacional
+- [[06 Operations/Obsidian Vault Workflow]]: abertura do vault, uso do CLI oficial e regras praticas de documentacao
 - [[06 Operations/Risks and Unknowns]]: riscos tecnicos e pontos ainda nao consolidados
 
 ## 07 Sessions

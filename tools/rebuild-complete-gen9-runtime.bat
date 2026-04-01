@@ -2,7 +2,7 @@
 setlocal
 
 pushd "%~dp0.."
-set "ROOT=%CD%"
+for %%I in ("%CD%") do set "ROOT=%%~sI"
 set "RUNTIME_ROOT=C:\Users\hedge\OneDrive\Desktop\pokem-runtime"
 set "BASE_EXTRACT=%RUNTIME_ROOT%\complete-base"
 set "HOTFIX_EXTRACT=%RUNTIME_ROOT%\hotfix-extract"
@@ -44,10 +44,18 @@ echo Rebuilding official runtime...
 if errorlevel 8 goto :robocopy_failed
 
 echo Overlaying editable Essentials scripts...
+if exist "%TARGET%\Data\Scripts" rmdir /S /Q "%TARGET%\Data\Scripts"
 "%ROBO%" "%ROOT%\sources\pokemon-essentials-21.1\Data\Scripts" "%TARGET%\Data\Scripts" /E >nul
 if errorlevel 8 goto :robocopy_failed
 copy /Y "%ROOT%\sources\pokemon-essentials-21.1\Data\Scripts.rxdata" "%TARGET%\Data\Scripts.rxdata" >nul
+if errorlevel 1 goto :copy_failed
 copy /Y "%ROOT%\sources\pokemon-essentials-21.1\Data\messages_core.dat" "%TARGET%\Data\messages_core.dat" >nul
+if errorlevel 1 goto :copy_failed
+if not exist "%TARGET%\Data\Scripts\001_Settings.rb" goto :verify_failed
+
+echo Overlaying editable Essentials PBS...
+"%ROBO%" "%ROOT%\sources\pokemon-essentials-21.1\PBS" "%TARGET%\PBS" /E >nul
+if errorlevel 8 goto :robocopy_failed
 
 echo Overlaying Gen 9 pack...
 "%ROBO%" "%ROOT%\sources\generation-9-pack-v3.3.4\Audio" "%TARGET%\Audio" /E >nul
@@ -73,12 +81,27 @@ mkdir "%HOTFIX_EXTRACT%"
 if errorlevel 8 goto :robocopy_failed
 
 if exist "%TARGET%\Data\PluginScripts.rxdata" del /F /Q "%TARGET%\Data\PluginScripts.rxdata"
+type nul > "%TARGET%\Data\force_compile"
+if exist "%TARGET%\Data\PluginScripts.rxdata" goto :verify_failed
+if not exist "%TARGET%\Data\force_compile" goto :verify_failed
+if not exist "%TARGET%\Data\Scripts\003_Game processing\001_StartGame.rb" goto :verify_failed
+if not exist "%TARGET%\Data\Scripts\019_Utilities\004_RecentLegendaryBundle.rb" goto :verify_failed
 
 echo.
 echo Runtime rebuilt successfully:
 echo %TARGET%
 popd
 exit /b 0
+
+:copy_failed
+echo Copy failed with exit code %ERRORLEVEL%.
+popd
+exit /b 1
+
+:verify_failed
+echo Runtime verification failed after rebuild.
+popd
+exit /b 1
 
 :robocopy_failed
 echo Robocopy failed with exit code %ERRORLEVEL%.

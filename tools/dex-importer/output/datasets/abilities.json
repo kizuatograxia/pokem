@@ -1,0 +1,2792 @@
+{
+  "STENCH": {
+    "id": "STENCH",
+    "name": "Stench",
+    "description": "The stench may cause the target to flinch.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DRIZZLE": {
+    "id": "DRIZZLE",
+    "name": "Drizzle",
+    "description": "The Pokémon makes it rain if it appears in battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SPEEDBOOST": {
+    "id": "SPEEDBOOST",
+    "name": "Speed Boost",
+    "description": "Its Speed stat is gradually boosted.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BATTLEARMOR": {
+    "id": "BATTLEARMOR",
+    "name": "Battle Armor",
+    "description": "The Pokémon is protected against critical hits.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STURDY": {
+    "id": "STURDY",
+    "name": "Sturdy",
+    "description": "It cannot be knocked out with one hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DAMP": {
+    "id": "DAMP",
+    "name": "Damp",
+    "description": "Prevents the use of self-destructing moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIMBER": {
+    "id": "LIMBER",
+    "name": "Limber",
+    "description": "The Pokémon is protected from paralysis.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SANDVEIL": {
+    "id": "SANDVEIL",
+    "name": "Sand Veil",
+    "description": "Boosts the Pokémon's evasion in a sandstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STATIC": {
+    "id": "STATIC",
+    "name": "Static",
+    "description": "Contact with the Pokémon may cause paralysis.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "VOLTABSORB": {
+    "id": "VOLTABSORB",
+    "name": "Volt Absorb",
+    "description": "Restores HP if hit by an Electric-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WATERABSORB": {
+    "id": "WATERABSORB",
+    "name": "Water Absorb",
+    "description": "Restores HP if hit by a Water-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "OBLIVIOUS": {
+    "id": "OBLIVIOUS",
+    "name": "Oblivious",
+    "description": "Prevents it from becoming infatuated.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CLOUDNINE": {
+    "id": "CLOUDNINE",
+    "name": "Cloud Nine",
+    "description": "Eliminates the effects of weather.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "COMPOUNDEYES": {
+    "id": "COMPOUNDEYES",
+    "name": "Compound Eyes",
+    "description": "The Pokémon's accuracy is boosted.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INSOMNIA": {
+    "id": "INSOMNIA",
+    "name": "Insomnia",
+    "description": "Prevents the Pokémon from falling asleep.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "COLORCHANGE": {
+    "id": "COLORCHANGE",
+    "name": "Color Change",
+    "description": "Changes the Pokémon's type to the foe's move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "IMMUNITY": {
+    "id": "IMMUNITY",
+    "name": "Immunity",
+    "description": "Prevents the Pokémon from getting poisoned.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLASHFIRE": {
+    "id": "FLASHFIRE",
+    "name": "Flash Fire",
+    "description": "It powers up Fire-type moves if it's hit by one.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHIELDDUST": {
+    "id": "SHIELDDUST",
+    "name": "Shield Dust",
+    "description": "Blocks the added effects of attacks taken.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "OWNTEMPO": {
+    "id": "OWNTEMPO",
+    "name": "Own Tempo",
+    "description": "Prevents the Pokémon from becoming confused.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SUCTIONCUPS": {
+    "id": "SUCTIONCUPS",
+    "name": "Suction Cups",
+    "description": "Negates all moves that force switching out.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INTIMIDATE": {
+    "id": "INTIMIDATE",
+    "name": "Intimidate",
+    "description": "Lowers the foe's Attack stat.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHADOWTAG": {
+    "id": "SHADOWTAG",
+    "name": "Shadow Tag",
+    "description": "Prevents the foe from escaping.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ROUGHSKIN": {
+    "id": "ROUGHSKIN",
+    "name": "Rough Skin",
+    "description": "Inflicts damage to the foe on contact.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WONDERGUARD": {
+    "id": "WONDERGUARD",
+    "name": "Wonder Guard",
+    "description": "Only super-effective moves will hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LEVITATE": {
+    "id": "LEVITATE",
+    "name": "Levitate",
+    "description": "Gives full immunity to all Ground-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "EFFECTSPORE": {
+    "id": "EFFECTSPORE",
+    "name": "Effect Spore",
+    "description": "Contact may poison or cause paralysis or sleep.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SYNCHRONIZE": {
+    "id": "SYNCHRONIZE",
+    "name": "Synchronize",
+    "description": "Passes a burn, poison, or paralysis to the foe.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CLEARBODY": {
+    "id": "CLEARBODY",
+    "name": "Clear Body",
+    "description": "Prevents other Pokémon from lowering its stats.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "NATURALCURE": {
+    "id": "NATURALCURE",
+    "name": "Natural Cure",
+    "description": "All status problems heal when it switches out.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIGHTNINGROD": {
+    "id": "LIGHTNINGROD",
+    "name": "Lightning Rod",
+    "description": "Draws in all Electric-type moves to up Sp. Attack.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SERENEGRACE": {
+    "id": "SERENEGRACE",
+    "name": "Serene Grace",
+    "description": "Boosts the likelihood of added effects appearing.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SWIFTSWIM": {
+    "id": "SWIFTSWIM",
+    "name": "Swift Swim",
+    "description": "Boosts the Pokémon's Speed in rain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CHLOROPHYLL": {
+    "id": "CHLOROPHYLL",
+    "name": "Chlorophyll",
+    "description": "Boosts the Pokémon's Speed in sunshine.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ILLUMINATE": {
+    "id": "ILLUMINATE",
+    "name": "Illuminate",
+    "description": "Raises the likelihood of meeting wild Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TRACE": {
+    "id": "TRACE",
+    "name": "Trace",
+    "description": "The Pokémon copies a foe's Ability.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HUGEPOWER": {
+    "id": "HUGEPOWER",
+    "name": "Huge Power",
+    "description": "Raises the Pokémon's Attack stat.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POISONPOINT": {
+    "id": "POISONPOINT",
+    "name": "Poison Point",
+    "description": "Contact with the Pokémon may poison the attacker.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INNERFOCUS": {
+    "id": "INNERFOCUS",
+    "name": "Inner Focus",
+    "description": "The Pokémon is protected from flinching.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MAGMAARMOR": {
+    "id": "MAGMAARMOR",
+    "name": "Magma Armor",
+    "description": "Prevents the Pokémon from becoming frozen.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WATERVEIL": {
+    "id": "WATERVEIL",
+    "name": "Water Veil",
+    "description": "Prevents the Pokémon from getting a burn.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MAGNETPULL": {
+    "id": "MAGNETPULL",
+    "name": "Magnet Pull",
+    "description": "Prevents Steel-type Pokémon from escaping.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SOUNDPROOF": {
+    "id": "SOUNDPROOF",
+    "name": "Soundproof",
+    "description": "Gives full immunity to all sound-based moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RAINDISH": {
+    "id": "RAINDISH",
+    "name": "Rain Dish",
+    "description": "The Pokémon gradually regains HP in rain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SANDSTREAM": {
+    "id": "SANDSTREAM",
+    "name": "Sand Stream",
+    "description": "The Pokémon summons a sandstorm in battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PRESSURE": {
+    "id": "PRESSURE",
+    "name": "Pressure",
+    "description": "The Pokémon raises the foe's PP usage.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "THICKFAT": {
+    "id": "THICKFAT",
+    "name": "Thick Fat",
+    "description": "Ups resistance to Fire- and Ice-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "EARLYBIRD": {
+    "id": "EARLYBIRD",
+    "name": "Early Bird",
+    "description": "The Pokémon awakens quickly from sleep.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLAMEBODY": {
+    "id": "FLAMEBODY",
+    "name": "Flame Body",
+    "description": "Contact with the Pokémon may burn the attacker.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RUNAWAY": {
+    "id": "RUNAWAY",
+    "name": "Run Away",
+    "description": "Enables a sure getaway from wild Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "KEENEYE": {
+    "id": "KEENEYE",
+    "name": "Keen Eye",
+    "description": "Prevents other Pokémon from lowering accuracy.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HYPERCUTTER": {
+    "id": "HYPERCUTTER",
+    "name": "Hyper Cutter",
+    "description": "Prevents other Pokémon from lowering Attack stat.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PICKUP": {
+    "id": "PICKUP",
+    "name": "Pickup",
+    "description": "The Pokémon may pick up items.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TRUANT": {
+    "id": "TRUANT",
+    "name": "Truant",
+    "description": "Pokémon can't attack on consecutive turns.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HUSTLE": {
+    "id": "HUSTLE",
+    "name": "Hustle",
+    "description": "Boosts the Attack stat, but lowers accuracy.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CUTECHARM": {
+    "id": "CUTECHARM",
+    "name": "Cute Charm",
+    "description": "Contact with the Pokémon may cause infatuation.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PLUS": {
+    "id": "PLUS",
+    "name": "Plus",
+    "description": "Ups Sp. Atk if another Pokémon has Plus or Minus.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MINUS": {
+    "id": "MINUS",
+    "name": "Minus",
+    "description": "Ups Sp. Atk if another Pokémon has Plus or Minus.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FORECAST": {
+    "id": "FORECAST",
+    "name": "Forecast",
+    "description": "Castform transforms with the weather.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STICKYHOLD": {
+    "id": "STICKYHOLD",
+    "name": "Sticky Hold",
+    "description": "Protects the Pokémon from item theft.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHEDSKIN": {
+    "id": "SHEDSKIN",
+    "name": "Shed Skin",
+    "description": "The Pokémon may heal its own status problems.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GUTS": {
+    "id": "GUTS",
+    "name": "Guts",
+    "description": "Boosts Attack if there is a status problem.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MARVELSCALE": {
+    "id": "MARVELSCALE",
+    "name": "Marvel Scale",
+    "description": "Ups Defense if there is a status problem.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIQUIDOOZE": {
+    "id": "LIQUIDOOZE",
+    "name": "Liquid Ooze",
+    "description": "Damages attackers using any draining move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "OVERGROW": {
+    "id": "OVERGROW",
+    "name": "Overgrow",
+    "description": "Powers up Grass-type moves in a pinch.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BLAZE": {
+    "id": "BLAZE",
+    "name": "Blaze",
+    "description": "Powers up Fire-type moves in a pinch.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TORRENT": {
+    "id": "TORRENT",
+    "name": "Torrent",
+    "description": "Powers up Water-type moves in a pinch.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SWARM": {
+    "id": "SWARM",
+    "name": "Swarm",
+    "description": "Powers up Bug-type moves in a pinch.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ROCKHEAD": {
+    "id": "ROCKHEAD",
+    "name": "Rock Head",
+    "description": "Protects the Pokémon from recoil damage.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DROUGHT": {
+    "id": "DROUGHT",
+    "name": "Drought",
+    "description": "Turns the sunlight harsh if it is in battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ARENATRAP": {
+    "id": "ARENATRAP",
+    "name": "Arena Trap",
+    "description": "Prevents the foe from fleeing.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "VITALSPIRIT": {
+    "id": "VITALSPIRIT",
+    "name": "Vital Spirit",
+    "description": "Prevents the Pokémon from falling asleep.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WHITESMOKE": {
+    "id": "WHITESMOKE",
+    "name": "White Smoke",
+    "description": "Prevents other Pokémon from lowering its stats.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PUREPOWER": {
+    "id": "PUREPOWER",
+    "name": "Pure Power",
+    "description": "Raises the Pokémon's Attack stat.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHELLARMOR": {
+    "id": "SHELLARMOR",
+    "name": "Shell Armor",
+    "description": "The Pokémon is protected against critical hits.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "AIRLOCK": {
+    "id": "AIRLOCK",
+    "name": "Air Lock",
+    "description": "Eliminates the effects of weather.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TANGLEDFEET": {
+    "id": "TANGLEDFEET",
+    "name": "Tangled Feet",
+    "description": "Raises evasion if the Pokémon is confused.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MOTORDRIVE": {
+    "id": "MOTORDRIVE",
+    "name": "Motor Drive",
+    "description": "Raises Speed if hit by an Electric-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RIVALRY": {
+    "id": "RIVALRY",
+    "name": "Rivalry",
+    "description": "Deals more damage to a foe of the same gender.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STEADFAST": {
+    "id": "STEADFAST",
+    "name": "Steadfast",
+    "description": "Raises Speed each time the Pokémon flinches.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SNOWCLOAK": {
+    "id": "SNOWCLOAK",
+    "name": "Snow Cloak",
+    "description": "Raises evasion in a hailstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GLUTTONY": {
+    "id": "GLUTTONY",
+    "name": "Gluttony",
+    "description": "Encourages the early use of a held Berry.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ANGERPOINT": {
+    "id": "ANGERPOINT",
+    "name": "Anger Point",
+    "description": "Maxes Attack after taking a critical hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "UNBURDEN": {
+    "id": "UNBURDEN",
+    "name": "Unburden",
+    "description": "Raises Speed if a held item is used.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HEATPROOF": {
+    "id": "HEATPROOF",
+    "name": "Heatproof",
+    "description": "Weakens the power of Fire-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SIMPLE": {
+    "id": "SIMPLE",
+    "name": "Simple",
+    "description": "The Pokémon is prone to wild stat changes.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DRYSKIN": {
+    "id": "DRYSKIN",
+    "name": "Dry Skin",
+    "description": "Reduces HP if it is hot. Water restores HP.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DOWNLOAD": {
+    "id": "DOWNLOAD",
+    "name": "Download",
+    "description": "Adjusts power according to a foe's defenses.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "IRONFIST": {
+    "id": "IRONFIST",
+    "name": "Iron Fist",
+    "description": "Boosts the power of punching moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POISONHEAL": {
+    "id": "POISONHEAL",
+    "name": "Poison Heal",
+    "description": "Restores HP if the Pokémon is poisoned.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ADAPTABILITY": {
+    "id": "ADAPTABILITY",
+    "name": "Adaptability",
+    "description": "Powers up moves of the same type.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SKILLLINK": {
+    "id": "SKILLLINK",
+    "name": "Skill Link",
+    "description": "Increases the frequency of multi-strike moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HYDRATION": {
+    "id": "HYDRATION",
+    "name": "Hydration",
+    "description": "Heals status problems if it is raining.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SOLARPOWER": {
+    "id": "SOLARPOWER",
+    "name": "Solar Power",
+    "description": "In sunshine, Sp. Atk is boosted but HP decreases.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "QUICKFEET": {
+    "id": "QUICKFEET",
+    "name": "Quick Feet",
+    "description": "Boosts Speed if there is a status problem.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "NORMALIZE": {
+    "id": "NORMALIZE",
+    "name": "Normalize",
+    "description": "All the Pokémon's moves become the Normal type.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SNIPER": {
+    "id": "SNIPER",
+    "name": "Sniper",
+    "description": "Powers up moves if they become critical hits.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MAGICGUARD": {
+    "id": "MAGICGUARD",
+    "name": "Magic Guard",
+    "description": "The Pokémon only takes damage from attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "NOGUARD": {
+    "id": "NOGUARD",
+    "name": "No Guard",
+    "description": "Ensures attacks by or against the Pokémon land.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STALL": {
+    "id": "STALL",
+    "name": "Stall",
+    "description": "The Pokémon moves after all other Pokémon do.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TECHNICIAN": {
+    "id": "TECHNICIAN",
+    "name": "Technician",
+    "description": "Powers up the Pokémon's weaker moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LEAFGUARD": {
+    "id": "LEAFGUARD",
+    "name": "Leaf Guard",
+    "description": "Prevents problems with status in sunny weather.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "KLUTZ": {
+    "id": "KLUTZ",
+    "name": "Klutz",
+    "description": "The Pokémon can't use any held items.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MOLDBREAKER": {
+    "id": "MOLDBREAKER",
+    "name": "Mold Breaker",
+    "description": "Moves can be used regardless of Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SUPERLUCK": {
+    "id": "SUPERLUCK",
+    "name": "Super Luck",
+    "description": "Heightens the critical-hit ratios of moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "AFTERMATH": {
+    "id": "AFTERMATH",
+    "name": "Aftermath",
+    "description": "Damages the attacker landing the finishing hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ANTICIPATION": {
+    "id": "ANTICIPATION",
+    "name": "Anticipation",
+    "description": "Senses a foe's dangerous moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FOREWARN": {
+    "id": "FOREWARN",
+    "name": "Forewarn",
+    "description": "Determines what moves a foe has.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "UNAWARE": {
+    "id": "UNAWARE",
+    "name": "Unaware",
+    "description": "Ignores any stat changes in the Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TINTEDLENS": {
+    "id": "TINTEDLENS",
+    "name": "Tinted Lens",
+    "description": "Powers up \"not very effective\" moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FILTER": {
+    "id": "FILTER",
+    "name": "Filter",
+    "description": "Reduces damage from super-effective attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SLOWSTART": {
+    "id": "SLOWSTART",
+    "name": "Slow Start",
+    "description": "Temporarily halves Attack and Speed.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SCRAPPY": {
+    "id": "SCRAPPY",
+    "name": "Scrappy",
+    "description": "Enables moves to hit Ghost-type Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STORMDRAIN": {
+    "id": "STORMDRAIN",
+    "name": "Storm Drain",
+    "description": "Draws in all Water-type moves to up Sp. Attack.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ICEBODY": {
+    "id": "ICEBODY",
+    "name": "Ice Body",
+    "description": "The Pokémon gradually regains HP in a hailstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SOLIDROCK": {
+    "id": "SOLIDROCK",
+    "name": "Solid Rock",
+    "description": "Reduces damage from super-effective attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SNOWWARNING": {
+    "id": "SNOWWARNING",
+    "name": "Snow Warning",
+    "description": "The Pokémon summons a hailstorm in battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HONEYGATHER": {
+    "id": "HONEYGATHER",
+    "name": "Honey Gather",
+    "description": "The Pokémon may gather Honey from somewhere.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FRISK": {
+    "id": "FRISK",
+    "name": "Frisk",
+    "description": "The Pokémon can check a foe's held item.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RECKLESS": {
+    "id": "RECKLESS",
+    "name": "Reckless",
+    "description": "Powers up moves that have recoil damage.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MULTITYPE": {
+    "id": "MULTITYPE",
+    "name": "Multitype",
+    "description": "Changes type to match the held Plate.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLOWERGIFT": {
+    "id": "FLOWERGIFT",
+    "name": "Flower Gift",
+    "description": "Powers up party Pokémon when it is sunny.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BADDREAMS": {
+    "id": "BADDREAMS",
+    "name": "Bad Dreams",
+    "description": "Reduces a sleeping foe's HP.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PICKPOCKET": {
+    "id": "PICKPOCKET",
+    "name": "Pickpocket",
+    "description": "Steals an item when hit by another Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHEERFORCE": {
+    "id": "SHEERFORCE",
+    "name": "Sheer Force",
+    "description": "Removes added effects to increase move damage.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CONTRARY": {
+    "id": "CONTRARY",
+    "name": "Contrary",
+    "description": "Makes stat changes have an opposite effect.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "UNNERVE": {
+    "id": "UNNERVE",
+    "name": "Unnerve",
+    "description": "Makes the foe nervous and unable to eat Berries.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DEFIANT": {
+    "id": "DEFIANT",
+    "name": "Defiant",
+    "description": "When its stats are lowered its Attack increases.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DEFEATIST": {
+    "id": "DEFEATIST",
+    "name": "Defeatist",
+    "description": "Lowers stats when HP becomes half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CURSEDBODY": {
+    "id": "CURSEDBODY",
+    "name": "Cursed Body",
+    "description": "May disable a move used on the Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HEALER": {
+    "id": "HEALER",
+    "name": "Healer",
+    "description": "May heal an ally's status conditions.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FRIENDGUARD": {
+    "id": "FRIENDGUARD",
+    "name": "Friend Guard",
+    "description": "Reduces damage done to allies.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WEAKARMOR": {
+    "id": "WEAKARMOR",
+    "name": "Weak Armor",
+    "description": "Physical attacks lower Defense and raise Speed.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HEAVYMETAL": {
+    "id": "HEAVYMETAL",
+    "name": "Heavy Metal",
+    "description": "Doubles the Pokémon's weight.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIGHTMETAL": {
+    "id": "LIGHTMETAL",
+    "name": "Light Metal",
+    "description": "Halves the Pokémon's weight.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MULTISCALE": {
+    "id": "MULTISCALE",
+    "name": "Multiscale",
+    "description": "Reduces damage when HP is full.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TOXICBOOST": {
+    "id": "TOXICBOOST",
+    "name": "Toxic Boost",
+    "description": "Powers up physical attacks when poisoned.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLAREBOOST": {
+    "id": "FLAREBOOST",
+    "name": "Flare Boost",
+    "description": "Powers up special attacks when burned.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HARVEST": {
+    "id": "HARVEST",
+    "name": "Harvest",
+    "description": "May create another Berry after one is used.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TELEPATHY": {
+    "id": "TELEPATHY",
+    "name": "Telepathy",
+    "description": "Anticipates an ally's attack and dodges it.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MOODY": {
+    "id": "MOODY",
+    "name": "Moody",
+    "description": "Raises one stat and lowers another.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "OVERCOAT": {
+    "id": "OVERCOAT",
+    "name": "Overcoat",
+    "description": "Protects the Pokémon from damage from weather.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POISONTOUCH": {
+    "id": "POISONTOUCH",
+    "name": "Poison Touch",
+    "description": "May poison targets when a Pokémon makes contact.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "REGENERATOR": {
+    "id": "REGENERATOR",
+    "name": "Regenerator",
+    "description": "Restores a little HP when withdrawn from battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BIGPECKS": {
+    "id": "BIGPECKS",
+    "name": "Big Pecks",
+    "description": "Protects from Defense-lowering attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SANDRUSH": {
+    "id": "SANDRUSH",
+    "name": "Sand Rush",
+    "description": "Boosts the Pokémon's Speed in a sandstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WONDERSKIN": {
+    "id": "WONDERSKIN",
+    "name": "Wonder Skin",
+    "description": "Makes status-changing moves more likely to miss.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ANALYTIC": {
+    "id": "ANALYTIC",
+    "name": "Analytic",
+    "description": "Boosts move power when the Pokémon moves last.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ILLUSION": {
+    "id": "ILLUSION",
+    "name": "Illusion",
+    "description": "Comes out disguised as the Pokémon in back.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "IMPOSTER": {
+    "id": "IMPOSTER",
+    "name": "Imposter",
+    "description": "It transforms itself into the Pokémon it is facing.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INFILTRATOR": {
+    "id": "INFILTRATOR",
+    "name": "Infiltrator",
+    "description": "Passes through the foe's barrier and strikes.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MUMMY": {
+    "id": "MUMMY",
+    "name": "Mummy",
+    "description": "Contact with this Pokémon spreads this Ability.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MOXIE": {
+    "id": "MOXIE",
+    "name": "Moxie",
+    "description": "Boosts Attack after knocking out any Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "JUSTIFIED": {
+    "id": "JUSTIFIED",
+    "name": "Justified",
+    "description": "Raises Attack when hit by a Dark-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RATTLED": {
+    "id": "RATTLED",
+    "name": "Rattled",
+    "description": "Some move types scare it and boost its Speed.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MAGICBOUNCE": {
+    "id": "MAGICBOUNCE",
+    "name": "Magic Bounce",
+    "description": "Reflects status-changing moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SAPSIPPER": {
+    "id": "SAPSIPPER",
+    "name": "Sap Sipper",
+    "description": "Boosts Attack when hit by a Grass-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PRANKSTER": {
+    "id": "PRANKSTER",
+    "name": "Prankster",
+    "description": "Gives priority to a status move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SANDFORCE": {
+    "id": "SANDFORCE",
+    "name": "Sand Force",
+    "description": "Boosts certain moves' power in a sandstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "IRONBARBS": {
+    "id": "IRONBARBS",
+    "name": "Iron Barbs",
+    "description": "Inflicts damage to the Pokémon on contact.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ZENMODE": {
+    "id": "ZENMODE",
+    "name": "Zen Mode",
+    "description": "Changes the Pokémon's shape when HP is halved.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "VICTORYSTAR": {
+    "id": "VICTORYSTAR",
+    "name": "Victory Star",
+    "description": "Boosts the accuracy of its allies and itself.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TURBOBLAZE": {
+    "id": "TURBOBLAZE",
+    "name": "Turboblaze",
+    "description": "Moves can be used regardless of Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TERAVOLT": {
+    "id": "TERAVOLT",
+    "name": "Teravolt",
+    "description": "Moves can be used regardless of Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "AROMAVEIL": {
+    "id": "AROMAVEIL",
+    "name": "Aroma Veil",
+    "description": "Protects against attacks that limit move choices.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLOWERVEIL": {
+    "id": "FLOWERVEIL",
+    "name": "Flower Veil",
+    "description": "Protects Grass-type allies from stat/status effects.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CHEEKPOUCH": {
+    "id": "CHEEKPOUCH",
+    "name": "Cheek Pouch",
+    "description": "Restores HP as well when the Pokémon eats a Berry.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PROTEAN": {
+    "id": "PROTEAN",
+    "name": "Protean",
+    "description": "It changes type to that of the move it's about to use.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FURCOAT": {
+    "id": "FURCOAT",
+    "name": "Fur Coat",
+    "description": "Halves the damage from physical moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MAGICIAN": {
+    "id": "MAGICIAN",
+    "name": "Magician",
+    "description": "Steals the held item of a Pokémon it hits.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BULLETPROOF": {
+    "id": "BULLETPROOF",
+    "name": "Bulletproof",
+    "description": "Protects the Pokémon from some ball and bomb moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "COMPETITIVE": {
+    "id": "COMPETITIVE",
+    "name": "Competitive",
+    "description": "Sharply boosts Sp. Atk when a stat is lowered.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STRONGJAW": {
+    "id": "STRONGJAW",
+    "name": "Strong Jaw",
+    "description": "Boosts the power of biting moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "REFRIGERATE": {
+    "id": "REFRIGERATE",
+    "name": "Refrigerate",
+    "description": "Normal-type moves become Ice-type and powered up.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SWEETVEIL": {
+    "id": "SWEETVEIL",
+    "name": "Sweet Veil",
+    "description": "Prevents itself and allies from falling asleep.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STANCECHANGE": {
+    "id": "STANCECHANGE",
+    "name": "Stance Change",
+    "description": "Changes between Blade and Shield Forme with attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GALEWINGS": {
+    "id": "GALEWINGS",
+    "name": "Gale Wings",
+    "description": "Flying-type moves gain priority when its HP is full.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MEGALAUNCHER": {
+    "id": "MEGALAUNCHER",
+    "name": "Mega Launcher",
+    "description": "Powers up aura and pulse moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GRASSPELT": {
+    "id": "GRASSPELT",
+    "name": "Grass Pelt",
+    "description": "Boosts the Defense stat on Grassy Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SYMBIOSIS": {
+    "id": "SYMBIOSIS",
+    "name": "Symbiosis",
+    "description": "Passes its held item to an ally that has used theirs.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TOUGHCLAWS": {
+    "id": "TOUGHCLAWS",
+    "name": "Tough Claws",
+    "description": "Powers up moves that make direct contact.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PIXILATE": {
+    "id": "PIXILATE",
+    "name": "Pixilate",
+    "description": "Normal-type moves become Fairy-type and powered up.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GOOEY": {
+    "id": "GOOEY",
+    "name": "Gooey",
+    "description": "Contact with it lowers the attacker's Speed stat.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "AERILATE": {
+    "id": "AERILATE",
+    "name": "Aerilate",
+    "description": "Normal-type moves become Flying-type and power up.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PARENTALBOND": {
+    "id": "PARENTALBOND",
+    "name": "Parental Bond",
+    "description": "Parent and child each attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DARKAURA": {
+    "id": "DARKAURA",
+    "name": "Dark Aura",
+    "description": "Powers up each Pokémon's Dark-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FAIRYAURA": {
+    "id": "FAIRYAURA",
+    "name": "Fairy Aura",
+    "description": "Powers up each Pokémon's Fairy-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "AURABREAK": {
+    "id": "AURABREAK",
+    "name": "Aura Break",
+    "description": "Reverses \"Aura\" Abilities to weaken affected moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PRIMORDIALSEA": {
+    "id": "PRIMORDIALSEA",
+    "name": "Primordial Sea",
+    "description": "Changes the weather to nullify Fire-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DESOLATELAND": {
+    "id": "DESOLATELAND",
+    "name": "Desolate Land",
+    "description": "Changes the weather to nullify Water-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DELTASTREAM": {
+    "id": "DELTASTREAM",
+    "name": "Delta Stream",
+    "description": "Alters weather to remove Flying-type's weaknesses.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STAMINA": {
+    "id": "STAMINA",
+    "name": "Stamina",
+    "description": "Boosts Defense when hit by an attack.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WIMPOUT": {
+    "id": "WIMPOUT",
+    "name": "Wimp Out",
+    "description": "Cowardly switches out if its HP becomes half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "EMERGENCYEXIT": {
+    "id": "EMERGENCYEXIT",
+    "name": "Emergency Exit",
+    "description": "Switches out if its HP becomes half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WATERCOMPACTION": {
+    "id": "WATERCOMPACTION",
+    "name": "Water Compaction",
+    "description": "Sharply ups Defense when hit by a Water-type move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MERCILESS": {
+    "id": "MERCILESS",
+    "name": "Merciless",
+    "description": "Its attacks are critical hits when it is poisoned.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHIELDSDOWN": {
+    "id": "SHIELDSDOWN",
+    "name": "Shields Down",
+    "description": "Its shell breaks if its HP becomes half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STAKEOUT": {
+    "id": "STAKEOUT",
+    "name": "Stakeout",
+    "description": "Deals doubles damage to a target's replacement.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WATERBUBBLE": {
+    "id": "WATERBUBBLE",
+    "name": "Water Bubble",
+    "description": "Weakens incoming Fire-type moves and prevents burns.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STEELWORKER": {
+    "id": "STEELWORKER",
+    "name": "Steelworker",
+    "description": "Powers up Steel-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BERSERK": {
+    "id": "BERSERK",
+    "name": "Berserk",
+    "description": "Ups Sp. Atk if a hit makes its HP half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SLUSHRUSH": {
+    "id": "SLUSHRUSH",
+    "name": "Slush Rush",
+    "description": "Boosts the Pokémon's Speed stat in a hailstorm.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LONGREACH": {
+    "id": "LONGREACH",
+    "name": "Long Reach",
+    "description": "Uses moves without making contact with the target.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIQUIDVOICE": {
+    "id": "LIQUIDVOICE",
+    "name": "Liquid Voice",
+    "description": "Its sound-based moves become Water-type.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TRIAGE": {
+    "id": "TRIAGE",
+    "name": "Triage",
+    "description": "Gives priority to a healing move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GALVANIZE": {
+    "id": "GALVANIZE",
+    "name": "Galvanize",
+    "description": "Normal-type moves become Electric-type and powered.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SURGESURFER": {
+    "id": "SURGESURFER",
+    "name": "Surge Surfer",
+    "description": "Doubles Speed on Electric Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SCHOOLING": {
+    "id": "SCHOOLING",
+    "name": "Schooling",
+    "description": "Forms a powerful school while it has a lot of HP.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DISGUISE": {
+    "id": "DISGUISE",
+    "name": "Disguise",
+    "description": "Its shroud protects it from an attack just once.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BATTLEBOND": {
+    "id": "BATTLEBOND",
+    "name": "Battle Bond",
+    "description": "Defeating a foe lets it become Ash-Greninja.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POWERCONSTRUCT": {
+    "id": "POWERCONSTRUCT",
+    "name": "Power Construct",
+    "description": "Changes with other Cells if HP becomes half or less.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CORROSION": {
+    "id": "CORROSION",
+    "name": "Corrosion",
+    "description": "It can poison Steel- and Poison-type targets.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "COMATOSE": {
+    "id": "COMATOSE",
+    "name": "Comatose",
+    "description": "It's always drowsing, and attacks without waking.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "QUEENLYMAJESTY": {
+    "id": "QUEENLYMAJESTY",
+    "name": "Queenly Majesty",
+    "description": "Makes foes unable to use priority attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INNARDSOUT": {
+    "id": "INNARDSOUT",
+    "name": "Innards Out",
+    "description": "Damages an attacker that lands the finishing hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DANCER": {
+    "id": "DANCER",
+    "name": "Dancer",
+    "description": "Repeats another Pokémon's dance move immediately.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BATTERY": {
+    "id": "BATTERY",
+    "name": "Battery",
+    "description": "Powers up ally Pokémon's special moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FLUFFY": {
+    "id": "FLUFFY",
+    "name": "Fluffy",
+    "description": "Resists contact damage but weaker to Fire-type.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DAZZLING": {
+    "id": "DAZZLING",
+    "name": "Dazzling",
+    "description": "Makes foes unable to use priority attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SOULHEART": {
+    "id": "SOULHEART",
+    "name": "Soul-Heart",
+    "description": "Boosts Sp. Atk each time a Pokémon faints.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TANGLINGHAIR": {
+    "id": "TANGLINGHAIR",
+    "name": "Tangling Hair",
+    "description": "Contact with it lowers the attacker's Speed.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RECEIVER": {
+    "id": "RECEIVER",
+    "name": "Receiver",
+    "description": "Copies the Ability of a defeated ally.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POWEROFALCHEMY": {
+    "id": "POWEROFALCHEMY",
+    "name": "Power of Alchemy",
+    "description": "Copies the Ability of a defeated ally.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BEASTBOOST": {
+    "id": "BEASTBOOST",
+    "name": "Beast Boost",
+    "description": "Boosts its best stat each time it deals a KO.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RKSSYSTEM": {
+    "id": "RKSSYSTEM",
+    "name": "RKS System",
+    "description": "Its type matches the memory disc it holds.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ELECTRICSURGE": {
+    "id": "ELECTRICSURGE",
+    "name": "Electric Surge",
+    "description": "Turns the ground into Electric Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PSYCHICSURGE": {
+    "id": "PSYCHICSURGE",
+    "name": "Psychic Surge",
+    "description": "Turns the ground into Psychic Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MISTYSURGE": {
+    "id": "MISTYSURGE",
+    "name": "Misty Surge",
+    "description": "Turns the ground into Misty Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GRASSYSURGE": {
+    "id": "GRASSYSURGE",
+    "name": "Grassy Surge",
+    "description": "Turns the ground into Grassy Terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "FULLMETALBODY": {
+    "id": "FULLMETALBODY",
+    "name": "Full Metal Body",
+    "description": "Prevents other Pokémon from lowering its stats.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SHADOWSHIELD": {
+    "id": "SHADOWSHIELD",
+    "name": "Shadow Shield",
+    "description": "Resists damage while its HP is full.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PRISMARMOR": {
+    "id": "PRISMARMOR",
+    "name": "Prism Armor",
+    "description": "Reduces damage from super-effective attacks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "NEUROFORCE": {
+    "id": "NEUROFORCE",
+    "name": "Neuroforce",
+    "description": "Powers up moves that are super-effective.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "INTREPIDSWORD": {
+    "id": "INTREPIDSWORD",
+    "name": "Intrepid Sword",
+    "description": "Boosts Attack when entering a battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DAUNTLESSSHIELD": {
+    "id": "DAUNTLESSSHIELD",
+    "name": "Dauntless Shield",
+    "description": "Boosts Defense when entering a battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "LIBERO": {
+    "id": "LIBERO",
+    "name": "Libero",
+    "description": "It changes type to that of the move it's about to use.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "BALLFETCH": {
+    "id": "BALLFETCH",
+    "name": "Ball Fetch",
+    "description": "Retrieves the first thrown Poké Ball if it failed.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "COTTONDOWN": {
+    "id": "COTTONDOWN",
+    "name": "Cotton Down",
+    "description": "Scatters Speed-lowering cotton fluff when hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PROPELLERTAIL": {
+    "id": "PROPELLERTAIL",
+    "name": "Propeller Tail",
+    "description": "This Pokémon's moves cannot be redirected.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MIRRORARMOR": {
+    "id": "MIRRORARMOR",
+    "name": "Mirror Armor",
+    "description": "Bounces back stat-lowering effects.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GULPMISSILE": {
+    "id": "GULPMISSILE",
+    "name": "Gulp Missile",
+    "description": "Catches prey via Surf or Dive, spits it out when hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STALWART": {
+    "id": "STALWART",
+    "name": "Stalwart",
+    "description": "This Pokémon's moves cannot be redirected.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STEAMENGINE": {
+    "id": "STEAMENGINE",
+    "name": "Steam Engine",
+    "description": "Boosts Speed drastically if hit by a Fire or Water move.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PUNKROCK": {
+    "id": "PUNKROCK",
+    "name": "Punk Rock",
+    "description": "Powers up own sound moves. Resists other sound moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SANDSPIT": {
+    "id": "SANDSPIT",
+    "name": "Sand Spit",
+    "description": "Creates a sandstorm when hit by an attack.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ICESCALES": {
+    "id": "ICESCALES",
+    "name": "Ice Scales",
+    "description": "Halves the damage taken from special moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "RIPEN": {
+    "id": "RIPEN",
+    "name": "Ripen",
+    "description": "Ripens Berries and doubles their effect.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ICEFACE": {
+    "id": "ICEFACE",
+    "name": "Ice Face",
+    "description": "Blocks a physical hit, but the ice head breaks.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "POWERSPOT": {
+    "id": "POWERSPOT",
+    "name": "Power Spot",
+    "description": "Just being next to the Pokémon powers up moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "MIMICRY": {
+    "id": "MIMICRY",
+    "name": "Mimicry",
+    "description": "Changes type depending on the terrain.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "SCREENCLEANER": {
+    "id": "SCREENCLEANER",
+    "name": "Screen Cleaner",
+    "description": "On entering battle, clears effects of Reflect, etc.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "STEELYSPIRIT": {
+    "id": "STEELYSPIRIT",
+    "name": "Steely Spirit",
+    "description": "Powers up ally Pokémon's Steel-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PERISHBODY": {
+    "id": "PERISHBODY",
+    "name": "Perish Body",
+    "description": "Both Pokémon faint 3 turns after taking a contact hit.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "WANDERINGSPIRIT": {
+    "id": "WANDERINGSPIRIT",
+    "name": "Wandering Spirit",
+    "description": "Swaps Abilities with contact-making Pokémon.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GORILLATACTICS": {
+    "id": "GORILLATACTICS",
+    "name": "Gorilla Tactics",
+    "description": "Boosts Attack, but allows only one move to be used.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "NEUTRALIZINGGAS": {
+    "id": "NEUTRALIZINGGAS",
+    "name": "Neutralizing Gas",
+    "description": "Nullifies the effects of all other Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "PASTELVEIL": {
+    "id": "PASTELVEIL",
+    "name": "Pastel Veil",
+    "description": "Protects the Pokémon and its allies from poisoning.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "HUNGERSWITCH": {
+    "id": "HUNGERSWITCH",
+    "name": "Hunger Switch",
+    "description": "Changes between Full Belly and Hangry Mode each turn.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "QUICKDRAW": {
+    "id": "QUICKDRAW",
+    "name": "Quick Draw",
+    "description": "Enables the Pokémon to move first occasionally.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "UNSEENFIST": {
+    "id": "UNSEENFIST",
+    "name": "Unseen Fist",
+    "description": "The Pokémon's contact moves ignore protections.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CURIOUSMEDICINE": {
+    "id": "CURIOUSMEDICINE",
+    "name": "Curious Medicine",
+    "description": "Removes all allies' stat changes on joining battle.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "TRANSISTOR": {
+    "id": "TRANSISTOR",
+    "name": "Transistor",
+    "description": "Powers up Electric-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "DRAGONSMAW": {
+    "id": "DRAGONSMAW",
+    "name": "Dragon's Maw",
+    "description": "Powers up Dragon-type moves.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "CHILLINGNEIGH": {
+    "id": "CHILLINGNEIGH",
+    "name": "Chilling Neigh",
+    "description": "When knocking out a target, raises Attack.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "GRIMNEIGH": {
+    "id": "GRIMNEIGH",
+    "name": "Grim Neigh",
+    "description": "When knocking out a target, raises Sp. Atk.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ASONECHILLINGNEIGH": {
+    "id": "ASONECHILLINGNEIGH",
+    "name": "As One",
+    "description": "Combines Unnerve and Chilling Neigh Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ASONEGRIMNEIGH": {
+    "id": "ASONEGRIMNEIGH",
+    "name": "As One",
+    "description": "Combines Unnerve and Grim Neigh Abilities.",
+    "provenance": {
+      "source": "essentials-21.1",
+      "file": "PBS/abilities.txt"
+    }
+  },
+  "ANGERSHELL": {
+    "id": "ANGERSHELL",
+    "name": "Anger Shell",
+    "description": "Gets a powerful boost if a hit makes its HP half or less.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "ARMORTAIL": {
+    "id": "ARMORTAIL",
+    "name": "Armor Tail",
+    "description": "Prevents opposing Pokémon from using priority moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "BEADSOFRUIN": {
+    "id": "BEADSOFRUIN",
+    "name": "Beads of Ruin",
+    "description": "Lowers the Sp. Def of all Pokémon except the user.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "COMMANDER": {
+    "id": "COMMANDER",
+    "name": "Commander",
+    "description": "Pairs up and commands with an active Dondozo.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "COSTAR": {
+    "id": "COSTAR",
+    "name": "Costar",
+    "description": "Copies an ally's stat changes upon entry to battle.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "CUDCHEW": {
+    "id": "CUDCHEW",
+    "name": "Cud Chew",
+    "description": "Reuses an eaten Berry at the end of the next turn.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "EARTHEATER": {
+    "id": "EARTHEATER",
+    "name": "Earth Eater",
+    "description": "Restores HP if hit by a Ground-type move.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "ELECTROMORPHOSIS": {
+    "id": "ELECTROMORPHOSIS",
+    "name": "Electromorphosis",
+    "description": "The Pokémon becomes charged upon taking damage.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "GOODASGOLD": {
+    "id": "GOODASGOLD",
+    "name": "Good as Gold",
+    "description": "The Pokémon becomes immune to status moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "GUARDDOG": {
+    "id": "GUARDDOG",
+    "name": "Guard Dog",
+    "description": "Boosts Atk if intimidated and immune to being forced out.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "HADRONENGINE": {
+    "id": "HADRONENGINE",
+    "name": "Hadron Engine",
+    "description": "Turns the ground into Electric Terrain and boosts Sp. Atk.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "LINGERINGAROMA": {
+    "id": "LINGERINGAROMA",
+    "name": "Lingering Aroma",
+    "description": "Contact with this Pokémon spreads this Ability.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "MYCELIUMMIGHT": {
+    "id": "MYCELIUMMIGHT",
+    "name": "Mycelium Might",
+    "description": "Status moves are unimpeded by this Ability but slower to use.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "OPPORTUNIST": {
+    "id": "OPPORTUNIST",
+    "name": "Opportunist",
+    "description": "Copies an opponent's stat boost during a turn.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "ORICHALCUMPULSE": {
+    "id": "ORICHALCUMPULSE",
+    "name": "Orichalcum Pulse",
+    "description": "Turns the sunlight harsh while boosing Attack.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "PROTOSYNTHESIS": {
+    "id": "PROTOSYNTHESIS",
+    "name": "Protosynthesis",
+    "description": "Boosts its best stat in harsh sunlight.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "PURIFYINGSALT": {
+    "id": "PURIFYINGSALT",
+    "name": "Purifying Salt",
+    "description": "Gains protection from status effects and Ghost-type moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "QUARKDRIVE": {
+    "id": "QUARKDRIVE",
+    "name": "Quark Drive",
+    "description": "Boosts its best stat in Electric Terrain.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "ROCKYPAYLOAD": {
+    "id": "ROCKYPAYLOAD",
+    "name": "Rocky Payload",
+    "description": "Powers up Rock-type moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "SEEDSOWER": {
+    "id": "SEEDSOWER",
+    "name": "Seed Sower",
+    "description": "Turns the ground into Grassy Terrain upon taking damage.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "SHARPNESS": {
+    "id": "SHARPNESS",
+    "name": "Sharpness",
+    "description": "Powers up slicing moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "SUPREMEOVERLORD": {
+    "id": "SUPREMEOVERLORD",
+    "name": "Supreme Overlord",
+    "description": "Boosts the power of its moves with every fainted ally.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "SWORDOFRUIN": {
+    "id": "SWORDOFRUIN",
+    "name": "Sword of Ruin",
+    "description": "Lowers the Defense of all Pokémon except the user.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TABLETSOFRUIN": {
+    "id": "TABLETSOFRUIN",
+    "name": "Tablets of Ruin",
+    "description": "Lowers the Attack of all Pokémon except the user.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "THERMALEXCHANGE": {
+    "id": "THERMALEXCHANGE",
+    "name": "Thermal Exchange",
+    "description": "Boosts Atk when hit by a Fire-type move and prevents burns.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TOXICDEBRIS": {
+    "id": "TOXICDEBRIS",
+    "name": "Toxic Debris",
+    "description": "Scatters poison spikes when hit by physical moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "VESSELOFRUIN": {
+    "id": "VESSELOFRUIN",
+    "name": "Vessel of Ruin",
+    "description": "Lowers the Sp. Atk of all Pokémon except the user.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "WELLBAKEDBODY": {
+    "id": "WELLBAKEDBODY",
+    "name": "Well-Baked Body",
+    "description": "Fire-type moves deal no damage and sharply boost Defense.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "WINDPOWER": {
+    "id": "WINDPOWER",
+    "name": "Wind Power",
+    "description": "The Pokémon becomes charged from taking wind damage.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "WINDRIDER": {
+    "id": "WINDRIDER",
+    "name": "Wind Rider",
+    "description": "Boosts Attack in Tailwind or when attacked by wind moves.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "ZEROTOHERO": {
+    "id": "ZEROTOHERO",
+    "name": "Zero to Hero",
+    "description": "Transforms into its Hero Form when it switches out.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "SUPERSWEETSYRUP": {
+    "id": "SUPERSWEETSYRUP",
+    "name": "Supersweet Syrup",
+    "description": "Lowers the foe's evasion once per battle.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "HOSPITALITY": {
+    "id": "HOSPITALITY",
+    "name": "Hospitality",
+    "description": "Restores ally's HP a little when entering battle.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TOXICCHAIN": {
+    "id": "TOXICCHAIN",
+    "name": "Toxic Chain",
+    "description": "May badly poison targets when the user attacks.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "MINDSEYE": {
+    "id": "MINDSEYE",
+    "name": "Mind's Eye",
+    "description": "Prevents accuracy loss. Ignores Ghost immunities.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "EMBODYASPECT": {
+    "id": "EMBODYASPECT",
+    "name": "Embody Aspect",
+    "description": "The user's shining mask raises its Speed stat.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "EMBODYASPECT_1": {
+    "id": "EMBODYASPECT_1",
+    "name": "Embody Aspect",
+    "description": "The user's shining mask raises its Sp. Def stat.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "EMBODYASPECT_2": {
+    "id": "EMBODYASPECT_2",
+    "name": "Embody Aspect",
+    "description": "The user's shining mask raises its Attack stat.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "EMBODYASPECT_3": {
+    "id": "EMBODYASPECT_3",
+    "name": "Embody Aspect",
+    "description": "The user's shining mask raises its Defense stat.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "POISONPUPPETEER": {
+    "id": "POISONPUPPETEER",
+    "name": "Poison Puppeteer",
+    "description": "Moves that inflict poison also cause confusion.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TERASHIFT": {
+    "id": "TERASHIFT",
+    "name": "Tera Shift",
+    "description": "Enters Terastal Form when sent out.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TERASHELL": {
+    "id": "TERASHELL",
+    "name": "Tera Shell",
+    "description": "Resists all types when HP is full.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  },
+  "TERAFORMZERO": {
+    "id": "TERAFORMZERO",
+    "name": "Teraform Zero",
+    "description": "Eliminates all weather and terrain.",
+    "provenance": {
+      "source": "gen9-pack-3.3.4",
+      "file": "PBS/abilities_Gen_9_Pack.txt"
+    }
+  }
+}

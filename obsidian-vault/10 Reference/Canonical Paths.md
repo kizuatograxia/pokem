@@ -43,6 +43,16 @@ Centralizar os caminhos oficiais e historicamente importantes do projeto.
 
 `C:\Users\hedge\OneDrive\Desktop\pokém\launch-gen9-game.bat`
 
+## Operacao do vault
+
+### Abrir o vault oficial
+
+`C:\Users\hedge\OneDrive\Desktop\pokém\tools\obsidian-cli\open-project-vault.bat`
+
+### Wrapper local do Obsidian CLI
+
+`C:\Users\hedge\OneDrive\Desktop\pokém\tools\obsidian-cli\obsidian-cli.bat`
+
 ## Documentacao operacional previa
 
 `C:\Users\hedge\OneDrive\Desktop\pokém\docs`

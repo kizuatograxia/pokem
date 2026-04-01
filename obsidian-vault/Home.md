@@ -25,8 +25,9 @@ O objetivo deste vault nao e ser apenas um conjunto de notas soltas. Ele foi est
 2. Leia [[01 Project/Project Brief]] para alinhar escopo e direcao.
 3. Consulte [[01 Project/Source of Truth]] antes de editar arquivos no workspace.
 4. Use [[06 Operations/Build and Runtime Workflow]] sempre que precisar rebuildar ou testar o jogo.
-5. Registre sessoes em [[07 Sessions/Session Log]] e em notas diarias.
-6. Quando uma decisao impactar arquitetura, runtime ou fluxo de dados, crie um ADR em [[08 Decisions]].
+5. Use [[06 Operations/Obsidian Vault Workflow]] sempre que precisar operar o vault ou o CLI oficial do Obsidian.
+6. Registre sessoes em [[07 Sessions/Session Log]] e em notas diarias.
+7. Quando uma decisao impactar arquitetura, runtime ou fluxo de dados, crie um ADR em [[08 Decisions]].
 
 ## Leitura recomendada por objetivo
 
@@ -51,6 +52,7 @@ O objetivo deste vault nao e ser apenas um conjunto de notas soltas. Ele foi est
 ### Se o foco for operacao
 
 - [[06 Operations/Build and Runtime Workflow]]
+- [[06 Operations/Obsidian Vault Workflow]]
 - [[06 Operations/Risks and Unknowns]]
 - [[10 Reference/Canonical Paths]]
 
@@ -61,6 +63,7 @@ O objetivo deste vault nao e ser apenas um conjunto de notas soltas. Ele foi est
 - O Pack Gen 9 foi aplicado sobre uma base completa do Essentials v21.1
 - O hotfix necessario para o plugin da Gen 9 ja foi integrado ao runtime oficial
 - O workspace ja possui scripts e documentacao para rebuild e launch
+- O vault agora possui wrappers locais para abertura do cofre e uso do CLI oficial do Obsidian
 
 ## Principio operacional deste vault
 

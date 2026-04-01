@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Power Green';
+  src: url('/assets/fonts/power green.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Power Green Small';
+  src: url('/assets/fonts/power green small.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Power Green Narrow';
+  src: url('/assets/fonts/power green narrow.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Power Clear';
+  src: url('/assets/fonts/power clear.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Power Clear';
+  src: url('/assets/fonts/power clear bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #121212;
+    --text-primary: #ffffff;
+    --pixel-border: #000000;
+  }
+
+  /* Crisp pixel rendering enforcement */
+  * {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)];
+    /* Use a default system font that acts like bitmap if specialized font isn't loaded */
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .pixel-shadow {
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  }
+}

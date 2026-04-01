@@ -1,0 +1,12 @@
+{
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "Assets",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "07 Sessions",
+  "readableLineLength": false,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "strictLineBreaks": false,
+  "tabSize": 2,
+  "useMarkdownLinks": true
+}

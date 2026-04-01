@@ -46,6 +46,7 @@ Atalho raiz:
 - aplica assets, PBS e plugin do Pack Gen 9
 - aplica o hotfix exigido pelo plugin da Gen 9
 - remove `Data\PluginScripts.rxdata` para permitir recompilacao correta na primeira inicializacao
+- cria `Data\force_compile` para obrigar uma recompilacao dos `.dat` no primeiro boot apos cada rebuild
 
 ## Por que o runtime oficial fica em outro caminho
 
@@ -64,16 +65,31 @@ O caminho sem acento foi adotado porque o boot do jogo apresentou problemas em c
 
 1. editar em `sources\generation-9-pack-v3.3.4`
 2. rebuildar
-3. validar boot e comportamento esperado
+3. abrir o runtime oficial uma vez para permitir a recompilacao forçada dos `.dat`
+4. validar boot e comportamento esperado
+
+## Nova regra importante de primeira abertura
+
+Depois de cada rebuild do runtime oficial:
+
+1. abra o jogo uma vez pelo launcher oficial
+2. espere a inicializacao terminar normalmente
+3. deixe o runtime consumir e remover `Data\force_compile`
+4. so depois trate o teste funcional como definitivo
+
+Essa etapa existe porque o runtime legado nao recompila automaticamente os `PBS` em modo release sem ajuda adicional. O marcador `force_compile` e a forma segura de garantir que os dados de `PBS` realmente virem `Data/*.dat`.
 
 ### Quando alterar documentacao
 
 1. atualizar nota correspondente no vault
 2. se o fluxo operacional mudou, atualizar tambem `docs` caso a documentacao antiga ainda seja usada
+3. se a mudanca afetar abertura do cofre ou automacao documental, atualizar [[06 Operations/Obsidian Vault Workflow]]
 
 ## Validacoes minimas apos rebuild
 
 - o jogo abre
+- `Data\force_compile` desaparece depois do primeiro boot
+- os arquivos `Data\*.dat` recebem timestamp novo
 - nao reaparecem erros de `Game.ini`
 - nao reaparecem erros de `PluginScripts.rxdata`
 - nao falta `Animations.rxdata`

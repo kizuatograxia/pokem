@@ -1,0 +1,13 @@
+{
+  "name": "pokemon-monero-backend",
+  "version": "1.0.0",
+  "description": "Monero Betting wrapper for Pokemon Essentials",
+  "main": "monero_betting_service.js",
+  "scripts": {
+    "start": "node monero_betting_service.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "monero-javascript": "^0.9.1"
+  }
+}

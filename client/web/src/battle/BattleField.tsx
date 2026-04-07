@@ -35,6 +35,12 @@ interface FrameRect {
   height: number;
 }
 
+interface AxisRun {
+  start: number;
+  end: number;
+  weight: number;
+}
+
 interface SheetInfo {
   source: HTMLCanvasElement;
   frames: FrameRect[];
@@ -108,6 +114,41 @@ function stripLeadingGuideColumns(data: Uint8ClampedArray, width: number, height
     break;
   }
 
+  const sparseThreshold = Math.max(1, Math.floor(height * 0.08));
+  while (trim < Math.min(width, 6)) {
+    let opaque = 0;
+    for (let y = 0; y < height; y += 1) {
+      const alpha = data[(y * width + trim) * 4 + 3] ?? 0;
+      if (alpha > 16) opaque += 1;
+    }
+    if (opaque > 0 && opaque <= sparseThreshold) {
+      trim += 1;
+      continue;
+    }
+    break;
+  }
+
+  return trim;
+}
+
+function stripTrailingGuideColumns(data: Uint8ClampedArray, width: number, height: number): number {
+  let trim = 0;
+  const sparseThreshold = Math.max(1, Math.floor(height * 0.08));
+
+  while (trim < Math.min(width, 6)) {
+    const x = width - 1 - trim;
+    let opaque = 0;
+    for (let y = 0; y < height; y += 1) {
+      const alpha = data[(y * width + x) * 4 + 3] ?? 0;
+      if (alpha > 16) opaque += 1;
+    }
+    if (opaque > 0 && opaque <= sparseThreshold) {
+      trim += 1;
+      continue;
+    }
+    break;
+  }
+
   return trim;
 }
 
@@ -117,11 +158,11 @@ function buildOccupancyRuns(
   height: number,
   axis: "x" | "y",
   startOffset = 0,
-): Array<{ start: number; end: number }> {
+): AxisRun[] {
   const size = axis === "x" ? width - startOffset : height;
   const orthogonal = axis === "x" ? height : width;
   const threshold = Math.max(1, Math.floor(orthogonal * 0.04));
-  const occupied = Array.from({ length: size }, (_, index) => {
+  const occupancy = Array.from({ length: size }, (_, index) => {
     let count = 0;
     const coordinate = index + startOffset;
     for (let other = 0; other < orthogonal; other += 1) {
@@ -130,28 +171,264 @@ function buildOccupancyRuns(
       const alpha = data[(y * width + x) * 4 + 3] ?? 0;
       if (alpha > 16) count += 1;
     }
-    return count >= threshold;
+    return count;
   });
 
-  const runs: Array<{ start: number; end: number }> = [];
+  const runs: AxisRun[] = [];
   let currentStart: number | null = null;
+  let currentWeight = 0;
 
-  occupied.forEach((value, index) => {
-    if (value && currentStart === null) {
+  occupancy.forEach((value, index) => {
+    const occupied = value >= threshold;
+    if (occupied && currentStart === null) {
       currentStart = index + startOffset;
+      currentWeight = value;
       return;
     }
-    if (!value && currentStart !== null) {
-      runs.push({ start: currentStart, end: index + startOffset - 1 });
+    if (occupied && currentStart !== null) {
+      currentWeight += value;
+      return;
+    }
+    if (!occupied && currentStart !== null) {
+      runs.push({ start: currentStart, end: index + startOffset - 1, weight: currentWeight });
       currentStart = null;
+      currentWeight = 0;
     }
   });
 
   if (currentStart !== null) {
-    runs.push({ start: currentStart, end: startOffset + occupied.length - 1 });
+    runs.push({ start: currentStart, end: startOffset + occupancy.length - 1, weight: currentWeight });
   }
 
   return runs.filter((run) => run.end - run.start >= 2);
+}
+
+function significantRuns(runs: AxisRun[]): AxisRun[] {
+  if (runs.length <= 1) return runs;
+  const maxWeight = Math.max(...runs.map((run) => run.weight));
+  const filtered = runs.filter((run) => run.weight >= maxWeight * 0.12);
+  return filtered.length > 0 ? filtered : runs;
+}
+
+function dominantRun(runs: AxisRun[]): AxisRun | null {
+  if (runs.length === 0) return null;
+  return runs.reduce((best, run) => (run.weight > best.weight ? run : best), runs[0]);
+}
+
+function median(values: number[]): number {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0
+    ? (sorted[middle - 1] + sorted[middle]) / 2
+    : sorted[middle];
+}
+
+function repeatedFrameRuns(runs: AxisRun[]): AxisRun[] {
+  if (runs.length < 3) return [];
+  const widths = runs.map((run) => run.end - run.start + 1);
+  const weights = runs.map((run) => run.weight);
+  const medianWidth = median(widths);
+  const medianWeight = median(weights);
+
+  const filtered = runs.filter((run) => {
+    const width = run.end - run.start + 1;
+    return (
+      width >= medianWidth * 0.45 &&
+      width <= medianWidth * 1.8 &&
+      run.weight >= medianWeight * 0.45 &&
+      run.weight <= medianWeight * 1.8
+    );
+  });
+
+  return filtered.length >= 3 ? filtered : [];
+}
+
+function buildHorizontalStripFrames(
+  xStart: number,
+  xEnd: number,
+  yStart: number,
+  yEnd: number,
+): FrameRect[] {
+  const usableWidth = Math.max(1, xEnd - xStart + 1);
+  const usableHeight = Math.max(1, yEnd - yStart + 1);
+  const frameCount = Math.max(1, Math.round(usableWidth / usableHeight));
+  const frameWidth = Math.max(1, Math.floor(usableWidth / frameCount));
+
+  return Array.from({ length: frameCount }, (_, index) => {
+    const x = xStart + index * frameWidth;
+    const nextX = index === frameCount - 1 ? xEnd + 1 : Math.min(xEnd + 1, xStart + (index + 1) * frameWidth);
+    return {
+      x,
+      y: yStart,
+      width: Math.max(1, nextX - x),
+      height: usableHeight,
+    };
+  });
+}
+
+interface PixelComponent {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+  pixels: number;
+}
+
+function boundsNearby(left: PixelComponent, right: PixelComponent, padding: number): boolean {
+  return !(
+    left.right + padding < right.left ||
+    right.right + padding < left.left ||
+    left.bottom + padding < right.top ||
+    right.bottom + padding < left.top
+  );
+}
+
+function refineFrameRect(
+  data: Uint8ClampedArray,
+  imageWidth: number,
+  frame: FrameRect,
+): FrameRect {
+  const width = frame.width;
+  const height = frame.height;
+  const visited = new Uint8Array(width * height);
+  const components: PixelComponent[] = [];
+
+  for (let localY = 0; localY < height; localY += 1) {
+    for (let localX = 0; localX < width; localX += 1) {
+      const localIndex = localY * width + localX;
+      if (visited[localIndex]) continue;
+      visited[localIndex] = 1;
+
+      const globalX = frame.x + localX;
+      const globalY = frame.y + localY;
+      const alpha = data[(globalY * imageWidth + globalX) * 4 + 3] ?? 0;
+      if (alpha <= 16) continue;
+
+      const queue = [[localX, localY]];
+      let queueIndex = 0;
+      const component: PixelComponent = {
+        left: globalX,
+        right: globalX,
+        top: globalY,
+        bottom: globalY,
+        pixels: 0,
+      };
+
+      while (queueIndex < queue.length) {
+        const [x, y] = queue[queueIndex]!;
+        queueIndex += 1;
+        const gx = frame.x + x;
+        const gy = frame.y + y;
+        const pixelAlpha = data[(gy * imageWidth + gx) * 4 + 3] ?? 0;
+        if (pixelAlpha <= 16) continue;
+
+        component.left = Math.min(component.left, gx);
+        component.right = Math.max(component.right, gx);
+        component.top = Math.min(component.top, gy);
+        component.bottom = Math.max(component.bottom, gy);
+        component.pixels += 1;
+
+        for (let dy = -1; dy <= 1; dy += 1) {
+          for (let dx = -1; dx <= 1; dx += 1) {
+            if (dx === 0 && dy === 0) continue;
+            const nx = x + dx;
+            const ny = y + dy;
+            if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+            const nextIndex = ny * width + nx;
+            if (visited[nextIndex]) continue;
+            visited[nextIndex] = 1;
+            queue.push([nx, ny]);
+          }
+        }
+      }
+
+      if (component.pixels > 0) {
+        components.push(component);
+      }
+    }
+  }
+
+  if (components.length <= 1) return frame;
+
+  const dominant = components.reduce(
+    (best, component) => (component.pixels > best.pixels ? component : best),
+    components[0]!,
+  );
+
+  const kept = components.filter((component) =>
+    component.pixels >= dominant.pixels * 0.18 || boundsNearby(component, dominant, 2),
+  );
+
+  const left = Math.max(frame.x, Math.min(...kept.map((component) => component.left)));
+  const right = Math.min(frame.x + frame.width - 1, Math.max(...kept.map((component) => component.right)));
+  const top = Math.max(frame.y, Math.min(...kept.map((component) => component.top)));
+  const bottom = Math.min(frame.y + frame.height - 1, Math.max(...kept.map((component) => component.bottom)));
+
+  const refined: FrameRect = {
+    x: left,
+    y: top,
+    width: Math.max(1, right - left + 1),
+    height: Math.max(1, bottom - top + 1),
+  };
+
+  const sparseColumnThreshold = Math.max(1, Math.floor(refined.height * 0.08));
+  const sparseRowThreshold = Math.max(1, Math.floor(refined.width * 0.08));
+
+  const countColumn = (x: number): number => {
+    let count = 0;
+    for (let y = refined.y; y < refined.y + refined.height; y += 1) {
+      const alpha = data[(y * imageWidth + x) * 4 + 3] ?? 0;
+      if (alpha > 16) count += 1;
+    }
+    return count;
+  };
+
+  const countRow = (y: number): number => {
+    let count = 0;
+    for (let x = refined.x; x < refined.x + refined.width; x += 1) {
+      const alpha = data[(y * imageWidth + x) * 4 + 3] ?? 0;
+      if (alpha > 16) count += 1;
+    }
+    return count;
+  };
+
+  while (refined.width > 1 && countColumn(refined.x) <= sparseColumnThreshold) {
+    refined.x += 1;
+    refined.width -= 1;
+  }
+  while (
+    refined.width > 1 &&
+    countColumn(refined.x + refined.width - 1) <= sparseColumnThreshold
+  ) {
+    refined.width -= 1;
+  }
+  while (refined.height > 1 && countRow(refined.y) <= sparseRowThreshold) {
+    refined.y += 1;
+    refined.height -= 1;
+  }
+  while (
+    refined.height > 1 &&
+    countRow(refined.y + refined.height - 1) <= sparseRowThreshold
+  ) {
+    refined.height -= 1;
+  }
+
+  return refined;
+}
+
+function expandFrameRect(frame: FrameRect, maxWidth: number, maxHeight: number, padding = 1): FrameRect {
+  const left = Math.max(0, frame.x - padding);
+  const top = Math.max(0, frame.y - padding);
+  const right = Math.min(maxWidth - 1, frame.x + frame.width - 1 + padding);
+  const bottom = Math.min(maxHeight - 1, frame.y + frame.height - 1 + padding);
+
+  return {
+    x: left,
+    y: top,
+    width: right - left + 1,
+    height: bottom - top + 1,
+  };
 }
 
 function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
@@ -193,8 +470,16 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
   }
 
   const trimLeft = stripLeadingGuideColumns(imageData.data, source.width, source.height);
-  const columnRuns = buildOccupancyRuns(imageData.data, source.width, source.height, "x", trimLeft);
-  const rowRuns = buildOccupancyRuns(imageData.data, source.width, source.height, "y");
+  const trimRight = stripTrailingGuideColumns(imageData.data, source.width, source.height);
+  const columnRuns = significantRuns(
+    buildOccupancyRuns(imageData.data, source.width, source.height, "x", trimLeft),
+  ).map((run) => ({
+    ...run,
+    end: Math.min(run.end, source.width - 1 - trimRight),
+  })).filter((run) => run.end > run.start);
+  const rowRuns = significantRuns(
+    buildOccupancyRuns(imageData.data, source.width, source.height, "y"),
+  );
 
   let frames: FrameRect[] = [];
 
@@ -207,21 +492,38 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
         height: row.end - row.start + 1,
       })),
     );
+  } else if (rowRuns.length <= 1 && columnRuns.length > 1) {
+    const mainRun = dominantRun(columnRuns);
+    const row = rowRuns[0] ?? { start: 0, end: source.height - 1, weight: 0 };
+    const repeatedRuns = repeatedFrameRuns(columnRuns);
+    if (repeatedRuns.length > 0) {
+      frames = repeatedRuns.map((column) => ({
+        x: column.start,
+        y: row.start,
+        width: column.end - column.start + 1,
+        height: row.end - row.start + 1,
+      }));
+    } else if (mainRun) {
+      frames = buildHorizontalStripFrames(mainRun.start, mainRun.end, row.start, row.end);
+    }
+  } else if (rowRuns.length > 1 && columnRuns.length <= 1) {
+    const column = columnRuns[0] ?? { start: trimLeft, end: source.width - 1 - trimRight, weight: 0 };
+    frames = rowRuns.flatMap((row) =>
+      buildHorizontalStripFrames(column.start, column.end, row.start, row.end),
+    );
   } else {
-    const usableWidth = Math.max(1, source.width - trimLeft);
-    const frameCount = Math.max(1, Math.round(usableWidth / source.height));
-    const frameWidth = Math.max(1, Math.floor(usableWidth / frameCount));
-    frames = Array.from({ length: frameCount }, (_, index) => {
-      const x = trimLeft + index * frameWidth;
-      const nextX = index === frameCount - 1 ? source.width : trimLeft + (index + 1) * frameWidth;
-      return {
-        x,
-        y: 0,
-        width: Math.max(1, nextX - x),
-        height: source.height,
-      };
-    });
+    const column = columnRuns[0] ?? { start: trimLeft, end: source.width - 1 - trimRight, weight: 0 };
+    const row = rowRuns[0] ?? { start: 0, end: source.height - 1, weight: 0 };
+    frames = buildHorizontalStripFrames(column.start, column.end, row.start, row.end);
   }
+
+  frames = frames.map((frame) =>
+    expandFrameRect(
+      refineFrameRect(imageData.data, source.width, frame),
+      source.width,
+      source.height,
+    ),
+  );
 
   return {
     source,

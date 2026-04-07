@@ -244,6 +244,48 @@ function repeatedFrameRuns(runs: AxisRun[]): AxisRun[] {
   return filtered.length >= 3 ? filtered : [];
 }
 
+function buildCellsFromRuns(
+  runs: AxisRun[],
+  limitStart: number,
+  limitEnd: number,
+): Array<{ start: number; end: number }> {
+  if (runs.length === 0) return [];
+  if (runs.length === 1) {
+    return [{ start: limitStart, end: limitEnd }];
+  }
+
+  const cells: Array<{ start: number; end: number }> = [];
+
+  for (let index = 0; index < runs.length; index += 1) {
+    const run = runs[index]!;
+    const previous = runs[index - 1];
+    const next = runs[index + 1];
+
+    let start = limitStart;
+    if (previous) {
+      start = Math.max(limitStart, Math.floor((previous.end + run.start) / 2) + 1);
+    } else if (next) {
+      const gap = Math.max(0, next.start - run.end - 1);
+      start = Math.max(limitStart, run.start - Math.floor(gap / 2));
+    }
+
+    let end = limitEnd;
+    if (next) {
+      end = Math.min(limitEnd, Math.floor((run.end + next.start) / 2));
+    } else if (previous) {
+      const gap = Math.max(0, run.start - previous.end - 1);
+      end = Math.min(limitEnd, run.end + Math.floor(gap / 2));
+    }
+
+    cells.push({
+      start,
+      end: Math.max(start, end),
+    });
+  }
+
+  return cells;
+}
+
 function buildHorizontalStripFrames(
   xStart: number,
   xEnd: number,
@@ -350,14 +392,36 @@ function refineFrameRect(
   }
 
   if (components.length <= 1) return frame;
+  const filteredComponents = components.filter((component) => {
+    const componentWidth = component.right - component.left + 1;
+    const componentHeight = component.bottom - component.top + 1;
+    if (componentWidth <= 2 && componentHeight >= Math.floor(frame.height * 0.6)) {
+      return false;
+    }
+    if (componentWidth <= 3 && componentHeight <= 3) {
+      return false;
+    }
+    return true;
+  });
 
-  const dominant = components.reduce(
+  const usableComponents = filteredComponents.length > 0 ? filteredComponents : components;
+  if (usableComponents.length === 1) {
+    const component = usableComponents[0]!;
+    return {
+      x: component.left,
+      y: component.top,
+      width: component.right - component.left + 1,
+      height: component.bottom - component.top + 1,
+    };
+  }
+
+  const dominant = usableComponents.reduce(
     (best, component) => (component.pixels > best.pixels ? component : best),
-    components[0]!,
+    usableComponents[0]!,
   );
 
-  const kept = components.filter((component) =>
-    component.pixels >= dominant.pixels * 0.18 || boundsNearby(component, dominant, 2),
+  const kept = usableComponents.filter((component) =>
+    component.pixels >= dominant.pixels * 0.12 || boundsNearby(component, dominant, 1),
   );
 
   const left = Math.max(frame.x, Math.min(...kept.map((component) => component.left)));
@@ -480,24 +544,27 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
   const rowRuns = significantRuns(
     buildOccupancyRuns(imageData.data, source.width, source.height, "y"),
   );
+  const columnCells = buildCellsFromRuns(columnRuns, trimLeft, source.width - 1 - trimRight);
+  const rowCells = buildCellsFromRuns(rowRuns, 0, source.height - 1);
 
   let frames: FrameRect[] = [];
 
-  if (columnRuns.length > 1 && rowRuns.length > 1) {
-    frames = rowRuns.flatMap((row) =>
-      columnRuns.map((column) => ({
+  if (columnCells.length > 1 && rowCells.length > 1) {
+    frames = rowCells.flatMap((row) =>
+      columnCells.map((column) => ({
         x: column.start,
         y: row.start,
         width: column.end - column.start + 1,
         height: row.end - row.start + 1,
       })),
     );
-  } else if (rowRuns.length <= 1 && columnRuns.length > 1) {
+  } else if (rowCells.length <= 1 && columnRuns.length > 1) {
     const mainRun = dominantRun(columnRuns);
-    const row = rowRuns[0] ?? { start: 0, end: source.height - 1, weight: 0 };
+    const row = rowCells[0] ?? { start: 0, end: source.height - 1 };
     const repeatedRuns = repeatedFrameRuns(columnRuns);
     if (repeatedRuns.length > 0) {
-      frames = repeatedRuns.map((column) => ({
+      const repeatedCells = buildCellsFromRuns(repeatedRuns, trimLeft, source.width - 1 - trimRight);
+      frames = repeatedCells.map((column) => ({
         x: column.start,
         y: row.start,
         width: column.end - column.start + 1,
@@ -506,14 +573,14 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
     } else if (mainRun) {
       frames = buildHorizontalStripFrames(mainRun.start, mainRun.end, row.start, row.end);
     }
-  } else if (rowRuns.length > 1 && columnRuns.length <= 1) {
-    const column = columnRuns[0] ?? { start: trimLeft, end: source.width - 1 - trimRight, weight: 0 };
-    frames = rowRuns.flatMap((row) =>
+  } else if (rowCells.length > 1 && columnCells.length <= 1) {
+    const column = columnCells[0] ?? { start: trimLeft, end: source.width - 1 - trimRight };
+    frames = rowCells.flatMap((row) =>
       buildHorizontalStripFrames(column.start, column.end, row.start, row.end),
     );
   } else {
-    const column = columnRuns[0] ?? { start: trimLeft, end: source.width - 1 - trimRight, weight: 0 };
-    const row = rowRuns[0] ?? { start: 0, end: source.height - 1, weight: 0 };
+    const column = columnCells[0] ?? { start: trimLeft, end: source.width - 1 - trimRight };
+    const row = rowCells[0] ?? { start: 0, end: source.height - 1 };
     frames = buildHorizontalStripFrames(column.start, column.end, row.start, row.end);
   }
 

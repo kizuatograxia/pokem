@@ -1,0 +1,20 @@
+{
+  "targetUrl": "http://127.0.0.1:4317",
+  "mode": "command",
+  "visibleText": "Pikachu\nLv100\nPikachu\nLv100\n100/100\nWhat will\nPikachu do?\n▶\nFIGHT\nPOKEMON\nBAG\nRUN",
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ],
+  "pageErrors": []
+}

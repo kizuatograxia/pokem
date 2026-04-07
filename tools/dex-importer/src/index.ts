@@ -4,6 +4,7 @@ import { parsePbsFile } from './parsers/pbs.js';
 import { parseSpeciesBlock } from './parsers/species.js';
 import { parseMoveBlock } from './parsers/moves.js';
 import { parseAbilityBlock } from './parsers/abilities.js';
+import { parseMetricsBlock } from './parsers/metrics.js';
 import { mergeWithConflicts } from './merger.js';
 import { validateDataset } from './validator.js';
 import { writeDatasets, writeReport, printSummary } from './reporter.js';
@@ -45,6 +46,7 @@ console.log('Parsing base Essentials PBS...');
 const baseSpeciesRaw = parsePbsFile(join(SOURCES.base, 'pokemon.txt'));
 const baseMovesRaw = parsePbsFile(join(SOURCES.base, 'moves.txt'));
 const baseAbilitiesRaw = parsePbsFile(join(SOURCES.base, 'abilities.txt'));
+const baseMetricsRaw = parsePbsFile(join(SOURCES.base, 'pokemon_metrics.txt'));
 
 const baseProv = { source: 'essentials-21.1' as const, file: 'PBS/pokemon.txt' };
 const baseMoveProv = { source: 'essentials-21.1' as const, file: 'PBS/moves.txt' };
@@ -54,12 +56,23 @@ const baseSpecies = parseCatalog(baseSpeciesRaw, parseSpeciesBlock, baseProv);
 const baseMoves = parseCatalog(baseMovesRaw, parseMoveBlock, baseMoveProv);
 const baseAbilities = parseCatalog(baseAbilitiesRaw, parseAbilityBlock, baseAbilityProv);
 
-console.log(`  Species: ${baseSpecies.size} | Moves: ${baseMoves.size} | Abilities: ${baseAbilities.size}`);
+// Apply metrics to base
+for (const [id, species] of baseSpecies) {
+  const metricsBlock = baseMetricsRaw.get(id);
+  if (metricsBlock) {
+    species.metrics = parseMetricsBlock(id, metricsBlock, parseErrors);
+  }
+}
+
+console.log(`  Base: ${baseSpecies.size} species | ${baseMoves.size} moves | ${baseAbilities.size} abilities`);
 
 console.log('Parsing Gen9 Pack PBS...');
 const gen9SpeciesRaw = parsePbsFile(join(SOURCES.gen9, 'pokemon_base_Gen_9_Pack.txt'));
 const gen9MovesRaw = parsePbsFile(join(SOURCES.gen9, 'moves_Gen_9_Pack.txt'));
 const gen9AbilitiesRaw = parsePbsFile(join(SOURCES.gen9, 'abilities_Gen_9_Pack.txt'));
+// Gen9 Pack often has its own metrics file for new mons, and a full metrics override for vanilla mons
+const gen9MetricsBaseRaw = parsePbsFile(join(SOURCES.gen9, 'pokemon_metrics.txt'));
+const gen9MetricsPackRaw = parsePbsFile(join(SOURCES.gen9, 'pokemon_metrics_Gen_9_Pack.txt'));
 
 const gen9Prov = { source: 'gen9-pack-3.3.4' as const, file: 'PBS/pokemon_base_Gen_9_Pack.txt' };
 const gen9MoveProv = { source: 'gen9-pack-3.3.4' as const, file: 'PBS/moves_Gen_9_Pack.txt' };
@@ -69,7 +82,24 @@ const gen9Species = parseCatalog(gen9SpeciesRaw, parseSpeciesBlock, gen9Prov);
 const gen9Moves = parseCatalog(gen9MovesRaw, parseMoveBlock, gen9MoveProv);
 const gen9Abilities = parseCatalog(gen9AbilitiesRaw, parseAbilityBlock, gen9AbilityProv);
 
-console.log(`  Species: ${gen9Species.size} | Moves: ${gen9Moves.size} | Abilities: ${gen9Abilities.size}`);
+// Apply metrics to gen9 (merge base override + pack specific)
+const combinedGen9Metrics = new Map([...gen9MetricsBaseRaw, ...gen9MetricsPackRaw]);
+for (const [id, species] of gen9Species) {
+  const metricsBlock = combinedGen9Metrics.get(id);
+  if (metricsBlock) {
+    species.metrics = parseMetricsBlock(id, metricsBlock, parseErrors);
+  }
+}
+
+// Also back-port gen9 metrics to base species if they exist in gen9 metrics files
+for (const [id, species] of baseSpecies) {
+  const metricsBlock = combinedGen9Metrics.get(id);
+  if (metricsBlock) {
+    species.metrics = parseMetricsBlock(id, metricsBlock, parseErrors);
+  }
+}
+
+console.log(`  Gen9: ${gen9Species.size} species | ${gen9Moves.size} moves | ${gen9Abilities.size} abilities`);
 
 // ─── Also parse pokemon_forms for completeness (logged but not deep-merged yet) ─
 let formsCount = 0;

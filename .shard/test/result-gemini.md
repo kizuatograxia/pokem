@@ -1,65 +1,39 @@
-# Result — Inventário PBS: Ownership Base vs Gen9
-
-**Data:** 2026-04-01
-**Executor:** Gemini CLI (escrita via Claude Code — Gemini não tinha `write_file`)
-
----
+# Resultado: Inventário PBS — Ownership Base vs Gen9
 
 ## 1. Tabela de Ownership Completa
 
 | Arquivo | Presente Base | Presente Gen9 | Relação | Observação |
-|:---|:---:|:---:|:---|:---|
-| `abilities.txt` | Sim | Sim (Auto-Updates) | `merge` | Auto-Updates contém descrições Gen 9 |
-| `abilities_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Novas habilidades Gen 9 |
-| `items.txt` | Sim | Sim (Auto-Updates) | `merge` | Preços e Fling damage atualizados |
-| `items_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Novos itens Gen 9 |
-| `moves.txt` | Sim | Sim (Auto-Updates) | `merge` | Mudanças de power/flags (Wind, Slicing) |
-| `moves_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Novos movimentos Gen 9 |
-| `pokemon.txt` | Sim | Sim (Auto-Updates) | `merge` | Learnsets e evoluções atualizadas |
-| `pokemon_base_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Novas espécies Gen 9 |
-| `pokemon_forms.txt` | Sim | Sim (Auto-Updates*) | `merge` | Formas base Essentials + Gen 9 updates |
-| `pokemon_forms_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Novas formas Gen 9 |
-| `pokemon_metrics.txt` | Sim | Sim | `merge` | Métricas atualizadas para sprites Gen 9 |
-| `pokemon_metrics_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Métricas para novas espécies Gen 9 |
-| `types.txt` | Sim | Não | `base-only` | Tipos fundamentais (Stellar não incluso no Gen9) |
-| `encounters.txt` | Sim | Não | `base-only` | Encontros selvagens do mapa base |
-| `trainers.txt` | Sim | Não | `base-only` | Treinadores do jogo base |
+| :--- | :---: | :---: | :---: | :--- |
+| `abilities.txt` | Sim | Sim* | `merge` | Gen9 usa `abilities_Gen_9_Pack.txt` |
+| `items.txt` | Sim | Sim* | `merge` | Gen9 usa `items_Gen_9_Pack.txt` |
+| `moves.txt` | Sim | Sim* | `merge` | Gen9 usa `moves_Gen_9_Pack.txt` |
+| `pokemon.txt` | Sim | Sim* | `merge` | Gen9 usa `pokemon_base_Gen_9_Pack.txt` |
+| `pokemon_forms.txt` | Sim | Sim* | `merge` | Gen9 usa `pokemon_forms_Gen_9_Pack.txt` |
+| `pokemon_metrics.txt` | Sim | Sim | `override` | Gen9 possui arquivo com mesmo nome (6242 linhas) que substitui o base |
+| `pokemon_metrics_Gen_9_Pack.txt` | Não | Sim | `gen9-only` | Contém métricas específicas da Gen9 e formas extras do pack |
+| `types.txt` | Sim | Não | `base-only` | Tipos permanecem os do Essentials 21.1 |
+| `encounters.txt` | Sim | Não | `base-only` | Encontros wild do Essentials |
+| `trainers.txt` | Sim | Não | `base-only` | Treinadores base |
+| `trainer_types.txt` | Sim | Não | `base-only` | Tipos de treinadores base |
+| `town_map.txt` | Sim | Não | `base-only` | Dados do mapa regional |
 
----
+*\*Arquivos do Gen9 Pack possuem sufixos (ex: `_Gen_9_Pack.txt`) e devem ser fundidos com os arquivos base homônimos.*
 
-## 2. Arquivos Críticos — Caminhos Canônicos e Ordem de Carregamento
+## 2. Arquivos Críticos (Caminho Canônico)
 
-### Espécies e Formas
-1. `sources/pokemon-essentials-21.1/PBS/pokemon.txt` — base
-2. `sources/pokemon-essentials-21.1/PBS/pokemon_forms.txt` — formas base
-3. `sources/generation-9-pack-v3.3.4/PBS/Gen 9 backup/Auto-Updates/pokemon.txt` — merge/override
-4. `sources/generation-9-pack-v3.3.4/PBS/pokemon_base_Gen_9_Pack.txt` — append novas espécies
-5. `sources/generation-9-pack-v3.3.4/PBS/pokemon_forms_Gen_9_Pack.txt` — append novas formas
+Para o importador, a ordem de carga deve respeitar:
+1. **Espécies**: `sources/pokemon-essentials-21.1/PBS/pokemon.txt` + `sources/generation-9-pack-v3.3.4/PBS/pokemon_base_Gen_9_Pack.txt`
+2. **Formas**: `sources/pokemon-essentials-21.1/PBS/pokemon_forms.txt` + `sources/generation-9-pack-v3.3.4/PBS/pokemon_forms_Gen_9_Pack.txt`
+3. **Métricas (Visual)**: `sources/generation-9-pack-v3.3.4/PBS/pokemon_metrics.txt` (Precedência) + `sources/generation-9-pack-v3.3.4/PBS/pokemon_metrics_Gen_9_Pack.txt`
+4. **Moves**: `sources/pokemon-essentials-21.1/PBS/moves.txt` + `sources/generation-9-pack-v3.3.4/PBS/moves_Gen_9_Pack.txt`
+5. **Items**: `sources/pokemon-essentials-21.1/PBS/items.txt` + `sources/generation-9-pack-v3.3.4/PBS/items_Gen_9_Pack.txt`
 
-### Movimentos
-1. `sources/pokemon-essentials-21.1/PBS/moves.txt`
-2. `sources/generation-9-pack-v3.3.4/PBS/Gen 9 backup/Auto-Updates/moves.txt`
-3. `sources/generation-9-pack-v3.3.4/PBS/moves_Gen_9_Pack.txt`
+## 3. Gaps do dex-importer (O que falta)
 
-### Habilidades
-1. `sources/pokemon-essentials-21.1/PBS/abilities.txt`
-2. `sources/generation-9-pack-v3.3.4/PBS/Gen 9 backup/Auto-Updates/abilities.txt`
-3. `sources/generation-9-pack-v3.3.4/PBS/abilities_Gen_9_Pack.txt`
+Atualmente o `tools/dex-importer/src/index.ts` ignora os seguintes pontos:
 
-### Itens
-1. `sources/pokemon-essentials-21.1/PBS/items.txt`
-2. `sources/generation-9-pack-v3.3.4/PBS/Gen 9 backup/Auto-Updates/items.txt`
-3. `sources/generation-9-pack-v3.3.4/PBS/items_Gen_9_Pack.txt`
-
----
-
-## 3. Gaps do dex-importer
-
-| # | Gap | Severidade |
-|---|-----|-----------|
-| 1 | Sem parser/schema para `items.txt` | P1 |
-| 2 | Sem parser para `types.txt` | P1 |
-| 3 | **Auto-Updates ignorado** — pasta `Gen 9 backup/Auto-Updates/` não é lida; Pokémon antigos ficam com dados Gen 8 | P0 |
-| 4 | Deep-merge de formas incompleto — `pokemon_forms.txt` mencionado mas merge não implementado | P1 |
-| 5 | Sem parser de métricas (`pokemon_metrics.txt`) | P2 |
-| 6 | Sem validação cruzada de IDs — moves/abilities referenciados em `pokemon.txt` não são checados contra os outros arquivos | P1 |
+- **Itens**: Não há parser para `items.txt` nem carga dos arquivos de itens.
+- **Tipos**: O arquivo `types.txt` não é lido; tipos são hardcoded ou inferidos como strings simples.
+- **Métricas Visuais**: O importador não lê `pokemon_metrics.txt`. Sem isso, o frontend não saberá o posicionamento dos sprites (`BackSprite`, `FrontSprite`) nem o tamanho das sombras.
+- **Merge de Metrics**: O arquivo `pokemon_metrics.txt` do Gen9 Pack substitui o do Essentials, mas o pack ainda tem o `pokemon_metrics_Gen_9_Pack.txt` que precisa ser adicionado ao set final.
+- **Encounters & Trainers**: Dados fundamentais para o gameplay de overworld que ainda não estão no pipeline de importação.

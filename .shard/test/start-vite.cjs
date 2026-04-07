@@ -10,18 +10,19 @@ const pidPath = path.join(repoRoot, ".shard", "test", "vite-hub.pid");
 const timeoutMs = 30000;
 const systemRoot = process.env.SystemRoot || "C:\\Windows";
 const commandHost = process.env.ComSpec || path.join(systemRoot, "System32", "cmd.exe");
-const npmCommand = "C:\\Program Files\\nodejs\\npm.cmd";
+const npmCommand = "C:\\PROGRA~1\\nodejs\\npm.cmd";
 const portArg = Number(process.argv[2]);
 const port = Number.isFinite(portArg) && portArg > 0 ? portArg : 4317;
 const targetUrl = `http://127.0.0.1:${port}`;
 
 fs.mkdirSync(path.dirname(logPath), { recursive: true });
 fs.writeFileSync(logPath, "");
-const command = `"${npmCommand}" run dev -- --host 127.0.0.1 --port ${port} >> "${logPath}" 2>&1`;
+const outFd = fs.openSync(logPath, "a");
+const command = `${npmCommand} run dev -- --host 127.0.0.1 --port ${port}`;
 const child = spawn(commandHost, ["/d", "/s", "/c", command], {
   cwd: webDir,
   detached: true,
-  stdio: "ignore",
+  stdio: ["ignore", outFd, outFd],
   windowsHide: true,
 });
 

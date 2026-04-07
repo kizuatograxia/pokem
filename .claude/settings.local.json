@@ -14,7 +14,12 @@
       "Bash(netstat.exe -an)",
       "Bash(\"/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\" -NoProfile -Command \"Get-ScheduledTask | Where-Object { \\\\$_.TaskName -like '*OpenClaw*' -or \\\\$_.TaskName -like '*openclaw*' } | Select-Object TaskName,State | ConvertTo-Json\" 2>&1)",
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\(r'C:\\\\Users\\\\hedge\\\\OneDrive\\\\Desktop\\\\pokém\\\\client\\\\web\\\\public\\\\assets\\\\sprites\\\\characters\\\\player.png'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(npm run:*)",
+      "Bash(echo \"Battle server PID: $!\")",
+      "Bash(echo \"Vite PID: $!\")",
+      "Bash(node:*)"
     ]
   }
 }

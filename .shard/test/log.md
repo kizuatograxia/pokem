@@ -20,4 +20,7 @@ Created: 2026-03-31
 ## 2026-03-31 09:56 — openclaw-done: FluidSynth+ffmpeg portable baixados, MIDIs convertidos para OGG
 ## 2026-03-31 12:44 — codex-done: consolidacao exaustiva do progresso multiagente no Obsidian
 
-## 2026-03-31 12:54 � openclaw-done: importa��o assets PKE+Gen9 (fontes, pokemon, items, followers), busca windowskin+fontes
+## 2026-03-31 12:54 — openclaw-done: importao assets PKE+Gen9 (fontes, pokemon, items, followers), busca windowskin+fontes
+
+## 2026-04-01 — gemini-done: inventário PBS ownership base vs gen9
+

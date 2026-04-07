@@ -1,0 +1,280 @@
+[
+  {
+    "label": "p1",
+    "targetUrl": "ws://127.0.0.1:4317/battle-ws",
+    "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+    "playerSlot": 0,
+    "states": [
+      {
+        "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+        "turn": 0,
+        "phase": "preview",
+        "format": "gen9ou",
+        "gametype": "singles",
+        "spriteStyle": "retro",
+        "effectStyle": "essentials",
+        "sides": [
+          {
+            "playerSlot": 0,
+            "playerId": "p1",
+            "playerName": "Player 1",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          },
+          {
+            "playerSlot": 1,
+            "playerId": "p2",
+            "playerName": "Player 2",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          }
+        ],
+        "field": {
+          "weather": null,
+          "weatherTurnsLeft": null,
+          "terrain": null,
+          "terrainTurnsLeft": null,
+          "pseudoWeather": []
+        },
+        "messageQueue": [],
+        "animationQueue": [],
+        "result": null,
+        "winnerName": null
+      },
+      {
+        "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+        "turn": 0,
+        "phase": "preview",
+        "format": "gen9ou",
+        "gametype": "singles",
+        "spriteStyle": "retro",
+        "effectStyle": "essentials",
+        "sides": [
+          {
+            "playerSlot": 0,
+            "playerId": "p1",
+            "playerName": "Player 1",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          },
+          {
+            "playerSlot": 1,
+            "playerId": "p2",
+            "playerName": "Player 2",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          }
+        ],
+        "field": {
+          "weather": null,
+          "weatherTurnsLeft": null,
+          "terrain": null,
+          "terrainTurnsLeft": null,
+          "pseudoWeather": []
+        },
+        "messageQueue": [],
+        "animationQueue": [],
+        "result": null,
+        "winnerName": null,
+        "pendingRequest": {
+          "kind": "team",
+          "slots": [],
+          "switches": [
+            {
+              "position": 1,
+              "speciesId": "pikachu",
+              "name": "Pikachu",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 2,
+              "speciesId": "charizard",
+              "name": "Charizard",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 3,
+              "speciesId": "blastoise",
+              "name": "Blastoise",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 4,
+              "speciesId": "venusaur",
+              "name": "Venusaur",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 5,
+              "speciesId": "gengar",
+              "name": "Gengar",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 6,
+              "speciesId": "snorlax",
+              "name": "Snorlax",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            }
+          ],
+          "noCancel": false
+        }
+      }
+    ]
+  },
+  {
+    "label": "p2",
+    "targetUrl": "ws://127.0.0.1:4317/battle-ws",
+    "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+    "playerSlot": 1,
+    "states": [
+      {
+        "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+        "turn": 0,
+        "phase": "preview",
+        "format": "gen9ou",
+        "gametype": "singles",
+        "spriteStyle": "retro",
+        "effectStyle": "essentials",
+        "sides": [
+          {
+            "playerSlot": 0,
+            "playerId": "p1",
+            "playerName": "Player 1",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          },
+          {
+            "playerSlot": 1,
+            "playerId": "p2",
+            "playerName": "Player 2",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          }
+        ],
+        "field": {
+          "weather": null,
+          "weatherTurnsLeft": null,
+          "terrain": null,
+          "terrainTurnsLeft": null,
+          "pseudoWeather": []
+        },
+        "messageQueue": [],
+        "animationQueue": [],
+        "result": null,
+        "winnerName": null
+      },
+      {
+        "battleId": "battle-4b278864-c729-4eca-99b6-a1ebaf286531",
+        "turn": 0,
+        "phase": "preview",
+        "format": "gen9ou",
+        "gametype": "singles",
+        "spriteStyle": "retro",
+        "effectStyle": "essentials",
+        "sides": [
+          {
+            "playerSlot": 0,
+            "playerId": "p1",
+            "playerName": "Player 1",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          },
+          {
+            "playerSlot": 1,
+            "playerId": "p2",
+            "playerName": "Player 2",
+            "active": [],
+            "party": [],
+            "sideConditions": []
+          }
+        ],
+        "field": {
+          "weather": null,
+          "weatherTurnsLeft": null,
+          "terrain": null,
+          "terrainTurnsLeft": null,
+          "pseudoWeather": []
+        },
+        "messageQueue": [],
+        "animationQueue": [],
+        "result": null,
+        "winnerName": null,
+        "pendingRequest": {
+          "kind": "team",
+          "slots": [],
+          "switches": [
+            {
+              "position": 1,
+              "speciesId": "pikachu",
+              "name": "Pikachu",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 2,
+              "speciesId": "charizard",
+              "name": "Charizard",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 3,
+              "speciesId": "blastoise",
+              "name": "Blastoise",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 4,
+              "speciesId": "venusaur",
+              "name": "Venusaur",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 5,
+              "speciesId": "gengar",
+              "name": "Gengar",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            },
+            {
+              "position": 6,
+              "speciesId": "snorlax",
+              "name": "Snorlax",
+              "hpPercent": 100,
+              "hpStatus": "alive",
+              "status": null
+            }
+          ],
+          "noCancel": false
+        }
+      }
+    ]
+  }
+]

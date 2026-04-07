@@ -25,6 +25,15 @@ export interface Evolution {
   param: string;
 }
 
+export interface PokemonSpriteMetrics {
+  backSpriteX: number;
+  backSpriteY: number;
+  frontSpriteX: number;
+  frontSpriteY: number;
+  shadowX: number;
+  shadowSize: number;
+}
+
 export type GenderRatio =
   | 'AlwaysMale'
   | 'FemaleOneEighth'
@@ -62,5 +71,6 @@ export interface Species {
   pokedex: string;
   generation: number;
   evolutions: Evolution[];
+  metrics: PokemonSpriteMetrics | null;
   provenance: Provenance;
 }

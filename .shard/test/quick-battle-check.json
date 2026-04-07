@@ -1,0 +1,20 @@
+{
+  "targetUrl": "http://127.0.0.1:4317",
+  "visibleText": "Pikachu\n♂\nPikachu\n♂\nWhat will\nPikachu do?",
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ],
+  "pageErrors": [],
+  "requestFailures": []
+}

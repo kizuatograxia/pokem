@@ -1,0 +1,20 @@
+{
+  "targetUrl": "http://127.0.0.1:4317",
+  "mode": "fight",
+  "visibleText": "BATTLE TOWER\nOpponent disconnected.\nMake sure the battle server is running:\ncd server/battle && npm start\nPikachu\nM\n100\nPikachu\nM\n100\n100/100\nThunderbolt\nQuick Attack\nIron Tail\nThunder\nPP\n24/24",
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ],
+  "pageErrors": []
+}

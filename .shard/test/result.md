@@ -1,40 +1,46 @@
-# Result: BattleRoom + WebSocket transport — server/battle
+What I did
+- Downloaded the full `Pokemon Black/White` asset set from Spriters Resource into `sources/spriters-resource/pokemonblackwhite-full`.
+- Added a reusable downloader script at `tools/download-spriters-resource-assets.ps1`.
+- Added an organizer/converter script at `tools/organize-spriters-resource-bw-assets.ps1`.
+- Separated the Pokemon-related battle assets into:
+  - `sources/spriters-resource/pokemonblackwhite-pokemon/battlers-raw`
+  - `sources/spriters-resource/pokemonblackwhite-pokemon/atlases`
+  - `sources/spriters-resource/pokemonblackwhite-pokemon/parts`
+- Exported normalized animated strips for the frontend into:
+  - `client/web/public/assets/sprites/pokemon/animated/front`
+  - `client/web/public/assets/sprites/pokemon/animated/back`
+- Generated inventory/report files:
+  - `sources/spriters-resource/pokemonblackwhite-pokemon/manifest.json`
+  - `sources/spriters-resource/pokemonblackwhite-pokemon/README.md`
 
-## O que eu fiz
-- Implementei `BattleRoom` para orquestrar uma batalha, validar `battleId`/`playerSlot`, iniciar o `SdAdapter`, cachear estado público/privado e emitir `stateUpdate`, `playerStateUpdate`, `ended` e `error`.
-- Implementei `Matchmaker` com fila FIFO simples, fallback de time padrão e normalização de team string multiline para packed format.
-- Implementei `WsGateway` com `ws`, matchmaking por socket, envio de `match`, repasse de `state` privado por jogador, validação básica de payloads e cleanup de fila/sala em disconnect.
-- Adicionei `src/gateway/server.ts` como entrypoint de produção na porta 8788 e exportei `BattleRoom`, `Matchmaker` e `WsGateway` em `src/index.ts`.
-- Corrigi o bootstrap do `SdAdapter` para chamar `sendUpdates()` depois de `setPlayer` e `choose`, e corrigi a tradução de `|request|` do Showdown para inferir `team`/`move`/`switch`/`wait` quando `requestType` não vem no JSON.
-- Adicionei/ajustei `.shard/test/smoke-battle.mjs` para um smoke test local com dois clientes WS.
+Files changed
+- `tools/download-spriters-resource-assets.ps1`
+- `tools/organize-spriters-resource-bw-assets.ps1`
+- `client/web/public/assets/sprites/pokemon/animated/front/*`
+- `client/web/public/assets/sprites/pokemon/animated/back/*`
+- `sources/spriters-resource/pokemonblackwhite-full/*`
+- `sources/spriters-resource/pokemonblackwhite-pokemon/*`
+- `.shard/test/result.md`
 
-## Files changed
-- `server/battle/src/room/BattleRoom.ts`
-- `server/battle/src/gateway/Matchmaker.ts`
-- `server/battle/src/gateway/WsGateway.ts`
-- `server/battle/src/gateway/server.ts`
-- `server/battle/src/index.ts`
-- `server/battle/src/showdown-adapter/SdAdapter.ts`
-- `server/battle/src/showdown-adapter/protocol/types.ts`
-- `server/battle/src/showdown-adapter/translator/BattleTranslator.ts`
-- `server/battle/package.json`
-- `.shard/test/smoke-battle.mjs`
+Key output
+- Total source files scanned: `845`
+- Battler sheets normalized: `769`
+- Battle atlases separated: `20`
+- Battle parts sheets separated: `20`
+- Animated front strips exported: `769`
+- Animated back strips exported: `769`
 
-## Assumptions
-- Mantive o `BattleRoom` apoiado no `SdAdapter` existente em vez de instanciar um `BattleTranslator` separado na room, porque o adapter já encapsula os tradutores por lado e o espectador.
-- Interpretei o time padrão fornecido no task como packed team com separador `]`; por isso o fallback e a normalização convertem o bloco multiline para packed string antes de iniciar a batalha.
+Assumptions
+- Used the existing filenames in `client/web/public/assets/sprites/pokemon/front` as the canonical naming contract.
+- Treated the individual per-Pokemon Spriters Resource PNGs as the source of front/back animation strips.
+- Kept the generation-wide shiny/front/back sheets as separated source material in `atlases`/`parts`, but did not attempt per-species shiny strip reconstruction from those atlases.
 
-## Blockers / open questions
-- `cd server/battle && node dist/gateway/server.js` não pôde ser validado na porta `8788` neste ambiente porque o bind da porta falhou com erro do SO (`EACCES`/porta indisponível). O código continua configurado para `8788`, mas o smoke end-to-end precisou rodar em uma porta alternativa (`8790`) usando o `WsGateway` compilado de `dist/`.
+Blockers / open questions
+- Two battlers are still unresolved in the generated manifest:
+  - `#0029 Nidoran♀`
+  - `#0032 Nidoran♂`
+- The site source is limited to the Black/White page, so this pipeline currently covers the assets exposed there, not National Dex animated sprites beyond that page.
+- The exported animated strips are generated assets only; the frontend runtime has not yet been switched to use `pokemon/animated/front|back`.
 
-## Verificação executada
-- `cd server/battle && npx tsc --noEmit` ✅
-- `cd server/battle && npm run build` ✅
-- `cd client/web && npx tsc --noEmit` ✅
-- `cd tools/dex-importer && npx tsc --noEmit` ✅
-- `cd tools/dex-importer && npm run import` ✅
-- `node .shard/test/smoke-battle.mjs` ✅
-  - Dois clientes WS conectaram, fizeram `join`, receberam `match`, enviaram `team`/`move` e chegaram a um turno resolvido com `BattleViewState`.
-
-## Commit
-- A pedido do usuário, preparei um snapshot completo do repositório para commitar absolutamente todas as mudanças presentes no worktree, incluindo arquivos rastreados e não rastreados.
+Verification
+- `client/web`: `C:\Program Files\nodejs\npx.cmd tsc --noEmit` ✅

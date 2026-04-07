@@ -49,7 +49,9 @@ function isPlayerCommand(value: unknown): value is PlayerCommand {
   return candidate.kind === 'move'
     || candidate.kind === 'switch'
     || candidate.kind === 'team'
-    || candidate.kind === 'doubles-choice';
+    || candidate.kind === 'shift'
+    || candidate.kind === 'item'
+    || candidate.kind === 'multi-choice';
 }
 
 export class WsGateway {

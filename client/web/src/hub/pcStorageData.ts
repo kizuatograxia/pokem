@@ -18,6 +18,7 @@ export interface HubPartyMember {
 export interface HubStorageBox {
   id: string;
   name: string;
+  wallpaperIndex: number;
   contents: Array<HubPartyMember | null>;
 }
 
@@ -348,7 +349,9 @@ const BOX_SEEDS: MemberSeed[][] = [
 ];
 
 export function createInitialParty(): Array<HubPartyMember | null> {
-  const party = PARTY_SEEDS.map((seed, index) => createMember(seed, `party-${index + 1}`));
+  const party: Array<HubPartyMember | null> = PARTY_SEEDS.map((seed, index) =>
+    createMember(seed, `party-${index + 1}`),
+  );
 
   while (party.length < PARTY_SLOT_COUNT) {
     party.push(null);
@@ -360,7 +363,7 @@ export function createInitialParty(): Array<HubPartyMember | null> {
 export function createInitialStorageBoxes(): HubStorageBox[] {
   return Array.from({ length: 40 }, (_, boxIndex) => {
     const boxSeeds = BOX_SEEDS[boxIndex] ?? [];
-    const contents = boxSeeds.map((seed, memberIndex) =>
+    const contents: Array<HubPartyMember | null> = boxSeeds.map((seed, memberIndex) =>
       createMember(seed, `box-${boxIndex + 1}-${memberIndex + 1}`),
     );
 
@@ -371,6 +374,7 @@ export function createInitialStorageBoxes(): HubStorageBox[] {
     return {
       id: `box-${boxIndex + 1}`,
       name: `Box ${String(boxIndex + 1).padStart(2, "0")}`,
+      wallpaperIndex: boxIndex % 40,
       contents,
     };
   });

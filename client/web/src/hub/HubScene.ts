@@ -124,14 +124,6 @@ const COLLISION_ROWS = [
   "####################",
 ] as const;
 
-function isWalkableTile(tileX: number, tileY: number): boolean {
-  if (tileX < 0 || tileY < 0 || tileX >= MAP_WIDTH || tileY >= MAP_HEIGHT) {
-    return false;
-  }
-
-  return COLLISION_ROWS[tileY][tileX] === ".";
-}
-
 const STATIC_NPCS: HubNpc[] = [
   {
     id: "single-battles-clerk",

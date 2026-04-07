@@ -75,6 +75,43 @@ function statusVerb(status: string): string {
   return map[status] ?? status;
 }
 
+function parseRequestDetails(details: string): {
+  speciesId: string;
+  name: string;
+  level: number;
+  gender: 'M' | 'F' | 'N';
+  shiny: boolean;
+} {
+  const [rawName, ...rawParts] = details.split(',').map((part) => part.trim());
+  const parts = rawParts.filter(Boolean);
+  let level = 100;
+  let gender: 'M' | 'F' | 'N' = 'N';
+  let shiny = false;
+
+  for (const part of parts) {
+    if (part.startsWith('L')) {
+      const parsedLevel = Number.parseInt(part.slice(1), 10);
+      if (!Number.isNaN(parsedLevel)) level = parsedLevel;
+      continue;
+    }
+    if (part === 'M' || part === 'F') {
+      gender = part;
+      continue;
+    }
+    if (part.toLowerCase() === 'shiny') {
+      shiny = true;
+    }
+  }
+
+  return {
+    speciesId: rawName.toLowerCase().replace(/[^a-z0-9]/g, ''),
+    name: rawName,
+    level,
+    gender,
+    shiny,
+  };
+}
+
 function getRequestKind(req: SdRequest): PlayerRequestView['kind'] {
   if (req.requestType) {
     return req.requestType;
@@ -177,9 +214,13 @@ export class BattleTranslator {
           name: '???',
           level: 100,
           gender: 'N' as const,
+          shiny: false,
           hpPercent: 100,
+          hpCurrent: null,
+          hpMax: null,
           hpStatus: 'alive' as const,
           status: null,
+          item: null,
           isRevealed: false,
         }));
         break;
@@ -193,22 +234,26 @@ export class BattleTranslator {
       // team preview — phase stays 'preview' until |start|
       case 'teampreview':
         s.phase = 'preview';
+        s.pendingRequest = undefined;
         break;
 
       // |start| fires after team preview choose or directly in non-preview formats
       case 'start':
         s.phase = 'command';
+        s.pendingRequest = undefined;
         break;
 
       case 'turn':
         s.turn = event.turn;
         s.phase = 'command';
+        s.pendingRequest = undefined;
         s.animationQueue = [];
         this._pushMsg('info', `Turn ${event.turn}`);
         break;
 
       case 'win': {
         s.phase = 'ended';
+        s.pendingRequest = undefined;
         s.winnerName = event.player;
         // result is relative to this translator's side
         if (this._playerSide === null) {
@@ -223,6 +268,7 @@ export class BattleTranslator {
 
       case 'tie':
         s.phase = 'ended';
+        s.pendingRequest = undefined;
         s.result = 'tie';
         this._pushMsg('info', 'The battle ended in a tie.');
         break;
@@ -233,7 +279,7 @@ export class BattleTranslator {
       case 'drag': {
         const sideIdx = sideIndex(event.ident.side);
         const activeSlot = slotIndex(event.ident.slot);
-        const hp = parseHpStatus(event.hpStatus);
+        const hp = this._normalizeHpForViewer(event.ident, parseHpStatus(event.hpStatus));
 
         const pokemon: ActivePokemonView = {
           slot: activeSlot,
@@ -241,6 +287,7 @@ export class BattleTranslator {
           name: event.ident.name,
           level: event.ident.level,
           gender: event.ident.gender,
+          shiny: event.ident.shiny,
           hpCurrent: hp.hpCurrent,
           hpMax: hp.hpMax,
           hpStatus: hp.fainted ? 'fainted' : 'alive',
@@ -274,8 +321,19 @@ export class BattleTranslator {
       case 'faint': {
         const sideIdx = sideIndex(event.ident.side);
         const active = this._findActive(event.ident);
-        if (active) active.hpStatus = 'fainted';
-        this._updatePartyHp(sideIdx, event.ident.name, 0, true);
+        const faintedHp = this._normalizeHpForViewer(event.ident, {
+          hpCurrent: 0,
+          hpMax: 100,
+          percent: 0,
+          status: null,
+          fainted: true,
+        });
+        if (active) {
+          active.hpCurrent = faintedHp.hpCurrent;
+          active.hpMax = faintedHp.hpMax;
+          active.hpStatus = 'fainted';
+        }
+        this._updatePartyFromHp(sideIdx, event.ident.name, faintedHp);
         this._pushAnim({ kind: 'faint', side: sideIdx, slot: slotIndex(event.ident.slot) });
         this._pushMsg('faint', `${event.ident.name} fainted!`);
         break;
@@ -286,6 +344,7 @@ export class BattleTranslator {
       case 'move': {
         const sideIdx = sideIndex(event.ident.side);
         s.phase = 'resolving';
+        s.pendingRequest = undefined;
         const activeSlotIdx = slotIndex(event.ident.slot);
         const typeId = getMoveTypeId(event.moveName);
         this._lastMoveType.set(`${sideIdx}:${activeSlotIdx}`, typeId);
@@ -304,14 +363,14 @@ export class BattleTranslator {
 
       case 'damage': {
         const sideIdx = sideIndex(event.ident.side);
-        const hp = parseHpStatus(event.hpStatus);
+        const hp = this._normalizeHpForViewer(event.ident, parseHpStatus(event.hpStatus));
         const active = this._findActive(event.ident);
         if (active) {
           active.hpCurrent = hp.hpCurrent;
           active.hpMax = hp.hpMax;
           if (hp.fainted) active.hpStatus = 'fainted';
         }
-        this._updatePartyHp(sideIdx, event.ident.name, hp.percent, hp.fainted);
+        this._updatePartyFromHp(sideIdx, event.ident.name, hp);
         const dmgSlot = slotIndex(event.ident.slot);
         // Damage lands on the target's side, but the move was used by the other side.
         // We look up the last known move type from the attacker (either side, any slot).
@@ -331,10 +390,11 @@ export class BattleTranslator {
 
       case 'heal': {
         const sideIdx = sideIndex(event.ident.side);
-        const hp = parseHpStatus(event.hpStatus);
+        const hp = this._normalizeHpForViewer(event.ident, parseHpStatus(event.hpStatus));
         const active = this._findActive(event.ident);
         if (active) { active.hpCurrent = hp.hpCurrent; active.hpMax = hp.hpMax; }
-        this._updatePartyHp(sideIdx, event.ident.name, hp.percent, false);
+        this._updatePartyFromHp(sideIdx, event.ident.name, hp);
+        this._pushMsg('heal', `${event.ident.name} regained health!`);
         this._pushAnim({
           kind: 'heal',
           side: sideIdx,
@@ -346,7 +406,7 @@ export class BattleTranslator {
       }
 
       case 'sethp': {
-        const hp = parseHpStatus(event.hpStatus);
+        const hp = this._normalizeHpForViewer(event.ident, parseHpStatus(event.hpStatus));
         const active = this._findActive(event.ident);
         if (active) { active.hpCurrent = hp.hpCurrent; active.hpMax = hp.hpMax; }
         break;
@@ -357,6 +417,7 @@ export class BattleTranslator {
       case 'status': {
         const active = this._findActive(event.ident);
         if (active) active.status = statusFromStr(event.status);
+        this._updatePartyStatus(sideIndex(event.ident.side), event.ident.name, statusFromStr(event.status));
         this._pushAnim({
           kind: 'status-apply',
           side: sideIndex(event.ident.side),
@@ -370,6 +431,7 @@ export class BattleTranslator {
       case 'curestatus': {
         const active = this._findActive(event.ident);
         if (active) active.status = null;
+        this._updatePartyStatus(sideIndex(event.ident.side), event.ident.name, null);
         this._pushMsg('info', `${event.ident.name} was cured of its ${event.status}!`);
         break;
       }
@@ -537,20 +599,158 @@ export class BattleTranslator {
     if (slot) {
       slot.name = name;
       slot.hpPercent = hp.percent;
+      slot.hpCurrent = hp.hpCurrent;
+      slot.hpMax = hp.hpMax;
       slot.hpStatus = hp.fainted ? 'fainted' : 'alive';
       slot.isRevealed = true;
     }
   }
 
-  private _updatePartyHp(sideIdx: number, name: string, percent: number, fainted: boolean) {
+  private _updatePartyFromHp(
+    sideIdx: number,
+    name: string,
+    hp: ReturnType<typeof parseHpStatus>,
+  ) {
     const slot = this._state.sides[sideIdx].party.find(p => p.name === name);
     if (slot) {
-      slot.hpPercent = percent;
-      slot.hpStatus = fainted ? 'fainted' : 'alive';
+      slot.hpPercent = hp.percent;
+      slot.hpCurrent = hp.hpCurrent;
+      slot.hpMax = hp.hpMax;
+      slot.hpStatus = hp.fainted ? 'fainted' : 'alive';
+      slot.status = statusFromStr(hp.status);
     }
   }
 
-  private _translateRequest(req: SdRequest, _side: SdSide): PlayerRequestView {
+  private _updatePartyStatus(sideIdx: number, name: string, status: StatusCondition) {
+    const slot = this._state.sides[sideIdx].party.find(p => p.name === name);
+    if (slot) {
+      slot.status = status;
+    }
+  }
+
+  private _knownHpState(sideIdx: number, name: string): {
+    hpCurrent: number;
+    hpMax: number;
+  } | null {
+    const active = this._state.sides[sideIdx].active.find(
+      (pokemon) => pokemon.name === name && pokemon.hpMax > 0,
+    );
+    if (active) {
+      return {
+        hpCurrent: active.hpCurrent,
+        hpMax: active.hpMax,
+      };
+    }
+
+    const partySlot = this._state.sides[sideIdx].party.find(
+      (pokemon) =>
+        pokemon.name === name &&
+        pokemon.hpCurrent !== null &&
+        pokemon.hpMax !== null &&
+        pokemon.hpMax > 0,
+    );
+    if (!partySlot || partySlot.hpCurrent === null || partySlot.hpMax === null) {
+      return null;
+    }
+
+    return {
+      hpCurrent: partySlot.hpCurrent,
+      hpMax: partySlot.hpMax,
+    };
+  }
+
+  private _normalizeHpForPlayerSide(
+    side: SdSide,
+    name: string,
+    hp: ReturnType<typeof parseHpStatus>,
+  ): ReturnType<typeof parseHpStatus> {
+    if (this._playerSide === null || side !== this._playerSide) {
+      return hp;
+    }
+
+    const known = this._knownHpState(sideIndex(side), name);
+    if (!known || known.hpMax <= 0) {
+      return hp;
+    }
+
+    if (hp.hpMax !== 100 && hp.hpMax !== known.hpMax) {
+      return hp;
+    }
+
+    const hpCurrent = hp.fainted
+      ? 0
+      : Math.max(
+          0,
+          Math.min(known.hpMax, Math.round((hp.percent / 100) * known.hpMax)),
+        );
+
+    return {
+      ...hp,
+      hpCurrent,
+      hpMax: known.hpMax,
+      percent: known.hpMax > 0 ? Math.round((hpCurrent / known.hpMax) * 100) : 0,
+    };
+  }
+
+  private _normalizeHpForViewer(
+    ident: SdPokemonIdent,
+    hp: ReturnType<typeof parseHpStatus>,
+  ): ReturnType<typeof parseHpStatus> {
+    return this._normalizeHpForPlayerSide(ident.side, ident.name, hp);
+  }
+
+  private _syncPartyFromRequest(side: SdSide, req: SdRequest): void {
+    const sideData = req.side;
+    if (!sideData?.pokemon?.length) return;
+
+    const sideIdx = sideIndex(side);
+    const nextParty = sideData.pokemon.map((pokemon, index) => {
+      const details = parseRequestDetails(pokemon.details);
+      const hp = this._normalizeHpForPlayerSide(side, details.name, parseHpStatus(pokemon.condition));
+      return {
+        position: index,
+        speciesId: details.speciesId,
+        name: details.name,
+        level: details.level,
+        gender: details.gender,
+        shiny: details.shiny,
+        hpPercent: hp.percent,
+        hpCurrent: hp.hpCurrent,
+        hpMax: hp.hpMax,
+        hpStatus: hp.fainted ? 'fainted' as const : 'alive' as const,
+        status: statusFromStr(hp.status),
+        item: pokemon.item || null,
+        isRevealed: true,
+      };
+    });
+    this._state.sides[sideIdx].party = nextParty;
+
+    const activeParty = sideData.pokemon.filter((pokemon) => pokemon.active);
+    activeParty.forEach((pokemon, activeSlot) => {
+      const active = this._state.sides[sideIdx].active[activeSlot];
+      if (!active) return;
+
+      const hp = parseHpStatus(pokemon.condition);
+      const details = parseRequestDetails(pokemon.details);
+      active.speciesId = details.speciesId;
+      active.name = details.name;
+      active.level = details.level;
+      active.gender = details.gender;
+      active.shiny = details.shiny;
+      active.hpCurrent = hp.hpCurrent;
+      active.hpMax = hp.hpMax;
+      active.hpStatus = hp.fainted ? 'fainted' : 'alive';
+      active.status = statusFromStr(hp.status);
+      active.item = pokemon.item || null;
+      active.ability = pokemon.ability || pokemon.baseAbility || null;
+      active.isRevealed = true;
+      active.teraType = pokemon.teraType ?? active.teraType;
+    });
+  }
+
+  private _translateRequest(req: SdRequest, side: SdSide): PlayerRequestView {
+    this._syncPartyFromRequest(side, req);
+
     const requestKind = getRequestKind(req);
     const sideData = req.side;
 
@@ -561,6 +761,8 @@ export class BattleTranslator {
         index: i + 1,
         id: m.id,
         name: m.move,
+        typeId: getMoveTypeId(m.id),
+        target: m.target,
         pp: m.pp,
         maxPp: m.maxpp,
         disabled: !!m.disabled,
@@ -571,6 +773,26 @@ export class BattleTranslator {
       forceSwitch: !!(req.forceSwitch?.[slotIdx]),
       trapped: !!(active.trapped),
     }));
+
+    if (requestKind === 'switch' && slots.length === 0) {
+      const forcedSlots = req.forceSwitch
+        ?.map((needsSwitch, slotIdx) => (needsSwitch ? slotIdx : -1))
+        .filter((slotIdx) => slotIdx >= 0) ?? [];
+
+      const fallbackCount = sideData?.pokemon.filter((pokemon) => pokemon.active).length ?? 0;
+      const slotIndexes = forcedSlots.length > 0
+        ? forcedSlots
+        : Array.from({ length: Math.max(1, fallbackCount) }, (_, slotIdx) => slotIdx);
+
+      slotIndexes.forEach((slotIdx) => {
+        slots.push({
+          slot: slotIdx,
+          moves: [],
+          forceSwitch: true,
+          trapped: false,
+        });
+      });
+    }
 
     // ── Switch pool — preserve original 1-based team position ─────────────────
     // Map with original index BEFORE filtering so position stays accurate.

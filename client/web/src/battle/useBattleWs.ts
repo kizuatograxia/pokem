@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type {
   BattleViewState,
+  MultiChoiceCommand,
   MoveCommand,
   PlayerCommand,
+  ShiftCommand,
+  SlotChoice,
   SwitchCommand,
-} from "../../../server/battle/src/view-model/types.js";
+  TeamOrderCommand,
+} from "./types.js";
 
 export type BattleStatus =
   | "idle"
@@ -25,12 +29,36 @@ export interface UseBattleWsResult {
 
 const DEFAULT_SERVER = "ws://localhost:5173/battle-ws";
 
+function isEndedState(state: BattleViewState | null | undefined): boolean {
+  return state?.phase === "ended";
+}
+
+function buildTeamPreviewCommand(
+  state: BattleViewState,
+  battleId: string,
+  playerSlot: 0 | 1,
+): TeamOrderCommand | null {
+  const req = state.pendingRequest;
+  if (req?.kind !== "team") return null;
+
+  const order = req.switches.map((pokemon) => pokemon.position);
+  if (order.length === 0) return null;
+
+  return {
+    kind: "team",
+    battleId,
+    playerSlot,
+    order,
+  };
+}
+
 // ─── CPU bot ─────────────────────────────────────────────────────────────────
 
 function runCpuBot(serverUrl: string): WebSocket {
   const ws = new WebSocket(serverUrl);
   let slot: 0 | 1 | null = null;
   let battleId: string | null = null;
+  let teamPreviewSubmitted = false;
 
   ws.addEventListener("open", () => {
     ws.send(JSON.stringify({ type: "join" }));
@@ -46,41 +74,103 @@ function runCpuBot(serverUrl: string): WebSocket {
       }
       if (msg.type === "state" && slot !== null && battleId !== null) {
         const state = msg.state as BattleViewState;
+        if (isEndedState(state)) {
+          ws.close();
+          return;
+        }
         const req = state.pendingRequest;
         if (!req) return;
 
+        if (req.kind === "team") {
+          if (teamPreviewSubmitted) return;
+          const cmd = buildTeamPreviewCommand(state, battleId, slot);
+          if (!cmd) return;
+          teamPreviewSubmitted = true;
+          ws.send(JSON.stringify({ type: "command", ...cmd }));
+          return;
+        }
+
         if (req.kind === "move") {
-          const slotReq = req.slots[0];
-          if (!slotReq) return;
-          const move = slotReq.moves.find((m) => !m.disabled) ?? slotReq.moves[0];
-          if (!move) return;
-          const cmd: MoveCommand = {
-            kind: "move",
+          const choices: SlotChoice[] = [];
+          for (const slotReq of req.slots) {
+            const move = slotReq.moves.find((candidate) => !candidate.disabled) ?? slotReq.moves[0];
+            if (move) {
+              const choice: MoveCommand = {
+                kind: "move",
+                battleId,
+                playerSlot: slot,
+                activeSlot: slotReq.slot,
+                turn: state.turn,
+                stateHash: "",
+                moveIndex: move.index,
+                mega: false,
+                tera: false,
+                dynamax: false,
+              };
+              choices.push({ activeSlot: slotReq.slot, choice });
+              continue;
+            }
+
+            const shiftChoice: ShiftCommand = {
+              kind: "shift",
+              battleId,
+              playerSlot: slot,
+              activeSlot: slotReq.slot,
+              turn: state.turn,
+              stateHash: "",
+            };
+            choices.push({ activeSlot: slotReq.slot, choice: shiftChoice });
+          }
+          if (choices.length === 0) return;
+          if (choices.length === 1) {
+            ws.send(JSON.stringify({ type: "command", ...choices[0].choice }));
+            return;
+          }
+          const cmd: MultiChoiceCommand = {
+            kind: "multi-choice",
             battleId,
             playerSlot: slot,
-            activeSlot: 0,
             turn: state.turn,
             stateHash: "",
-            moveIndex: move.index,
-            mega: false,
-            tera: false,
-            dynamax: false,
+            choices,
           };
           ws.send(JSON.stringify({ type: "command", ...cmd }));
           return;
         }
 
         if (req.kind === "switch") {
-          const sw = req.switches.find((s) => s.hpStatus === "alive");
-          if (!sw) return;
-          const cmd: SwitchCommand = {
-            kind: "switch",
+          const claimedBench = new Set<number>();
+          const choices: SlotChoice[] = [];
+          for (const slotReq of req.slots) {
+            const sw = req.switches.find(
+              (candidate) =>
+                candidate.hpStatus === "alive" && !claimedBench.has(candidate.position),
+            );
+            if (!sw) return;
+            claimedBench.add(sw.position);
+            const choice: SwitchCommand = {
+              kind: "switch",
+              battleId,
+              playerSlot: slot,
+              activeSlot: slotReq.slot,
+              turn: state.turn,
+              stateHash: "",
+              partyIndex: sw.position,
+            };
+            choices.push({ activeSlot: slotReq.slot, choice });
+          }
+          if (choices.length === 0) return;
+          if (choices.length === 1) {
+            ws.send(JSON.stringify({ type: "command", ...choices[0].choice }));
+            return;
+          }
+          const cmd: MultiChoiceCommand = {
+            kind: "multi-choice",
             battleId,
             playerSlot: slot,
-            activeSlot: 0,
             turn: state.turn,
             stateHash: "",
-            partyIndex: sw.position,
+            choices,
           };
           ws.send(JSON.stringify({ type: "command", ...cmd }));
         }
@@ -113,6 +203,12 @@ export function useBattleWs(opts: {
 
   const wsRef = useRef<WebSocket | null>(null);
   const botRef = useRef<WebSocket | null>(null);
+  const autoTeamPreviewKeyRef = useRef<string | null>(null);
+  const latestStatusRef = useRef<BattleStatus>("idle");
+
+  useEffect(() => {
+    latestStatusRef.current = status;
+  }, [status]);
 
   const sendCommand = useCallback((cmd: PlayerCommand) => {
     const ws = wsRef.current;
@@ -157,12 +253,20 @@ export function useBattleWs(opts: {
         }
 
         if (msg.type === "state") {
-          setState(msg.state as BattleViewState);
+          const nextState = msg.state as BattleViewState;
+          setState(nextState);
+          if (isEndedState(nextState)) {
+            setStatus("ended");
+            botRef.current?.close();
+            botRef.current = null;
+          }
           return;
         }
 
         if (msg.type === "ended") {
           setStatus("ended");
+          botRef.current?.close();
+          botRef.current = null;
           return;
         }
 
@@ -176,7 +280,12 @@ export function useBattleWs(opts: {
     });
 
     ws.addEventListener("close", () => {
-      if (status !== "ended") setStatus("idle");
+      if (wsRef.current === ws) {
+        wsRef.current = null;
+      }
+      if (latestStatusRef.current !== "ended") {
+        setStatus("idle");
+      }
     });
 
     ws.addEventListener("error", () => {
@@ -189,8 +298,22 @@ export function useBattleWs(opts: {
       botRef.current?.close();
       wsRef.current = null;
       botRef.current = null;
+      autoTeamPreviewKeyRef.current = null;
     };
   }, [enabled, serverUrl]);
+
+  useEffect(() => {
+    if (!enabled || !state || !battleId || playerSlot === null) return;
+
+    const cmd = buildTeamPreviewCommand(state, battleId, playerSlot);
+    if (!cmd) return;
+
+    const requestKey = `${battleId}:${playerSlot}:${cmd.order.join(",")}`;
+    if (autoTeamPreviewKeyRef.current === requestKey) return;
+
+    autoTeamPreviewKeyRef.current = requestKey;
+    sendCommand(cmd);
+  }, [enabled, state, battleId, playerSlot, sendCommand]);
 
   return { status, state, battleId, playerSlot, error, sendCommand };
 }

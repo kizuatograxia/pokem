@@ -46,6 +46,7 @@ export interface ActivePokemonView {
   name: string;
   level: number;
   gender: 'M' | 'F' | 'N';
+  shiny: boolean;
   hpCurrent: number;                // 0-100 (percent for opponent, exact for own side)
   hpMax: number;
   hpStatus: HPStatus;
@@ -85,9 +86,13 @@ export interface PartySlotView {
   name: string;
   level: number;
   gender: 'M' | 'F' | 'N';
+  shiny: boolean;
   hpPercent: number;                // 0-100
+  hpCurrent: number | null;
+  hpMax: number | null;
   hpStatus: HPStatus;
   status: StatusCondition;
+  item: string | null;
   isRevealed: boolean;
 }
 
@@ -126,6 +131,19 @@ export interface BattleMessage {
   meta?: Record<string, unknown>;   // optional extra data for rendering
 }
 
+export interface BattleBagItemView {
+  id: string;
+  name: string;
+  description: string;
+  quantity: number | null;
+}
+
+export interface BattleBagPocketView {
+  id: number;
+  name: string;
+  items: BattleBagItemView[];
+}
+
 // ─── Player Request ──────────────────────────────────────────────────────────
 // Sent only to the player whose turn it is. Never leaked to spectators.
 
@@ -135,6 +153,8 @@ export interface MoveRequestOption {
   index: number;                    // 1-4
   id: string;
   name: string;
+  typeId: string;
+  target: string;
   pp: number;
   maxPp: number;
   disabled: boolean;
@@ -220,12 +240,13 @@ export interface BattleViewState {
   animationQueue: BattleAnimationCue[];
   result: BattleResult;
   winnerName: string | null;
+  bag?: BattleBagPocketView[];
 }
 
 // ─── Commands ────────────────────────────────────────────────────────────────
 // What the player sends to our backend. We translate to Showdown /choose.
 
-export type PlayerCommandKind = 'move' | 'switch' | 'team';
+export type PlayerCommandKind = 'move' | 'switch' | 'team' | 'shift' | 'item' | 'multi-choice';
 
 export interface MoveCommand {
   kind: 'move';
@@ -265,22 +286,44 @@ export interface TeamOrderCommand {
   order: number[];      // lead positions 1-6 in desired order
 }
 
-/**
- * For doubles: send one DoublesChoiceCommand per turn covering both slots.
- * Each entry maps to one slot's choice, ordered by activeSlot.
- */
-export interface SlotChoice {
+export interface ShiftCommand {
+  kind: 'shift';
+  battleId: string;
+  playerSlot: 0 | 1;
   activeSlot: number;
-  choice: MoveCommand | SwitchCommand;
+  turn: number;
+  stateHash: string;
 }
 
-export interface DoublesChoiceCommand {
-  kind: 'doubles-choice';
+export interface ItemCommand {
+  kind: 'item';
+  battleId: string;
+  playerSlot: 0 | 1;
+  activeSlot: number;
+  turn: number;
+  stateHash: string;
+  itemId: string;
+  targetPartyIndex?: number;
+}
+
+export interface SlotChoice {
+  activeSlot: number;
+  choice: MoveCommand | SwitchCommand | ShiftCommand | ItemCommand;
+}
+
+export interface MultiChoiceCommand {
+  kind: 'multi-choice';
   battleId: string;
   playerSlot: 0 | 1;
   turn: number;
   stateHash: string;
-  choices: [SlotChoice, SlotChoice];  // exactly two, one per active slot
+  choices: SlotChoice[];   // one per active slot that needs a choice
 }
 
-export type PlayerCommand = MoveCommand | SwitchCommand | TeamOrderCommand | DoublesChoiceCommand;
+export type PlayerCommand =
+  | MoveCommand
+  | SwitchCommand
+  | TeamOrderCommand
+  | ShiftCommand
+  | ItemCommand
+  | MultiChoiceCommand;

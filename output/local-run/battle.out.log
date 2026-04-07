@@ -1,0 +1,7 @@
+
+> battle-server@0.1.0 dev
+> tsx watch src/gateway/server.ts
+
+Battle WebSocket gateway listening on ws://localhost:8788
+02:03:35 [tsx] change in ./src\gateway\server.ts Restarting...
+cBattle WebSocket gateway listening on ws://localhost:8788

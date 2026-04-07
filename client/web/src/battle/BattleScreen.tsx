@@ -31,6 +31,8 @@ import {
 } from "./battleBagData.js";
 import { BattlePartyScreen } from "./BattleParty.js";
 import { useBattleWs } from "./useBattleWs.js";
+import { useBattleAnimations } from "./useBattleAnimations.js";
+import type { AnimMap } from "./useBattleAnimations.js";
 
 type MenuState = "command" | "fight" | "party" | "bag" | "target" | null;
 type PartyMode = "switch" | "bag";
@@ -334,6 +336,31 @@ export const BattleScreen: React.FC<Props> = ({ onExit }) => {
 
   const { status, state, playerSlot, battleId, error, sendCommand } =
     useBattleWs({ cpu: true, enabled: started });
+
+  const { animMap, keepVisible, isAnimating } = useBattleAnimations(state?.animationQueue);
+
+  // Translate absolute side indices (0=p1, 1=p2) to relative keys (player/foe)
+  const translatedAnimMap = useMemo<AnimMap>(() => {
+    if (!animMap.size || playerSlot === null) return animMap;
+    const result: AnimMap = new Map();
+    for (const [key, anim] of animMap) {
+      const [sideStr, slotStr] = key.split(':');
+      const relSide = Number(sideStr) === playerSlot ? 'player' : 'foe';
+      result.set(`${relSide}:${slotStr}`, anim);
+    }
+    return result;
+  }, [animMap, playerSlot]);
+
+  const translatedKeepVisible = useMemo<Set<string>>(() => {
+    if (!keepVisible.size || playerSlot === null) return keepVisible;
+    const result = new Set<string>();
+    for (const key of keepVisible) {
+      const [sideStr, slotStr] = key.split(':');
+      const relSide = Number(sideStr) === playerSlot ? 'player' : 'foe';
+      result.add(`${relSide}:${slotStr}`);
+    }
+    return result;
+  }, [keepVisible, playerSlot]);
 
   const ourSide = state && playerSlot !== null ? state.sides[playerSlot] : null;
   const foeSide =
@@ -837,7 +864,7 @@ export const BattleScreen: React.FC<Props> = ({ onExit }) => {
   }, [state?.messageQueue]);
 
   useEffect(() => {
-    if (!state || playerSlot === null) return;
+    if (!state || playerSlot === null || isAnimating) return;
 
     const firstSlot = slotRequests[0]?.slot ?? 0;
     const firstAvailableSwitchIndex = availableSwitchList[0] ?? 0;
@@ -869,7 +896,7 @@ export const BattleScreen: React.FC<Props> = ({ onExit }) => {
     ) {
       setMenuState(null);
     }
-  }, [requestKey, playerSlot, state?.phase, availableSwitchKey, slotRequests]);
+  }, [requestKey, playerSlot, state?.phase, availableSwitchKey, slotRequests, isAnimating]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -1163,6 +1190,8 @@ export const BattleScreen: React.FC<Props> = ({ onExit }) => {
               foeActive={foeSide?.active ?? []}
               sideSize={sideSize}
               selection={selection}
+              spriteAnims={translatedAnimMap}
+              keepVisible={translatedKeepVisible}
             />
 
             <BattleHud

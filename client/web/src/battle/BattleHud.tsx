@@ -240,6 +240,7 @@ const HpBar: React.FC<{
         backgroundPosition: `0px -${row * 6}px`,
         backgroundRepeat: "no-repeat",
         imageRendering: "pixelated",
+        transition: "width 0.35s ease",
       }}
     />
   );

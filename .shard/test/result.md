@@ -1,46 +1,33 @@
 What I did
-- Downloaded the full `Pokemon Black/White` asset set from Spriters Resource into `sources/spriters-resource/pokemonblackwhite-full`.
-- Added a reusable downloader script at `tools/download-spriters-resource-assets.ps1`.
-- Added an organizer/converter script at `tools/organize-spriters-resource-bw-assets.ps1`.
-- Separated the Pokemon-related battle assets into:
-  - `sources/spriters-resource/pokemonblackwhite-pokemon/battlers-raw`
-  - `sources/spriters-resource/pokemonblackwhite-pokemon/atlases`
-  - `sources/spriters-resource/pokemonblackwhite-pokemon/parts`
-- Exported normalized animated strips for the frontend into:
-  - `client/web/public/assets/sprites/pokemon/animated/front`
-  - `client/web/public/assets/sprites/pokemon/animated/back`
-- Generated inventory/report files:
-  - `sources/spriters-resource/pokemonblackwhite-pokemon/manifest.json`
-  - `sources/spriters-resource/pokemonblackwhite-pokemon/README.md`
+- Fixed the Pokemon battle sprite runtime in `client/web` so animated battlers no longer fall back to the legacy/static path just because the wrapper animation overwrote the spritesheet animation.
+- Reworked `client/web/src/battle/BattleField.tsx` to render battlers through an animated wrapper plus an internal `canvas`, allowing battle motion (`switch-in`, selection bob, faint, move-use) and frame playback to run at the same time.
+- Replaced the old “horizontal strip only” spritesheet logic with runtime sheet analysis that now supports:
+  - horizontal strips
+  - grid sheets with a uniform chroma background
+  - leading red guide columns present in some exported strips
+- Added a short diagnostic playtest script in `.shard/test/inspect-sprite-runtime.cjs` to confirm the browser is drawing animated Pokemon canvases and that their pixels change over time.
 
 Files changed
-- `tools/download-spriters-resource-assets.ps1`
-- `tools/organize-spriters-resource-bw-assets.ps1`
-- `client/web/public/assets/sprites/pokemon/animated/front/*`
-- `client/web/public/assets/sprites/pokemon/animated/back/*`
-- `sources/spriters-resource/pokemonblackwhite-full/*`
-- `sources/spriters-resource/pokemonblackwhite-pokemon/*`
+- `client/web/src/battle/BattleField.tsx`
+  - Added spritesheet analysis + canvas renderer.
+  - Split wrapper animation from sprite frame playback.
+  - Kept existing battle cue hooks (`spriteAnims`, `keepVisible`) wired into the field renderer.
+- `.shard/test/inspect-sprite-runtime.cjs`
+  - Browser diagnostic for sprite DOM/runtime validation.
 - `.shard/test/result.md`
 
-Key output
-- Total source files scanned: `845`
-- Battler sheets normalized: `769`
-- Battle atlases separated: `20`
-- Battle parts sheets separated: `20`
-- Animated front strips exported: `769`
-- Animated back strips exported: `769`
+Verification
+- `cd client/web && npx tsc --noEmit` ✅
+- `cd server/battle && npx tsc --noEmit` ✅
+- Browser playtest against `http://127.0.0.1:4317` ✅
+  - `node .shard/test/verify-quick-battle.cjs http://127.0.0.1:4317`
+  - screenshot: `.shard/test/quick-battle-check.png`
+  - runtime probe: `.shard/test/inspect-sprite-runtime.json`
+  - result: `canvasCount = 2` and `canvasChanged = true`, confirming both battler sprites are animating frame-to-frame
 
 Assumptions
-- Used the existing filenames in `client/web/public/assets/sprites/pokemon/front` as the canonical naming contract.
-- Treated the individual per-Pokemon Spriters Resource PNGs as the source of front/back animation strips.
-- Kept the generation-wide shiny/front/back sheets as separated source material in `atlases`/`parts`, but did not attempt per-species shiny strip reconstruction from those atlases.
+- I treated the user’s latest request (“Pokemon animations still look legacy/static”) as the active task, even though `.shard/test/task.md` still describes the earlier server transport work.
+- I kept the fix local to the battle frontend runtime and did not change the canonical battle view-model contract.
 
 Blockers / open questions
-- Two battlers are still unresolved in the generated manifest:
-  - `#0029 Nidoran♀`
-  - `#0032 Nidoran♂`
-- The site source is limited to the Black/White page, so this pipeline currently covers the assets exposed there, not National Dex animated sprites beyond that page.
-- The exported animated strips are generated assets only; the frontend runtime has not yet been switched to use `pokemon/animated/front|back`.
-
-Verification
-- `client/web`: `C:\Program Files\nodejs\npx.cmd tsc --noEmit` ✅
+- I validated live animation playback with Pikachu in the quick-battle smoke test. The renderer now also supports grid sheets, but I did not exhaustively playtest every species/form asset in the set.

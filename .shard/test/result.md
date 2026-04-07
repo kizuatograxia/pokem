@@ -10,6 +10,11 @@ What I did
   - supporting stacked multi-row strips
   - refining frame bounds from connected opaque components
   - trimming sparse edge columns/rows before drawing
+- Refined the parser again for the remaining bad cuts:
+  - frame cells are now built from gaps between detected runs instead of raw run bounds
+  - single-pixel / guide-line components are filtered out explicitly
+  - front-facing sheets like `PIKACHU front` keep their silhouette without pulling the red guide column
+  - `VENUSAUR front` / `VENUSAUR back` now use more consistent extracted bounds
 - Added a short diagnostic playtest script in `.shard/test/inspect-sprite-runtime.cjs` to confirm the browser is drawing animated Pokemon canvases and that their pixels change over time.
 - Added a preview script in `.shard/test/preview-analyzed-sprites.cjs` to inspect the extracted frames for problematic species outside the battle flow.
 
@@ -35,7 +40,7 @@ Verification
 - Sheet preview pass against representative problematic assets ✅
   - `node .shard/test/preview-analyzed-sprites.cjs http://127.0.0.1:4317`
   - screenshot: `.shard/test/preview-analyzed-sprites.png`
-  - covered: `PIKACHU front`, `GENGAR front`, `SNORLAX front`, `VENUSAUR back`
+  - covered: `PIKACHU front`, `PIKACHU back`, `VENUSAUR front`, `VENUSAUR back`
 
 Assumptions
 - I treated the user’s latest request (“Pokemon animations still look legacy/static”) as the active task, even though `.shard/test/task.md` still describes the earlier server transport work.

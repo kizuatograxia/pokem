@@ -257,7 +257,11 @@ function PokemonPreviewSprite({ member }: { member: HubPartyMember }) {
       <PokemonIcon
         iconSrc={member.iconSrc}
         scale={1.5}
-        style={{ left: PREVIEW_CENTER_X - 48, top: PREVIEW_CENTER_Y - 48 }}
+        style={{
+          left: PREVIEW_CENTER_X - 48,
+          top: PREVIEW_CENTER_Y - 48,
+          filter: "drop-shadow(0 3px 0 rgba(64, 72, 80, 0.24))",
+        }}
       />
     );
   }
@@ -276,6 +280,7 @@ function PokemonPreviewSprite({ member }: { member: HubPartyMember }) {
         height: PREVIEW_SIZE,
         objectFit: "contain",
         imageRendering: "pixelated",
+        filter: "drop-shadow(0 3px 0 rgba(64, 72, 80, 0.24))",
       }}
     />
   );
@@ -852,7 +857,15 @@ export function StorageOverlay(props: StorageOverlayProps) {
         alt=""
         aria-hidden="true"
         draggable={false}
-        style={{ position: "absolute", left: BOX_LEFT, top: BOX_TOP, width: BOX_WIDTH, height: BOX_HEIGHT, imageRendering: "pixelated" }}
+        style={{
+          position: "absolute",
+          left: BOX_LEFT,
+          top: BOX_TOP,
+          width: BOX_WIDTH,
+          height: BOX_HEIGHT,
+          imageRendering: "pixelated",
+          filter: "drop-shadow(0 4px 0 rgba(48, 72, 88, 0.22))",
+        }}
       />
       {currentBox?.contents.map((member, index) => {
         if (!member) return null;
@@ -884,6 +897,7 @@ export function StorageOverlay(props: StorageOverlayProps) {
           height: PARTY_PANEL_HEIGHT,
           imageRendering: "pixelated",
           transition: "top 400ms linear",
+          filter: "drop-shadow(0 4px 0 rgba(28, 36, 44, 0.26))",
         }}
       />
 
@@ -906,6 +920,19 @@ export function StorageOverlay(props: StorageOverlayProps) {
 
       {inspectedPokemon ? (
         <>
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              left: PREVIEW_CENTER_X - 42,
+              top: PREVIEW_CENTER_Y + 30,
+              width: 84,
+              height: 16,
+              borderRadius: "999px",
+              background: "rgba(72, 84, 96, 0.18)",
+              filter: "blur(3px)",
+            }}
+          />
           <PokemonPreviewSprite member={inspectedPokemon} />
           <PixelText size="xs" lineHeight={12} style={{ position: "absolute", left: 10, top: 14, width: 132, ...baseTextStyle }}>{inspectedPokemon.name}</PixelText>
           {inspectedPokemon.gender ? (
@@ -961,7 +988,16 @@ export function StorageOverlay(props: StorageOverlayProps) {
       <img src={cursorSrc} alt="" aria-hidden="true" draggable={false} style={{ position: "absolute", left: cursorPosition.x, top: cursorPosition.y, width: 16, height: 16, imageRendering: "pixelated" }} />
 
       {promptText ? (
-        <PkeWindow width={332} height={48} style={{ position: "absolute", right: 0, bottom: 0 }}>
+        <PkeWindow
+          width={332}
+          height={48}
+          style={{
+            position: "absolute",
+            right: 0,
+            bottom: 0,
+            filter: "drop-shadow(0 4px 0 rgba(32, 40, 48, 0.24))",
+          }}
+        >
           <PixelText size="xs" lineHeight={12} style={{ color: "#202018", textShadow: "1px 1px 0 #d0d0d0" }}>{promptText}</PixelText>
         </PkeWindow>
       ) : null}

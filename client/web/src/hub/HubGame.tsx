@@ -1,19 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Phaser from "phaser";
 import { HubDialogue } from "./HubDialogue";
 import { HubMobileControls } from "./HubMobileControls";
 import { HubScene } from "./HubScene";
 import { NurseMenu } from "./NurseMenu";
 import { PcMenu } from "./PcMenu";
-import { createInitialParty, createInitialStorageBoxes } from "./pcStorageData";
+import type { HubPartyMember, HubStorageBox } from "./pcStorageData";
 
 const GAME_WIDTH = 512;
 const GAME_HEIGHT = 384;
 
-export function HubGame() {
+interface HubGameProps {
+  party: Array<HubPartyMember | null>;
+  setParty: React.Dispatch<React.SetStateAction<Array<HubPartyMember | null>>>;
+  storageBoxes: HubStorageBox[];
+  setStorageBoxes: React.Dispatch<React.SetStateAction<HubStorageBox[]>>;
+}
+
+export function HubGame({ party, setParty, storageBoxes, setStorageBoxes }: HubGameProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [party, setParty] = useState(() => createInitialParty());
-  const [storageBoxes, setStorageBoxes] = useState(() => createInitialStorageBoxes());
 
   useEffect(() => {
     if (containerRef.current === null) {

@@ -27,7 +27,14 @@ export interface UseBattleWsResult {
   sendCommand: (cmd: PlayerCommand) => void;
 }
 
-const DEFAULT_SERVER = "ws://localhost:5173/battle-ws";
+function getDefaultServerUrl(): string {
+  if (typeof window === "undefined") {
+    return "ws://localhost:8788";
+  }
+
+  const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  return `${wsProtocol}//${window.location.host}/battle-ws`;
+}
 
 function isEndedState(state: BattleViewState | null | undefined): boolean {
   return state?.phase === "ended";
@@ -190,10 +197,11 @@ function runCpuBot(serverUrl: string): WebSocket {
 
 export function useBattleWs(opts: {
   serverUrl?: string;
+  team?: string;
   cpu?: boolean;
   enabled?: boolean;
 }): UseBattleWsResult {
-  const { serverUrl = DEFAULT_SERVER, cpu = true, enabled = false } = opts;
+  const { serverUrl = getDefaultServerUrl(), team, cpu = true, enabled = false } = opts;
 
   const [status, setStatus] = useState<BattleStatus>("idle");
   const [state, setState] = useState<BattleViewState | null>(null);
@@ -226,7 +234,7 @@ export function useBattleWs(opts: {
     wsRef.current = ws;
 
     ws.addEventListener("open", () => {
-      ws.send(JSON.stringify({ type: "join" }));
+      ws.send(JSON.stringify({ type: "join", team }));
       setStatus("waiting");
       if (cpu) {
         // Start bot after p1 is registered in the queue
@@ -289,7 +297,7 @@ export function useBattleWs(opts: {
     });
 
     ws.addEventListener("error", () => {
-      setError("Could not connect to battle server (ws://localhost:8788)");
+      setError(`Could not connect to battle server (${serverUrl})`);
       setStatus("error");
     });
 
@@ -300,7 +308,7 @@ export function useBattleWs(opts: {
       botRef.current = null;
       autoTeamPreviewKeyRef.current = null;
     };
-  }, [enabled, serverUrl]);
+  }, [cpu, enabled, serverUrl, team]);
 
   useEffect(() => {
     if (!enabled || !state || !battleId || playerSlot === null) return;

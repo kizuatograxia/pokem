@@ -43,6 +43,16 @@ export function PcMenu({ party, setParty, storageBoxes, setStorageBoxes }: PcMen
     () => message ?? MENU_HELP[selectedIndex],
     [message, selectedIndex],
   );
+  const partyCount = useMemo(() => getPartyCount(party), [party]);
+  const storedPokemonCount = useMemo(
+    () =>
+      storageBoxes.reduce(
+        (total, box) =>
+          total + box.contents.filter((member): member is HubPartyMember => member !== null).length,
+        0,
+      ),
+    [storageBoxes],
+  );
 
   const resetMenu = () => {
     setOpen(true);
@@ -181,10 +191,135 @@ export function PcMenu({ party, setParty, storageBoxes, setStorageBoxes }: PcMen
             style={{
               position: "absolute",
               top: 44,
+              right: 250,
+            }}
+          >
+            <PixelFrame width={190} height={120}>
+              <PixelText
+                size="xs"
+                lineHeight={12}
+                style={{
+                  marginBottom: 4,
+                  color: "#202018",
+                  textShadow: "1px 1px 0 #d0d0d0",
+                }}
+              >
+                ACTIVE PARTY
+              </PixelText>
+              <PixelText
+                size="xs"
+                lineHeight={12}
+                style={{
+                  color: "#202018",
+                  textShadow: "1px 1px 0 #d0d0d0",
+                }}
+              >
+                Quick Battle uses this team.
+              </PixelText>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: 6,
+                  marginTop: 8,
+                }}
+              >
+                {Array.from({ length: 6 }, (_, index) => {
+                  const member = party[index] ?? null;
+                  return (
+                    <div
+                      key={`pc-party-preview-${index + 1}`}
+                      style={{
+                        height: 28,
+                        border: "1px solid #708090",
+                        background: member ? "#eef5ff" : "#eff1f4",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        imageRendering: "pixelated",
+                      }}
+                      title={member?.name ?? "Empty slot"}
+                    >
+                      {member ? (
+                        <img
+                          src={member.iconSrc}
+                          alt=""
+                          aria-hidden="true"
+                          draggable={false}
+                          style={{
+                            width: 32,
+                            height: 14,
+                            imageRendering: "pixelated",
+                          }}
+                        />
+                      ) : (
+                        <PixelText
+                          size="xs"
+                          lineHeight={12}
+                          style={{
+                            color: "#687078",
+                            textShadow: "1px 1px 0 #f0f0f0",
+                          }}
+                        >
+                          ---
+                        </PixelText>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: 8,
+                }}
+              >
+                <PixelText
+                  size="xs"
+                  lineHeight={12}
+                  style={{
+                    color: "#202018",
+                    textShadow: "1px 1px 0 #d0d0d0",
+                  }}
+                >
+                  {`Party ${partyCount}/6`}
+                </PixelText>
+                <PixelText
+                  size="xs"
+                  lineHeight={12}
+                  style={{
+                    color: "#202018",
+                    textShadow: "1px 1px 0 #d0d0d0",
+                  }}
+                >
+                  {`Stored ${storedPokemonCount}`}
+                </PixelText>
+              </div>
+            </PixelFrame>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              top: 44,
               right: 18,
             }}
           >
-            <PixelFrame width={240} height={120}>
+            <PixelFrame width={220} height={120}>
+              <PixelText
+                size="xs"
+                lineHeight={12}
+                style={{
+                  marginBottom: 4,
+                  color: "#202018",
+                  textShadow: "1px 1px 0 #d0d0d0",
+                }}
+              >
+                BILL'S PC
+              </PixelText>
               <PixelText
                 size="xs"
                 lineHeight={12}
@@ -194,7 +329,7 @@ export function PcMenu({ party, setParty, storageBoxes, setStorageBoxes }: PcMen
                   textShadow: "1px 1px 0 #d0d0d0",
                 }}
               >
-                BILL'S PC
+                Organize your battle-ready party.
               </PixelText>
               <PixelMenuList
                 items={MENU_ITEMS}

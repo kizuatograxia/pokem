@@ -39,6 +39,7 @@ type PartyMode = "switch" | "bag";
 
 interface Props {
   onExit: () => void;
+  playerTeamPacked?: string;
 }
 
 const HUD_FONT = '"Courier New", monospace';
@@ -314,7 +315,7 @@ function hydrateBattleBag(
   }));
 }
 
-export const BattleScreen: React.FC<Props> = ({ onExit }) => {
+export const BattleScreen: React.FC<Props> = ({ onExit, playerTeamPacked }) => {
   const [started, setStarted] = useState(false);
   const [menuState, setMenuState] = useState<MenuState>(null);
   const [partyMode, setPartyMode] = useState<PartyMode>("switch");
@@ -335,7 +336,7 @@ export const BattleScreen: React.FC<Props> = ({ onExit }) => {
   const [displayMessage, setDisplayMessage] = useState<string | null>(null);
 
   const { status, state, playerSlot, battleId, error, sendCommand } =
-    useBattleWs({ cpu: true, enabled: started });
+    useBattleWs({ cpu: true, enabled: started, team: playerTeamPacked });
 
   const { animMap, keepVisible, isAnimating } = useBattleAnimations(state?.animationQueue);
 

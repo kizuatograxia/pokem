@@ -1,6 +1,6 @@
 {
   "targetUrl": "http://127.0.0.1:4317",
-  "visibleText": "Pikachu\n♂\nPikachu\n♂\nWhat will\nPikachu do?",
+  "visibleText": "Opponent disconnected.\nPikachu\n♂\nPikachu\n♂\nWhat will\nPikachu do?",
   "consoleMessages": [
     {
       "type": "debug",

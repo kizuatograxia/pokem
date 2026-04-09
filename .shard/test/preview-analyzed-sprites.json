@@ -2,8 +2,8 @@
   {
     "label": "PIKACHU front",
     "frameCount": 10,
-    "maxFrameWidth": 48,
-    "maxFrameHeight": 21
+    "maxFrameWidth": 50,
+    "maxFrameHeight": 48
   },
   {
     "label": "PIKACHU back",
@@ -13,14 +13,14 @@
   },
   {
     "label": "VENUSAUR front",
-    "frameCount": 14,
-    "maxFrameWidth": 83,
-    "maxFrameHeight": 52
+    "frameCount": 26,
+    "maxFrameWidth": 81,
+    "maxFrameHeight": 71
   },
   {
     "label": "VENUSAUR back",
-    "frameCount": 12,
-    "maxFrameWidth": 84,
-    "maxFrameHeight": 70
+    "frameCount": 35,
+    "maxFrameWidth": 85,
+    "maxFrameHeight": 66
   }
 ]

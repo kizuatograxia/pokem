@@ -8,8 +8,14 @@ import shutil
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
+from collections import Counter
 
 from PIL import Image, ImageDraw
+
+
+SCRIPT_PATH = Path(__file__).resolve()
+DEFAULT_PROJECT_ROOT = SCRIPT_PATH.parent.parent
+DEFAULT_SOURCE_DIR = DEFAULT_PROJECT_ROOT / "sources" / "spriters-resource" / "pokemonblackwhite-full"
 
 
 VARIANT_SUFFIX_MAPS: dict[str, dict[str, int]] = {
@@ -182,6 +188,27 @@ def image_to_mask(image: Image.Image, bg_rgba: tuple[int, int, int, int]) -> lis
             if pixels[x, y] != bg_rgba:
                 row[x] = 1
     return mask
+
+
+def region_background_color(
+    image: Image.Image,
+    fallback_rgba: tuple[int, int, int, int],
+) -> tuple[int, int, int, int]:
+    width, height = image.size
+    if width <= 0 or height <= 0:
+        return fallback_rgba
+
+    pixels = image.load()
+    colors: Counter[tuple[int, int, int, int]] = Counter()
+    for y in range(height):
+        for x in range(width):
+            colors[pixels[x, y]] += 1
+    if not colors:
+        return fallback_rgba
+
+    most_common, count = colors.most_common(1)[0]
+    minimum_hits = max(16, (width * height) // 20)
+    return most_common if count >= minimum_hits else fallback_rgba
 
 
 def find_components(mask: list[bytearray], store_pixels: bool = False) -> list[Component]:
@@ -687,21 +714,40 @@ def extract_frames_for_mode(region_mask: list[bytearray], mode: str) -> list[Rec
     return frames
 
 
-def render_strip(
+def frame_ground_anchor_x(region_mask: list[bytearray], frame: Rect) -> float:
+    bottom = frame.bottom - 1
+    sample_top = max(frame.top, bottom - 3)
+    xs: list[int] = []
+
+    for y in range(sample_top, frame.bottom):
+        mask_row = region_mask[y]
+        for x in range(frame.left, frame.right):
+            if mask_row[x]:
+                xs.append(x - frame.left)
+
+    if not xs:
+        return frame.width / 2
+    return sum(xs) / len(xs)
+
+
+def prepare_frame_strip(
     source_image: Image.Image,
     bg_rgba: tuple[int, int, int, int],
     region_rect: Rect,
     frames: list[Rect],
-) -> Image.Image:
-    region = source_image.crop(region_rect.as_box()).convert("RGBA")
-    region_mask = clean_region_mask(image_to_mask(region, bg_rgba))
+) -> tuple[list[Image.Image], int, int]:
 
-    max_width = max(frame.width for frame in frames)
-    max_height = max(frame.height for frame in frames)
-    sheet = Image.new("RGBA", (max_width * len(frames), max_height), (0, 0, 0, 0))
+
+    region = source_image.crop(region_rect.as_box()).convert("RGBA")
+    region_bg_rgba = region_background_color(region, bg_rgba)
+    region_mask = clean_region_mask(image_to_mask(region, region_bg_rgba))
     region_pixels = region.load()
 
-    for index, frame in enumerate(frames):
+    prepared: list[Image.Image] = []
+    max_width = 0
+    max_height = 0
+
+    for frame in frames:
         frame_image = Image.new("RGBA", (frame.width, frame.height), (0, 0, 0, 0))
         frame_pixels = frame_image.load()
         for y in range(frame.top, frame.bottom):
@@ -710,12 +756,319 @@ def render_strip(
                 if mask_row[x]:
                     frame_pixels[x - frame.left, y - frame.top] = region_pixels[x, y]
 
-        paste_x = index * max_width + (max_width - frame.width) // 2
-        paste_y = max_height - frame.height
+        prepared.append(frame_image)
+        max_width = max(max_width, frame.width)
+        max_height = max(max_height, frame.height)
+
+    return prepared, max_width, max_height
+
+
+def render_strip(
+    prepared_frames: list[Image.Image],
+    slot_width: int,
+    slot_height: int,
+) -> Image.Image:
+    sheet = Image.new("RGBA", (slot_width * len(prepared_frames), slot_height), (0, 0, 0, 0))
+
+    for index, frame_image in enumerate(prepared_frames):
+        paste_x = index * slot_width + (slot_width - frame_image.width) // 2
+        paste_y = slot_height - frame_image.height
         sheet.alpha_composite(frame_image, (paste_x, paste_y))
 
     return sheet
 
+
+
+def save_debug_overlay(
+    source_image: Image.Image,
+    target_path: Path,
+    regions: list[Rect],
+    frames_by_region: list[list[Rect]],
+) -> None:
+    debug = source_image.convert("RGBA")
+    draw = ImageDraw.Draw(debug)
+    palette = [
+        (255, 80, 80, 255),
+        (80, 180, 255, 255),
+        (255, 210, 80, 255),
+        (180, 255, 80, 255),
+    ]
+    for index, region in enumerate(regions):
+        color = palette[index % len(palette)]
+        draw.rectangle(region.as_box(), outline=color, width=3)
+        for frame in frames_by_region[index]:
+            absolute = Rect(
+                region.left + frame.left,
+                region.top + frame.top,
+                region.left + frame.right,
+                region.top + frame.bottom,
+            )
+            draw.rectangle(absolute.as_box(), outline=color, width=1)
+    debug.save(target_path)
+
+
+
+def export_battler_sheet(
+    source_path: Path,
+    canonical_stem: str,
+    raw_dir: Path,
+    front_dir: Path,
+    back_dir: Path,
+    debug_dir: Path | None = None,
+) -> dict[str, int]:
+    shutil.copy2(source_path, raw_dir / f"{canonical_stem}.png")
+
+    with Image.open(source_path) as source_image:
+        rgba = source_image.convert("RGBA")
+        bg_rgba = rgba.getpixel((0, 0))
+        full_mask = image_to_mask(rgba, bg_rgba)
+        override = REGION_OVERRIDES.get(canonical_stem)
+        mode = "all_rows"
+        if override:
+            regions = [
+                rect_from_fractions(rgba.size, override["front_box"]),
+                rect_from_fractions(rgba.size, override["back_box"]),
+            ]
+            mode = str(override["mode"])
+        else:
+            regions = find_animation_regions(full_mask, rgba.size)
+        if len(regions) != 2:
+            raise ValueError(f"Expected 2 animation regions, found {len(regions)}")
+
+        outputs = []
+        frames_by_region: list[list[Rect]] = []
+        prepared_by_region: list[list[Image.Image]] = []
+        slot_width = 0
+        slot_height = 0
+
+        for region_rect in regions:
+            region_image = rgba.crop(region_rect.as_box())
+            region_bg_rgba = region_background_color(region_image, bg_rgba)
+            region_mask = image_to_mask(region_image, region_bg_rgba)
+            frames = extract_frames_for_mode(region_mask, mode)
+            if len(frames) < 2:
+                raise ValueError(
+                    f"Expected at least 2 frames in region {region_rect}, found {len(frames)}"
+                )
+            prepared, region_slot_width, region_slot_height = prepare_frame_strip(
+                rgba,
+                bg_rgba,
+                region_rect,
+                frames,
+            )
+            prepared_by_region.append(prepared)
+            frames_by_region.append(frames)
+            outputs.append(len(frames))
+            slot_width = max(slot_width, region_slot_width)
+            slot_height = max(slot_height, region_slot_height)
+
+        slot_size = max(slot_width, slot_height)
+
+        for prepared, side_dir in zip(prepared_by_region, (front_dir, back_dir), strict=True):
+            strip = render_strip(prepared, slot_size, slot_size)
+            strip.save(side_dir / f"{canonical_stem}.png")
+
+        if debug_dir is not None:
+            debug_dir.mkdir(parents=True, exist_ok=True)
+            save_debug_overlay(
+                rgba,
+                debug_dir / f"{canonical_stem}.png",
+                regions,
+                frames_by_region,
+            )
+
+        return {"frontFrames": outputs[0], "backFrames": outputs[1]}
+
+
+
+def should_process(
+    source_name: str,
+    canonical_stem: str,
+    filters: list[str],
+) -> bool:
+    if not filters:
+        return True
+    haystacks = (
+        source_name.upper(),
+        canonical_stem.upper(),
+    )
+    return any(any(token in haystack for haystack in haystacks) for token in filters)
+
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--source-dir",
+        default=str(DEFAULT_SOURCE_DIR),
+    )
+    parser.add_argument(
+        "--project-root",
+        default=str(DEFAULT_PROJECT_ROOT),
+    )
+    parser.add_argument(
+        "--match",
+        action="append",
+        default=[],
+        help="Only process sprites whose source or canonical name contains this token",
+    )
+    parser.add_argument("--offset", type=int, default=0)
+    parser.add_argument("--limit", type=int)
+    parser.add_argument("--debug-dir")
+    args = parser.parse_args()
+
+    source_dir = Path(args.source_dir)
+    project_root = Path(args.project_root)
+    filters = [token.upper() for token in args.match]
+    debug_dir = Path(args.debug_dir) if args.debug_dir else None
+    battler_index = 0
+
+    front_dir = project_root / "client" / "web" / "public" / "assets" / "sprites" / "pokemon" / "front"
+    base_by_comparable, female_by_base = get_canonical_maps(front_dir)
+
+    pokemon_root = project_root / "sources" / "spriters-resource" / "pokemonblackwhite-pokemon"
+    battler_raw_dir = pokemon_root / "battlers-raw"
+    atlas_dir = pokemon_root / "atlases"
+    parts_dir = pokemon_root / "parts"
+    animated_front_dir = (
+        project_root / "client" / "web" / "public" / "assets" / "sprites" / "pokemon" / "animated" / "front"
+    )
+    animated_back_dir = (
+        project_root / "client" / "web" / "public" / "assets" / "sprites" / "pokemon" / "animated" / "back"
+    )
+    manifest_path = pokemon_root / "manifest.json"
+    readme_path = pokemon_root / "README.md"
+
+    for directory in (
+        pokemon_root,
+        battler_raw_dir,
+        atlas_dir,
+        parts_dir,
+        animated_front_dir,
+        animated_back_dir,
+    ):
+        directory.mkdir(parents=True, exist_ok=True)
+
+    manifest: dict[str, object] = {
+        "sourceDir": str(source_dir),
+        "counts": {
+            "totalFiles": 0,
+            "battlerSheets": 0,
+            "battleAtlases": 0,
+            "battleParts": 0,
+            "animatedFront": 0,
+            "animatedBack": 0,
+            "unresolved": 0,
+        },
+        "unresolved": [],
+        "battlers": [],
+        "atlases": [],
+        "parts": [],
+    }
+
+    battler_pattern = re.compile(
+        r"^\d+__\d+__#\d+\s+(?P<species>.+?)(?:\s+\((?P<variant>[^)]+)\))?$"
+    )
+
+    for source_file in sorted(source_dir.iterdir(), key=lambda path: path.name):
+        if not source_file.is_file():
+            continue
+        manifest["counts"]["totalFiles"] += 1  # type: ignore[index]
+        stem = source_file.stem
+
+        battler_match = battler_pattern.match(stem)
+        if battler_match:
+            species = battler_match.group("species").strip()
+            variant = battler_match.group("variant")
+            try:
+                canonical_stem = resolve_canonical_stem(
+                    species,
+                    variant,
+                    base_by_comparable,
+                    female_by_base,
+                )
+                if battler_index < args.offset:
+                    battler_index += 1
+                    continue
+                if args.limit is not None and battler_index >= args.offset + args.limit:
+                    break
+                battler_index += 1
+                if not should_process(source_file.name, canonical_stem, filters):
+                    continue
+
+                result = export_battler_sheet(
+                    source_file,
+                    canonical_stem,
+                    battler_raw_dir,
+                    animated_front_dir,
+                    animated_back_dir,
+                    debug_dir,
+                )
+
+                manifest["counts"]["battlerSheets"] += 1  # type: ignore[index]
+                manifest["counts"]["animatedFront"] += 1  # type: ignore[index]
+                manifest["counts"]["animatedBack"] += 1  # type: ignore[index]
+                manifest["battlers"].append(  # type: ignore[union-attr]
+                    {
+                        "source": source_file.name,
+                        "species": species,
+                        "variant": variant,
+                        "canonical": f"{canonical_stem}.png",
+                        **result,
+                    }
+                )
+            except Exception as exc:  # noqa: BLE001
+                manifest["counts"]["unresolved"] += 1  # type: ignore[index]
+                manifest["unresolved"].append(  # type: ignore[union-attr]
+                    {"source": source_file.name, "reason": str(exc)}
+                )
+            continue
+
+        if "Generation" in stem or "Parts" in stem:
+            if "Parts" in stem:
+                shutil.copy2(source_file, parts_dir / source_file.name)
+                manifest["counts"]["battleParts"] += 1  # type: ignore[index]
+                manifest["parts"].append(source_file.name)  # type: ignore[union-attr]
+            else:
+                shutil.copy2(source_file, atlas_dir / source_file.name)
+                manifest["counts"]["battleAtlases"] += 1  # type: ignore[index]
+                manifest["atlases"].append(source_file.name)  # type: ignore[union-attr]
+
+    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    counts = manifest["counts"]  # type: ignore[assignment]
+    lines = [
+        "# Spriters Resource Pokemon Black/White Import",
+        "",
+        "Counts",
+        f"- Total files scanned: {counts['totalFiles']}",
+        f"- Battler sheets copied: {counts['battlerSheets']}",
+        f"- Battle atlases copied: {counts['battleAtlases']}",
+        f"- Battle parts sheets copied: {counts['battleParts']}",
+        f"- Animated front sheets exported: {counts['animatedFront']}",
+        f"- Animated back sheets exported: {counts['animatedBack']}",
+        f"- Unresolved battlers: {counts['unresolved']}",
+        "",
+        "Folders",
+        f"- Raw battler sheets: {battler_raw_dir}",
+        f"- Atlas sheets: {atlas_dir}",
+        f"- Parts sheets: {parts_dir}",
+        f"- Animated front sheets: {animated_front_dir}",
+        f"- Animated back sheets: {animated_back_dir}",
+        f"- Manifest: {manifest_path}",
+    ]
+
+    if manifest["unresolved"]:  # type: ignore[truthy-function]
+        lines.append("")
+        lines.append("Unresolved")
+        for entry in manifest["unresolved"]:  # type: ignore[index]
+            lines.append(f"- {entry['source']}: {entry['reason']}")
+
+    readme_path.write_text("\n".join(lines), encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
 
 def save_debug_overlay(
     source_image: Image.Image,
@@ -776,7 +1129,8 @@ def export_battler_sheet(
         frames_by_region: list[list[Rect]] = []
         for region_rect, side_dir in zip(regions, (front_dir, back_dir), strict=True):
             region_image = rgba.crop(region_rect.as_box())
-            region_mask = image_to_mask(region_image, bg_rgba)
+            region_bg_rgba = region_background_color(region_image, bg_rgba)
+            region_mask = image_to_mask(region_image, region_bg_rgba)
             frames = extract_frames_for_mode(region_mask, mode)
             if len(frames) < 2:
                 raise ValueError(
@@ -817,11 +1171,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--source-dir",
-        default=r"C:\Users\hedge\OneDrive\Desktop\pokém\sources\spriters-resource\pokemonblackwhite-full",
+        default=str(DEFAULT_SOURCE_DIR),
     )
     parser.add_argument(
         "--project-root",
-        default=r"C:\Users\hedge\OneDrive\Desktop\pokém",
+        default=str(DEFAULT_PROJECT_ROOT),
     )
     parser.add_argument(
         "--match",

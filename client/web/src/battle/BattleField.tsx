@@ -309,192 +309,6 @@ function buildHorizontalStripFrames(
   });
 }
 
-interface PixelComponent {
-  left: number;
-  right: number;
-  top: number;
-  bottom: number;
-  pixels: number;
-}
-
-function boundsNearby(left: PixelComponent, right: PixelComponent, padding: number): boolean {
-  return !(
-    left.right + padding < right.left ||
-    right.right + padding < left.left ||
-    left.bottom + padding < right.top ||
-    right.bottom + padding < left.top
-  );
-}
-
-function refineFrameRect(
-  data: Uint8ClampedArray,
-  imageWidth: number,
-  frame: FrameRect,
-): FrameRect {
-  const width = frame.width;
-  const height = frame.height;
-  const visited = new Uint8Array(width * height);
-  const components: PixelComponent[] = [];
-
-  for (let localY = 0; localY < height; localY += 1) {
-    for (let localX = 0; localX < width; localX += 1) {
-      const localIndex = localY * width + localX;
-      if (visited[localIndex]) continue;
-      visited[localIndex] = 1;
-
-      const globalX = frame.x + localX;
-      const globalY = frame.y + localY;
-      const alpha = data[(globalY * imageWidth + globalX) * 4 + 3] ?? 0;
-      if (alpha <= 16) continue;
-
-      const queue = [[localX, localY]];
-      let queueIndex = 0;
-      const component: PixelComponent = {
-        left: globalX,
-        right: globalX,
-        top: globalY,
-        bottom: globalY,
-        pixels: 0,
-      };
-
-      while (queueIndex < queue.length) {
-        const [x, y] = queue[queueIndex]!;
-        queueIndex += 1;
-        const gx = frame.x + x;
-        const gy = frame.y + y;
-        const pixelAlpha = data[(gy * imageWidth + gx) * 4 + 3] ?? 0;
-        if (pixelAlpha <= 16) continue;
-
-        component.left = Math.min(component.left, gx);
-        component.right = Math.max(component.right, gx);
-        component.top = Math.min(component.top, gy);
-        component.bottom = Math.max(component.bottom, gy);
-        component.pixels += 1;
-
-        for (let dy = -1; dy <= 1; dy += 1) {
-          for (let dx = -1; dx <= 1; dx += 1) {
-            if (dx === 0 && dy === 0) continue;
-            const nx = x + dx;
-            const ny = y + dy;
-            if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
-            const nextIndex = ny * width + nx;
-            if (visited[nextIndex]) continue;
-            visited[nextIndex] = 1;
-            queue.push([nx, ny]);
-          }
-        }
-      }
-
-      if (component.pixels > 0) {
-        components.push(component);
-      }
-    }
-  }
-
-  if (components.length <= 1) return frame;
-  const filteredComponents = components.filter((component) => {
-    const componentWidth = component.right - component.left + 1;
-    const componentHeight = component.bottom - component.top + 1;
-    if (componentWidth <= 2 && componentHeight >= Math.floor(frame.height * 0.6)) {
-      return false;
-    }
-    if (componentWidth <= 3 && componentHeight <= 3) {
-      return false;
-    }
-    return true;
-  });
-
-  const usableComponents = filteredComponents.length > 0 ? filteredComponents : components;
-  if (usableComponents.length === 1) {
-    const component = usableComponents[0]!;
-    return {
-      x: component.left,
-      y: component.top,
-      width: component.right - component.left + 1,
-      height: component.bottom - component.top + 1,
-    };
-  }
-
-  const dominant = usableComponents.reduce(
-    (best, component) => (component.pixels > best.pixels ? component : best),
-    usableComponents[0]!,
-  );
-
-  const kept = usableComponents.filter((component) =>
-    component.pixels >= dominant.pixels * 0.12 || boundsNearby(component, dominant, 1),
-  );
-
-  const left = Math.max(frame.x, Math.min(...kept.map((component) => component.left)));
-  const right = Math.min(frame.x + frame.width - 1, Math.max(...kept.map((component) => component.right)));
-  const top = Math.max(frame.y, Math.min(...kept.map((component) => component.top)));
-  const bottom = Math.min(frame.y + frame.height - 1, Math.max(...kept.map((component) => component.bottom)));
-
-  const refined: FrameRect = {
-    x: left,
-    y: top,
-    width: Math.max(1, right - left + 1),
-    height: Math.max(1, bottom - top + 1),
-  };
-
-  const sparseColumnThreshold = Math.max(1, Math.floor(refined.height * 0.08));
-  const sparseRowThreshold = Math.max(1, Math.floor(refined.width * 0.08));
-
-  const countColumn = (x: number): number => {
-    let count = 0;
-    for (let y = refined.y; y < refined.y + refined.height; y += 1) {
-      const alpha = data[(y * imageWidth + x) * 4 + 3] ?? 0;
-      if (alpha > 16) count += 1;
-    }
-    return count;
-  };
-
-  const countRow = (y: number): number => {
-    let count = 0;
-    for (let x = refined.x; x < refined.x + refined.width; x += 1) {
-      const alpha = data[(y * imageWidth + x) * 4 + 3] ?? 0;
-      if (alpha > 16) count += 1;
-    }
-    return count;
-  };
-
-  while (refined.width > 1 && countColumn(refined.x) <= sparseColumnThreshold) {
-    refined.x += 1;
-    refined.width -= 1;
-  }
-  while (
-    refined.width > 1 &&
-    countColumn(refined.x + refined.width - 1) <= sparseColumnThreshold
-  ) {
-    refined.width -= 1;
-  }
-  while (refined.height > 1 && countRow(refined.y) <= sparseRowThreshold) {
-    refined.y += 1;
-    refined.height -= 1;
-  }
-  while (
-    refined.height > 1 &&
-    countRow(refined.y + refined.height - 1) <= sparseRowThreshold
-  ) {
-    refined.height -= 1;
-  }
-
-  return refined;
-}
-
-function expandFrameRect(frame: FrameRect, maxWidth: number, maxHeight: number, padding = 1): FrameRect {
-  const left = Math.max(0, frame.x - padding);
-  const top = Math.max(0, frame.y - padding);
-  const right = Math.min(maxWidth - 1, frame.x + frame.width - 1 + padding);
-  const bottom = Math.min(maxHeight - 1, frame.y + frame.height - 1 + padding);
-
-  return {
-    x: left,
-    y: top,
-    width: right - left + 1,
-    height: bottom - top + 1,
-  };
-}
-
 function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
   const source = document.createElement("canvas");
   source.width = img.naturalWidth;
@@ -513,90 +327,23 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
 
   context.drawImage(img, 0, 0);
 
-  let imageData = context.getImageData(0, 0, source.width, source.height);
-  const backgroundColor = detectBackgroundColor(imageData.data, source.width, source.height);
-
-  if (backgroundColor) {
-    const next = imageData.data;
-    for (let index = 0; index < next.length; index += 4) {
-      const pixel = {
-        r: next[index] ?? 0,
-        g: next[index + 1] ?? 0,
-        b: next[index + 2] ?? 0,
-        a: next[index + 3] ?? 0,
-      };
-      if (pixel.a > 0 && colorsClose(pixel, backgroundColor, 20)) {
-        next[index + 3] = 0;
-      }
-    }
-    context.putImageData(imageData, 0, 0);
-    imageData = context.getImageData(0, 0, source.width, source.height);
-  }
-
-  const trimLeft = stripLeadingGuideColumns(imageData.data, source.width, source.height);
-  const trimRight = stripTrailingGuideColumns(imageData.data, source.width, source.height);
-  const columnRuns = significantRuns(
-    buildOccupancyRuns(imageData.data, source.width, source.height, "x", trimLeft),
-  ).map((run) => ({
-    ...run,
-    end: Math.min(run.end, source.width - 1 - trimRight),
-  })).filter((run) => run.end > run.start);
-  const rowRuns = significantRuns(
-    buildOccupancyRuns(imageData.data, source.width, source.height, "y"),
-  );
-  const columnCells = buildCellsFromRuns(columnRuns, trimLeft, source.width - 1 - trimRight);
-  const rowCells = buildCellsFromRuns(rowRuns, 0, source.height - 1);
-
-  let frames: FrameRect[] = [];
-
-  if (columnCells.length > 1 && rowCells.length > 1) {
-    frames = rowCells.flatMap((row) =>
-      columnCells.map((column) => ({
-        x: column.start,
-        y: row.start,
-        width: column.end - column.start + 1,
-        height: row.end - row.start + 1,
-      })),
-    );
-  } else if (rowCells.length <= 1 && columnRuns.length > 1) {
-    const mainRun = dominantRun(columnRuns);
-    const row = rowCells[0] ?? { start: 0, end: source.height - 1 };
-    const repeatedRuns = repeatedFrameRuns(columnRuns);
-    if (repeatedRuns.length > 0) {
-      const repeatedCells = buildCellsFromRuns(repeatedRuns, trimLeft, source.width - 1 - trimRight);
-      frames = repeatedCells.map((column) => ({
-        x: column.start,
-        y: row.start,
-        width: column.end - column.start + 1,
-        height: row.end - row.start + 1,
-      }));
-    } else if (mainRun) {
-      frames = buildHorizontalStripFrames(mainRun.start, mainRun.end, row.start, row.end);
-    }
-  } else if (rowCells.length > 1 && columnCells.length <= 1) {
-    const column = columnCells[0] ?? { start: trimLeft, end: source.width - 1 - trimRight };
-    frames = rowCells.flatMap((row) =>
-      buildHorizontalStripFrames(column.start, column.end, row.start, row.end),
-    );
-  } else {
-    const column = columnCells[0] ?? { start: trimLeft, end: source.width - 1 - trimRight };
-    const row = rowCells[0] ?? { start: 0, end: source.height - 1 };
-    frames = buildHorizontalStripFrames(column.start, column.end, row.start, row.end);
-  }
-
-  frames = frames.map((frame) =>
-    expandFrameRect(
-      refineFrameRect(imageData.data, source.width, frame),
-      source.width,
-      source.height,
-    ),
-  );
+  const frameCount = Math.max(1, Math.round(source.width / Math.max(1, source.height)));
+  const frames = Array.from({ length: frameCount }, (_, index) => {
+    const x = Math.round((index * source.width) / frameCount);
+    const nextX = Math.round(((index + 1) * source.width) / frameCount);
+    return {
+      x,
+      y: 0,
+      width: Math.max(1, nextX - x),
+      height: source.height,
+    };
+  });
 
   return {
     source,
     frames,
     maxFrameWidth: frames.reduce((max, frame) => Math.max(max, frame.width), 0),
-    maxFrameHeight: frames.reduce((max, frame) => Math.max(max, frame.height), 0),
+    maxFrameHeight: source.height,
     valid: frames.length >= 2,
   };
 }
@@ -627,6 +374,8 @@ function useSpriteSheet(animSrc: string): SheetInfo | null {
         frames: [],
         maxFrameWidth: 0,
         maxFrameHeight: 0,
+        maxSlotWidth: 0,
+        maxSlotHeight: 0,
         valid: false,
       };
       sheetCache.set(animSrc, result);
@@ -681,10 +430,11 @@ const AnimatedPokemonSprite: React.FC<{
       context.clearRect(0, 0, displaySize, displaySize);
       context.imageSmoothingEnabled = false;
 
+      const speciesScale = pokemon.speciesId.toUpperCase() === "CHARIZARD" ? 1.18 : 1;
       const scale = Math.min(
         displaySize / Math.max(1, info.maxFrameWidth),
         displaySize / Math.max(1, info.maxFrameHeight),
-      );
+      ) * speciesScale;
       const drawWidth = Math.max(1, Math.round(frame.width * scale));
       const drawHeight = Math.max(1, Math.round(frame.height * scale));
       const dx = Math.floor((displaySize - drawWidth) / 2);

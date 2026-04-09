@@ -1,7 +1,5 @@
 {
   "sourceDir": "C:\\Users\\hedge\\OneDrive\\Desktop\\pok\u00e9m\\sources\\spriters-resource\\pokemonblackwhite-full",
-  "aggregated": false,
-  "note": "The animated sprite folders were regenerated across multiple batched exporter runs. Counts and battler entries in this file reflect only the last batch invocation, not the whole export.",
   "counts": {
     "totalFiles": 844,
     "battlerSheets": 0,
@@ -9,9 +7,18 @@
     "battleParts": 20,
     "animatedFront": 0,
     "animatedBack": 0,
-    "unresolved": 0
+    "unresolved": 2
   },
-  "unresolved": [],
+  "unresolved": [
+    {
+      "source": "0069__35120__#0025 Pikachu (female).png",
+      "reason": "render_strip() takes 3 positional arguments but 4 were given"
+    },
+    {
+      "source": "0070__34905__#0025 Pikachu (male).png",
+      "reason": "render_strip() takes 3 positional arguments but 4 were given"
+    }
+  ],
   "battlers": [],
   "atlases": [
     "0001__34112__Pok\u00e9mon (1st Generation, Back).png",

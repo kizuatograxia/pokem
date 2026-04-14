@@ -1,0 +1,10 @@
+--- Charizard ---
+Cell 0: Idx 0 (Prio=0), Idx 1 (Prio=0), Idx 2 (Prio=0), Idx 3 (Prio=0), Idx 4 (Prio=0)
+Cell 1: Idx 0 (Prio=0)
+Cell 2: Idx 0 (Prio=0), Idx 1 (Prio=0), Idx 2 (Prio=0), Idx 3 (Prio=0)
+Cell 3: Idx 0 (Prio=0), Idx 1 (Prio=0), Idx 2 (Prio=0), Idx 3 (Prio=0)
+--- Pikachu ---
+Cell 0: Idx 0 (Prio=0), Idx 1 (Prio=0), Idx 2 (Prio=0), Idx 3 (Prio=0), Idx 4 (Prio=0)
+Cell 1: Idx 0 (Prio=0), Idx 1 (Prio=0)
+Cell 2: Idx 0 (Prio=0)
+Cell 3: Idx 0 (Prio=0)

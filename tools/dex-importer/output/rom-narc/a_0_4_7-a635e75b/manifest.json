@@ -1,0 +1,75 @@
+{
+  "romPath": "C:\\users\\hedge\\onedrive\\desktop\\pokem\\Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "romFileName": "Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "romSha256": "a635e75bcd38a2627607145fcd4f73ef5dce34debccb1037609128c59453fe6d",
+  "narcPath": "a/0/4/7",
+  "narcSize": 624420,
+  "fileCount": 80,
+  "chunks": [
+    {
+      "id": "BTAF",
+      "offset": 16,
+      "size": 652
+    },
+    {
+      "id": "BTNF",
+      "offset": 668,
+      "size": 16
+    },
+    {
+      "id": "GMIF",
+      "offset": 684,
+      "size": 623736
+    }
+  ],
+  "magicHistogram": [
+    {
+      "magic": "BIN",
+      "count": 25
+    },
+    {
+      "magic": "RGCN",
+      "count": 8
+    },
+    {
+      "magic": "BMD0",
+      "count": 6
+    },
+    {
+      "magic": "BTX0",
+      "count": 6
+    },
+    {
+      "magic": "RLCN",
+      "count": 6
+    },
+    {
+      "magic": "BCA0",
+      "count": 5
+    },
+    {
+      "magic": "BTA0",
+      "count": 5
+    },
+    {
+      "magic": "BTP0",
+      "count": 5
+    },
+    {
+      "magic": "APS",
+      "count": 4
+    },
+    {
+      "magic": "RCSN",
+      "count": 4
+    },
+    {
+      "magic": "RECN",
+      "count": 3
+    },
+    {
+      "magic": "RNAN",
+      "count": 3
+    }
+  ]
+}

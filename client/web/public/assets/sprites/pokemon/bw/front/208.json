@@ -1,0 +1,78 @@
+{
+  "frame_width": 95,
+  "frame_height": 89,
+  "frames": [
+    {
+      "index": 0,
+      "delay": 7
+    },
+    {
+      "index": 1,
+      "delay": 7
+    },
+    {
+      "index": 2,
+      "delay": 7
+    },
+    {
+      "index": 3,
+      "delay": 7
+    },
+    {
+      "index": 4,
+      "delay": 7
+    },
+    {
+      "index": 5,
+      "delay": 7
+    },
+    {
+      "index": 6,
+      "delay": 7
+    },
+    {
+      "index": 7,
+      "delay": 7
+    },
+    {
+      "index": 8,
+      "delay": 7
+    },
+    {
+      "index": 9,
+      "delay": 7
+    },
+    {
+      "index": 10,
+      "delay": 7
+    },
+    {
+      "index": 11,
+      "delay": 7
+    },
+    {
+      "index": 12,
+      "delay": 7
+    },
+    {
+      "index": 13,
+      "delay": 7
+    },
+    {
+      "index": 14,
+      "delay": 7
+    },
+    {
+      "index": 15,
+      "delay": 7
+    },
+    {
+      "index": 16,
+      "delay": 112
+    },
+    {
+      "index": 17,
+      "delay": 112
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+﻿Magic: b'RGCN'
+Total size: 16448 bytes
+
+File header:
+  BOM: 0xFEFF
+  Version: 0x0101
+  File size: 16448
+  Header size: 16
+  Sections: 2
+
+CHAR section:
+  Magic: b'RAHC'
+  Section size: 16416
+  Tile height (raw): 16
+  Tile width (raw): 32
+  Pixel format: 3  (3=4bpp, 4=8bpp)
+  Mapping type: 0  (0=2D, non-zero=1D boundary)
+  Tile count: 1
+  Tile data size: 16384
+  Data offset: 24
+
+After CHAR data (offset 0x4030): b'SOPC'
+  SOPC section size: 16
+  SOPC char size: 0
+  SOPC char count: 32
+
+============================================================
+
+NCER Magic: b'RECN'
+  Sections: 3
+  Cell count: 18
+  Entry type: 0 (1=extended, 0=basic)
+  Mapping mode: 0x00000004
+  VRAM max size: 0
+  Boundary size: 0
+
+First cells:
+  Cell 0: objs=5 obj_off=0
+  Cell 1: objs=1 obj_off=30
+  Cell 2: objs=4 obj_off=36
+  Cell 3: objs=4 obj_off=60
+  Cell 4: objs=2 obj_off=84
+
+First cell OBJs (count=5):
+  OBJ  0: x= -25 y=  -7 tile=320 shape=1 size=0 dims=16x 8 tiles= 2 pal=0
+  OBJ  1: x=  -5 y=  -7 tile=322 shape=0 size=0 dims= 8x 8 tiles= 1 pal=0
+  OBJ  2: x=  -5 y=  -7 tile=322 shape=0 size=0 dims= 8x 8 tiles= 1 pal=0
+  OBJ  3: x= -25 y= -35 tile=  1 shape=2 size=2 dims=16x32 tiles= 8 pal=0
+  OBJ  4: x=  -5 y= -35 tile=  3 shape=2 size=1 dims= 8x32 tiles= 4 pal=0
+
+Total tile data: 16384 bytes = 512 tiles (at 4bpp)
+Mapping type value: 0
+
+If mapping=non-zero, tile indices in OBJ.attr2 should be
+  multiplied by (boundary_size / tile_bytes) to get the
+  correct offset into the char data.
+  For 4bpp: tile_bytes = 32 bytes per 8x8 tile
+  boundary_size = 0

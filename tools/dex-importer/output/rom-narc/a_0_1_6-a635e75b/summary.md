@@ -1,0 +1,98 @@
+# ROM NARC Inspect
+
+- ROM: Pokemon Black (Unova Pokédex Edition v1.23).nds
+- NARC path: a/0/1/6
+- Archive size: 46780 bytes
+- Subfiles: 669
+
+## Chunk layout
+- BTAF: offset=16 size=5364
+- BTNF: offset=5380 size=16
+- GMIF: offset=5396 size=41384
+
+## Magic histogram
+- BIN: 602
+- FFFF: 4
+- KPU2: 2
+- PPPP: 2
+- __U7: 1
+- 0000: 1
+- 0H00: 1
+- 118B: 1
+- 2__F: 1
+- 2_4F: 1
+- 2_Z4: 1
+- 2222: 1
+- 2407: 1
+- 2AU7: 1
+- 2F Z: 1
+- 2F2F: 1
+- 2KF0: 1
+- 2KK2: 1
+- 2U7Z: 1
+- 2UU2: 1
+- 7727: 1
+- 7A_U: 1
+- 7F7U: 1
+- 7K2P: 1
+- A_KU: 1
+- A2FA: 1
+- AAAZ: 1
+- AI7U: 1
+- AKF_: 1
+- AZ27: 1
+- DAAP: 1
+- DHN: 1
+- DZAR: 1
+- F_UF: 1
+- F7_A: 1
+- F7AF: 1
+- FAAF: 1
+- FPAU: 1
+- FTF3: 1
+- FUF2: 1
+- FZFF: 1
+- G_UO: 1
+- K__U: 1
+- K_CS: 1
+- KA7E: 1
+- KFZP: 1
+- KPFZ: 1
+- KZ2_: 1
+- MU3A: 1
+- P_RK: 1
+- PFFF: 1
+- PPPZ: 1
+- PRNU: 1
+- PRSP: 1
+- U2_P: 1
+- UIFC: 1
+- UPFZ: 1
+- VLV_: 1
+- ZFPF: 1
+- ZKK7: 1
+- ZKKF: 1
+- ZRWL: 1
+- ZU_F: 1
+
+## First files
+- #0: size=56 magic=BIN
+- #1: size=60 magic=BIN
+- #2: size=60 magic=BIN
+- #3: size=60 magic=PRSP
+- #4: size=60 magic=BIN
+- #5: size=60 magic=BIN
+- #6: size=60 magic=BIN
+- #7: size=60 magic=BIN
+- #8: size=60 magic=BIN
+- #9: size=60 magic=BIN
+- #10: size=60 magic=BIN
+- #11: size=60 magic=BIN
+- #12: size=60 magic=BIN
+- #13: size=60 magic=BIN
+- #14: size=60 magic=BIN
+- #15: size=60 magic=BIN
+- #16: size=60 magic=BIN
+- #17: size=60 magic=BIN
+- #18: size=60 magic=BIN
+- #19: size=60 magic=BIN

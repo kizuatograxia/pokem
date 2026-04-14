@@ -1,0 +1,54 @@
+﻿
+=== Front Static Male (index 120) ===
+Magic: b'RGCN'
+  tilesY=12, tilesX=12
+  depth_raw=3 => depth=4bpp
+  mapping=0x00000000 (0=2D, else=1D boundary)
+  type=0 (0=tiled, 1=bitmap)
+  tile_data_size=4608
+  gfx_offset=0x0018
+  declared_tiles=144, present_tiles=144
+  is_bitmap=False
+
+=== Front Static Female (index 121) ===
+Magic: b''
+
+=== Front Static Female (index 121) === ERROR: unpack_from requires a buffer of at least 26 bytes for unpacking 2 bytes at offset 24 (actual buffer size is 0)
+
+=== Front Parts Male (index 122) ===
+Magic: b'RGCN'
+  tilesY=16, tilesX=32
+  depth_raw=3 => depth=4bpp
+  mapping=0x00000000 (0=2D, else=1D boundary)
+  type=1 (0=tiled, 1=bitmap)
+  tile_data_size=16384
+  gfx_offset=0x0018
+  declared_tiles=512, present_tiles=512
+  is_bitmap=True
+
+=== Front Parts Female (index 123) ===
+Magic: b''
+
+=== Front Parts Female (index 123) === ERROR: unpack_from requires a buffer of at least 26 bytes for unpacking 2 bytes at offset 24 (actual buffer size is 0)
+
+=== Back Static Male (index 129) ===
+Magic: b'RGCN'
+  tilesY=12, tilesX=12
+  depth_raw=3 => depth=4bpp
+  mapping=0x00000000 (0=2D, else=1D boundary)
+  type=0 (0=tiled, 1=bitmap)
+  tile_data_size=4608
+  gfx_offset=0x0018
+  declared_tiles=144, present_tiles=144
+  is_bitmap=False
+
+=== Back Parts Male (index 131) ===
+Magic: b'RGCN'
+  tilesY=16, tilesX=32
+  depth_raw=3 => depth=4bpp
+  mapping=0x00000000 (0=2D, else=1D boundary)
+  type=1 (0=tiled, 1=bitmap)
+  tile_data_size=16384
+  gfx_offset=0x0018
+  declared_tiles=512, present_tiles=512
+  is_bitmap=True

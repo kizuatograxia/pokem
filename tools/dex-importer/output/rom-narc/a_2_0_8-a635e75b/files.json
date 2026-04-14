@@ -1,0 +1,30 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 664,
+    "size": 664,
+    "magic": "BIN"
+  },
+  {
+    "index": 1,
+    "start": 664,
+    "end": 672,
+    "size": 8,
+    "magic": "BIN"
+  },
+  {
+    "index": 2,
+    "start": 672,
+    "end": 768,
+    "size": 96,
+    "magic": "BIN"
+  },
+  {
+    "index": 3,
+    "start": 768,
+    "end": 1144,
+    "size": 376,
+    "magic": "BIN"
+  }
+]

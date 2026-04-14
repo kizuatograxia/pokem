@@ -1,0 +1,12 @@
+﻿Static: 12x12 tiles, 9216 pixels
+First 64 pixels (tile 0): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Pixels 64-128 (tile 1): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Saved debug-front-tiled.png
+Saved debug-front-untiled.png
+Saved debug-front-bitmap.png
+
+First 4 tiles pixel dump (non-zero only):
+  Tile 0: 0 non-zero pixels
+  Tile 1: 0 non-zero pixels
+  Tile 2: 0 non-zero pixels
+  Tile 3: 0 non-zero pixels

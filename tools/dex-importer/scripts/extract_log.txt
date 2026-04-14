@@ -1,0 +1,29 @@
+﻿Loading palette...
+  Normal palette: 16 colors
+  Shiny palette: 16 colors
+
+Rendering front static (index 120)...
+  NCGR: 12x12 tiles = 96x96 px, fmt=3, data=4608 bytes
+  Saved: charizard-front-static.png ((96, 96))
+  NCGR: 12x12 tiles = 96x96 px, fmt=3, data=4608 bytes
+  Saved: charizard-front-static-shiny.png
+
+Rendering back static (index 129)...
+  NCGR: 12x12 tiles = 96x96 px, fmt=3, data=4608 bytes
+  Saved: charizard-back-static.png ((96, 96))
+  NCGR: 12x12 tiles = 96x96 px, fmt=3, data=4608 bytes
+  Saved: charizard-back-static-shiny.png
+
+Rendering front parts sheet (index 122)...
+  NCGR: 32x16 tiles = 256x128 px, fmt=3, data=16384 bytes
+  Saved: charizard-front-parts.png ((256, 128))
+
+Rendering back parts sheet (index 131)...
+  NCGR: 32x16 tiles = 256x128 px, fmt=3, data=16384 bytes
+  Saved: charizard-back-parts.png ((256, 128))
+
+Building contact sheet...
+  Saved: charizard-contact-sheet.png
+
+All outputs in: C:\Users\hedge\OneDrive\Desktop\pokem\tools\dex-importer\output\rom-charizard
+Done!

@@ -97,6 +97,7 @@ export function parseSpeciesBlock(
     pokedex: block['Pokedex'] ?? '',
     generation: Number(block['Generation'] ?? 1),
     evolutions: block['Evolutions'] ? parseEvolutions(block['Evolutions']) : [],
+    metrics: null,
     provenance,
   };
 }

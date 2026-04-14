@@ -1,0 +1,12 @@
+﻿
+=== bulbasaur (dex 1) ===
+  12x12 tiles, tiled=0, data=4608 bytes
+  Saved 5 variants to C:\Users\hedge\OneDrive\Desktop\pokem\tools\dex-importer\output\rom-debug
+
+=== charizard (dex 6) ===
+  12x12 tiles, tiled=0, data=4608 bytes
+  Saved 5 variants to C:\Users\hedge\OneDrive\Desktop\pokem\tools\dex-importer\output\rom-debug
+
+=== pikachu (dex 25) ===
+  12x12 tiles, tiled=0, data=4608 bytes
+  Saved 5 variants to C:\Users\hedge\OneDrive\Desktop\pokem\tools\dex-importer\output\rom-debug

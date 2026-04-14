@@ -1,0 +1,65 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 552,
+    "size": 552,
+    "magic": "RLCN"
+  },
+  {
+    "index": 1,
+    "start": 552,
+    "end": 1104,
+    "size": 552,
+    "magic": "RLCN"
+  },
+  {
+    "index": 2,
+    "start": 1104,
+    "end": 4240,
+    "size": 3136,
+    "magic": "RGCN"
+  },
+  {
+    "index": 3,
+    "start": 4240,
+    "end": 10208,
+    "size": 5968,
+    "magic": "RGCN"
+  },
+  {
+    "index": 4,
+    "start": 10208,
+    "end": 12768,
+    "size": 2560,
+    "magic": "RGCN"
+  },
+  {
+    "index": 5,
+    "start": 12768,
+    "end": 14898,
+    "size": 2130,
+    "magic": "RECN"
+  },
+  {
+    "index": 6,
+    "start": 14900,
+    "end": 16472,
+    "size": 1572,
+    "magic": "RCSN"
+  },
+  {
+    "index": 7,
+    "start": 16472,
+    "end": 18044,
+    "size": 1572,
+    "magic": "RCSN"
+  },
+  {
+    "index": 8,
+    "start": 18044,
+    "end": 19898,
+    "size": 1854,
+    "magic": "RNAN"
+  }
+]

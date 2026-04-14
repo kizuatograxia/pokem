@@ -1,0 +1,78 @@
+{
+  "sourcePath": "C:\\Users\\hedge\\OneDrive\\Desktop\\pokem\\Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "fileName": "Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "fileSize": 201632256,
+  "sha256": "a635e75bcd38a2627607145fcd4f73ef5dce34debccb1037609128c59453fe6d",
+  "md5": "2e6caabd6153b77271f8d301de14f228",
+  "inspectedAt": "2026-04-14T03:41:17.422Z",
+  "header": {
+    "title": "POKEMON B",
+    "gameCode": "IRBO",
+    "makerCode": "01",
+    "unitCode": 2,
+    "encryptionSeed": 0,
+    "deviceCapacityCode": 11,
+    "declaredCapacityBytes": 268435456,
+    "romVersion": 0,
+    "autoStartFlag": 0,
+    "arm9": {
+      "offset": 16384,
+      "entryAddress": 33572864,
+      "ramAddress": 33570816,
+      "size": 681920,
+      "end": 698304
+    },
+    "arm7": {
+      "offset": 3140096,
+      "entryAddress": 37224448,
+      "ramAddress": 37224448,
+      "size": 167812,
+      "end": 3307908
+    },
+    "fileNameTable": {
+      "offset": 3308032,
+      "size": 1040,
+      "end": 3309072
+    },
+    "fileAllocationTable": {
+      "offset": 3309568,
+      "size": 3872,
+      "end": 3313440
+    },
+    "arm9OverlayTable": {
+      "offset": 698368,
+      "size": 7584,
+      "end": 705952
+    },
+    "arm7OverlayTable": {
+      "offset": 0,
+      "size": 0,
+      "end": 0
+    },
+    "iconBannerOffset": 3313664,
+    "secureAreaChecksum": 18359,
+    "secureTransferDelay": 3454,
+    "arm9AutoLoadAddress": 33574568,
+    "arm7AutoLoadAddress": 37225428,
+    "romSizeDeclared": 205229568,
+    "headerSize": 16384
+  },
+  "banner": {
+    "version": 259,
+    "titles": {
+      "japanese": "Pokémon\nBlack Version\nNintendo",
+      "english": "Pokémon\nBlack Version\nNintendo",
+      "french": "Pokémon\nBlack Version\nNintendo",
+      "german": "Pokémon\nBlack Version\nNintendo",
+      "italian": "Pokémon\nBlack Version\nNintendo",
+      "spanish": "Pokémon\nBlack Version\nNintendo"
+    }
+  },
+  "filesystem": {
+    "fileCount": 247,
+    "directoryCount": 31
+  },
+  "warnings": [
+    "Declared ROM size (205229568) is larger than the actual file size (201632256)."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "frame_width": 79,
+  "frame_height": 69,
+  "frames": [
+    {
+      "index": 0,
+      "delay": 4
+    },
+    {
+      "index": 1,
+      "delay": 3
+    },
+    {
+      "index": 2,
+      "delay": 1
+    },
+    {
+      "index": 3,
+      "delay": 4
+    },
+    {
+      "index": 4,
+      "delay": 2
+    },
+    {
+      "index": 5,
+      "delay": 2
+    },
+    {
+      "index": 6,
+      "delay": 4
+    },
+    {
+      "index": 7,
+      "delay": 1
+    },
+    {
+      "index": 8,
+      "delay": 3
+    },
+    {
+      "index": 9,
+      "delay": 4
+    },
+    {
+      "index": 10,
+      "delay": 4
+    },
+    {
+      "index": 11,
+      "delay": 3
+    }
+  ]
+}

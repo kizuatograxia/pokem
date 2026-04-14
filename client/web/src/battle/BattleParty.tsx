@@ -1,5 +1,9 @@
 import React from "react";
 import type { PartySlotView } from "./types.js";
+import {
+  getPartyIconCandidates,
+  useResolvedImageUrl,
+} from "./pokemonSpriteResolver.js";
 
 const HUD_FONT = "'Power Green', 'Courier New', monospace";
 const PARTY_BG = "/assets/sprites/ui/party/bg.png";
@@ -42,11 +46,6 @@ function hpBarWidth(slot: PartySlotView): number {
   if (slot.hpPercent <= 0) return 0;
   const width = Math.round((96 * slot.hpPercent) / 100 / 2) * 2;
   return Math.max(2, Math.min(96, width));
-}
-
-function iconPath(slot: PartySlotView): string {
-  const folder = slot.shiny ? "icons-shiny" : "icons";
-  return `/assets/sprites/pokemon/${folder}/${slot.speciesId.toUpperCase()}.png`;
 }
 
 function genderStyle(gender: PartySlotView["gender"]): {
@@ -123,6 +122,34 @@ const ShadowText: React.FC<{
   </div>
 );
 
+const PartyPokemonIcon: React.FC<{
+  slot: PartySlotView;
+}> = ({ slot }) => {
+  const iconSrc = useResolvedImageUrl(getPartyIconCandidates(slot));
+
+  if (!iconSrc) {
+    return null;
+  }
+
+  return (
+    <img
+      src={iconSrc}
+      alt=""
+      draggable={false}
+      style={{
+        position: "absolute",
+        left: 28,
+        top: 8,
+        width: 64,
+        height: 64,
+        imageRendering: "pixelated",
+        objectFit: "contain",
+        display: "block",
+      }}
+    />
+  );
+};
+
 const PartyPanel: React.FC<{
   slot: PartySlotView;
   index: number;
@@ -177,19 +204,7 @@ const PartyPanel: React.FC<{
           imageRendering: "pixelated",
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          left: 28,
-          top: 8,
-          width: 64,
-          height: 64,
-          backgroundImage: `url(${iconPath(slot)})`,
-          backgroundPosition: "0px 0px",
-          backgroundRepeat: "no-repeat",
-          imageRendering: "pixelated",
-        }}
-      />
+      <PartyPokemonIcon slot={slot} />
       {slot.item && (
         <img
           src={PARTY_ITEM}

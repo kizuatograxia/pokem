@@ -1,0 +1,42 @@
+{
+  "frame_width": 45,
+  "frame_height": 50,
+  "frames": [
+    {
+      "index": 0,
+      "delay": 9
+    },
+    {
+      "index": 1,
+      "delay": 9
+    },
+    {
+      "index": 2,
+      "delay": 9
+    },
+    {
+      "index": 3,
+      "delay": 9
+    },
+    {
+      "index": 4,
+      "delay": 9
+    },
+    {
+      "index": 5,
+      "delay": 9
+    },
+    {
+      "index": 6,
+      "delay": 9
+    },
+    {
+      "index": 7,
+      "delay": 9
+    },
+    {
+      "index": 8,
+      "delay": 9
+    }
+  ]
+}

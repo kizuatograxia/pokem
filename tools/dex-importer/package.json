@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "import": "tsx src/index.ts",
-    "validate": "tsx src/index.ts --validate-only"
+    "validate": "tsx src/index.ts --validate-only",
+    "inspect:rom": "tsx src/index.ts --rom",
+    "inspect:narc": "tsx src/index.ts --rom",
+    "export:rom-icons": "python scripts/export_bw_rom_icons.py"
   },
   "dependencies": {},
   "devDependencies": {

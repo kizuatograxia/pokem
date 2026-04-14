@@ -27,7 +27,19 @@ export interface UseBattleWsResult {
   sendCommand: (cmd: PlayerCommand) => void;
 }
 
-const DEFAULT_SERVER = "ws://localhost:5173/battle-ws";
+function defaultServerUrl(): string {
+  const envUrl = import.meta.env.VITE_BATTLE_WS_URL;
+  if (typeof envUrl === "string" && envUrl.length > 0) {
+    return envUrl;
+  }
+
+  if (typeof window !== "undefined") {
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    return `${protocol}//${window.location.host}/battle-ws`;
+  }
+
+  return "ws://localhost:8788";
+}
 
 function isEndedState(state: BattleViewState | null | undefined): boolean {
   return state?.phase === "ended";
@@ -193,7 +205,7 @@ export function useBattleWs(opts: {
   cpu?: boolean;
   enabled?: boolean;
 }): UseBattleWsResult {
-  const { serverUrl = DEFAULT_SERVER, cpu = true, enabled = false } = opts;
+  const { serverUrl = defaultServerUrl(), cpu = true, enabled = false } = opts;
 
   const [status, setStatus] = useState<BattleStatus>("idle");
   const [state, setState] = useState<BattleViewState | null>(null);
@@ -289,7 +301,7 @@ export function useBattleWs(opts: {
     });
 
     ws.addEventListener("error", () => {
-      setError("Could not connect to battle server (ws://localhost:8788)");
+      setError(`Could not connect to battle server (${serverUrl})`);
       setStatus("error");
     });
 

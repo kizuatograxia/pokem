@@ -1,0 +1,279 @@
+{
+  "romPath": "C:\\users\\hedge\\onedrive\\desktop\\pokem\\Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "romFileName": "Pokemon Black (Unova Pokédex Edition v1.23).nds",
+  "romSha256": "a635e75bcd38a2627607145fcd4f73ef5dce34debccb1037609128c59453fe6d",
+  "narcPath": "a/0/1/6",
+  "narcSize": 46780,
+  "fileCount": 669,
+  "chunks": [
+    {
+      "id": "BTAF",
+      "offset": 16,
+      "size": 5364
+    },
+    {
+      "id": "BTNF",
+      "offset": 5380,
+      "size": 16
+    },
+    {
+      "id": "GMIF",
+      "offset": 5396,
+      "size": 41384
+    }
+  ],
+  "magicHistogram": [
+    {
+      "magic": "BIN",
+      "count": 602
+    },
+    {
+      "magic": "FFFF",
+      "count": 4
+    },
+    {
+      "magic": "KPU2",
+      "count": 2
+    },
+    {
+      "magic": "PPPP",
+      "count": 2
+    },
+    {
+      "magic": "__U7",
+      "count": 1
+    },
+    {
+      "magic": "0000",
+      "count": 1
+    },
+    {
+      "magic": "0H00",
+      "count": 1
+    },
+    {
+      "magic": "118B",
+      "count": 1
+    },
+    {
+      "magic": "2__F",
+      "count": 1
+    },
+    {
+      "magic": "2_4F",
+      "count": 1
+    },
+    {
+      "magic": "2_Z4",
+      "count": 1
+    },
+    {
+      "magic": "2222",
+      "count": 1
+    },
+    {
+      "magic": "2407",
+      "count": 1
+    },
+    {
+      "magic": "2AU7",
+      "count": 1
+    },
+    {
+      "magic": "2F Z",
+      "count": 1
+    },
+    {
+      "magic": "2F2F",
+      "count": 1
+    },
+    {
+      "magic": "2KF0",
+      "count": 1
+    },
+    {
+      "magic": "2KK2",
+      "count": 1
+    },
+    {
+      "magic": "2U7Z",
+      "count": 1
+    },
+    {
+      "magic": "2UU2",
+      "count": 1
+    },
+    {
+      "magic": "7727",
+      "count": 1
+    },
+    {
+      "magic": "7A_U",
+      "count": 1
+    },
+    {
+      "magic": "7F7U",
+      "count": 1
+    },
+    {
+      "magic": "7K2P",
+      "count": 1
+    },
+    {
+      "magic": "A_KU",
+      "count": 1
+    },
+    {
+      "magic": "A2FA",
+      "count": 1
+    },
+    {
+      "magic": "AAAZ",
+      "count": 1
+    },
+    {
+      "magic": "AI7U",
+      "count": 1
+    },
+    {
+      "magic": "AKF_",
+      "count": 1
+    },
+    {
+      "magic": "AZ27",
+      "count": 1
+    },
+    {
+      "magic": "DAAP",
+      "count": 1
+    },
+    {
+      "magic": "DHN",
+      "count": 1
+    },
+    {
+      "magic": "DZAR",
+      "count": 1
+    },
+    {
+      "magic": "F_UF",
+      "count": 1
+    },
+    {
+      "magic": "F7_A",
+      "count": 1
+    },
+    {
+      "magic": "F7AF",
+      "count": 1
+    },
+    {
+      "magic": "FAAF",
+      "count": 1
+    },
+    {
+      "magic": "FPAU",
+      "count": 1
+    },
+    {
+      "magic": "FTF3",
+      "count": 1
+    },
+    {
+      "magic": "FUF2",
+      "count": 1
+    },
+    {
+      "magic": "FZFF",
+      "count": 1
+    },
+    {
+      "magic": "G_UO",
+      "count": 1
+    },
+    {
+      "magic": "K__U",
+      "count": 1
+    },
+    {
+      "magic": "K_CS",
+      "count": 1
+    },
+    {
+      "magic": "KA7E",
+      "count": 1
+    },
+    {
+      "magic": "KFZP",
+      "count": 1
+    },
+    {
+      "magic": "KPFZ",
+      "count": 1
+    },
+    {
+      "magic": "KZ2_",
+      "count": 1
+    },
+    {
+      "magic": "MU3A",
+      "count": 1
+    },
+    {
+      "magic": "P_RK",
+      "count": 1
+    },
+    {
+      "magic": "PFFF",
+      "count": 1
+    },
+    {
+      "magic": "PPPZ",
+      "count": 1
+    },
+    {
+      "magic": "PRNU",
+      "count": 1
+    },
+    {
+      "magic": "PRSP",
+      "count": 1
+    },
+    {
+      "magic": "U2_P",
+      "count": 1
+    },
+    {
+      "magic": "UIFC",
+      "count": 1
+    },
+    {
+      "magic": "UPFZ",
+      "count": 1
+    },
+    {
+      "magic": "VLV_",
+      "count": 1
+    },
+    {
+      "magic": "ZFPF",
+      "count": 1
+    },
+    {
+      "magic": "ZKK7",
+      "count": 1
+    },
+    {
+      "magic": "ZKKF",
+      "count": 1
+    },
+    {
+      "magic": "ZRWL",
+      "count": 1
+    },
+    {
+      "magic": "ZU_F",
+      "count": 1
+    }
+  ]
+}

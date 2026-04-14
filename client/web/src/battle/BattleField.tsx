@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { ActivePokemonView } from "./types.js";
 import type { AnimMap, SpriteAnim } from "./useBattleAnimations.js";
+import {
+  getBattleSpriteCandidates,
+  useResolvedImageUrl,
+} from "./pokemonSpriteResolver.js";
 
 interface BattleSelectionState {
   player: Partial<Record<number, 1 | 2>>;
@@ -77,16 +81,35 @@ function colorsClose(left: RgbaColor, right: RgbaColor, tolerance: number): bool
   );
 }
 
-function detectBackgroundColor(data: Uint8ClampedArray, width: number, height: number): RgbaColor | null {
-  const samples = [
-    colorAt(data, width, 0, 0),
-    colorAt(data, width, width - 1, 0),
-    colorAt(data, width, 0, height - 1),
-    colorAt(data, width, width - 1, height - 1),
-  ];
-  const base = samples[0];
-  if (!base || base.a === 0) return null;
-  return samples.every((sample) => colorsClose(sample, base, 16)) ? base : null;
+function detectBackgroundColors(data: Uint8ClampedArray, width: number, height: number): RgbaColor[] {
+  const borderCounts = new Map<string, { color: RgbaColor; count: number }>();
+  const register = (x: number, y: number) => {
+    const color = colorAt(data, width, x, y);
+    if (color.a === 0) return;
+    const key = `${color.r},${color.g},${color.b},${color.a}`;
+    const current = borderCounts.get(key);
+    if (current) {
+      current.count += 1;
+      return;
+    }
+    borderCounts.set(key, { color, count: 1 });
+  };
+
+  for (let x = 0; x < width; x += 1) {
+    register(x, 0);
+    register(x, height - 1);
+  }
+  for (let y = 1; y < height - 1; y += 1) {
+    register(0, y);
+    register(width - 1, y);
+  }
+
+  const borderLength = width * 2 + Math.max(0, height - 2) * 2;
+  const threshold = Math.max(8, Math.floor(borderLength * 0.02));
+  return Array.from(borderCounts.values())
+    .filter((entry) => entry.count >= threshold)
+    .sort((left, right) => right.count - left.count)
+    .map((entry) => entry.color);
 }
 
 function stripLeadingGuideColumns(data: Uint8ClampedArray, width: number, height: number): number {
@@ -514,9 +537,9 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
   context.drawImage(img, 0, 0);
 
   let imageData = context.getImageData(0, 0, source.width, source.height);
-  const backgroundColor = detectBackgroundColor(imageData.data, source.width, source.height);
+  const backgroundColors = detectBackgroundColors(imageData.data, source.width, source.height);
 
-  if (backgroundColor) {
+  if (backgroundColors.length > 0) {
     const next = imageData.data;
     for (let index = 0; index < next.length; index += 4) {
       const pixel = {
@@ -525,7 +548,7 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
         b: next[index + 2] ?? 0,
         a: next[index + 3] ?? 0,
       };
-      if (pixel.a > 0 && colorsClose(pixel, backgroundColor, 20)) {
+      if (pixel.a > 0 && backgroundColors.some((backgroundColor) => colorsClose(pixel, backgroundColor, 20))) {
         next[index + 3] = 0;
       }
     }
@@ -601,11 +624,19 @@ function analyzeSpriteSheet(img: HTMLImageElement): SheetInfo {
   };
 }
 
-function useSpriteSheet(animSrc: string): SheetInfo | null {
-  const [info, setInfo] = useState<SheetInfo | null>(() => sheetCache.get(animSrc) ?? null);
-  const latestSrc = useRef(animSrc);
+function useSpriteSheet(animSrc: string | null): SheetInfo | null {
+  const [info, setInfo] = useState<SheetInfo | null>(() =>
+    animSrc ? (sheetCache.get(animSrc) ?? null) : null,
+  );
+  const latestSrc = useRef<string | null>(animSrc);
 
   useEffect(() => {
+    if (!animSrc) {
+      latestSrc.current = null;
+      setInfo(null);
+      return;
+    }
+
     latestSrc.current = animSrc;
     if (sheetCache.has(animSrc)) {
       setInfo(sheetCache.get(animSrc)!);
@@ -650,11 +681,9 @@ const AnimatedPokemonSprite: React.FC<{
   displaySize: number;
   wrapperStyle?: React.CSSProperties;
 }> = ({ pokemon, isBack, displaySize, wrapperStyle }) => {
-  const folder = isBack ? "back" : "front";
-  const animSrc = `/assets/sprites/pokemon/animated/${folder}/${pokemon.speciesId.toUpperCase()}.png`;
-  const staticSrc = `/assets/sprites/pokemon/${folder}/${pokemon.speciesId.toUpperCase()}.png`;
-  const fallbackSrc = `/assets/sprites/pokemon/${folder}/000.png`;
-
+  const spriteCandidates = getBattleSpriteCandidates(pokemon, isBack);
+  const animSrc = useResolvedImageUrl(spriteCandidates.animated);
+  const staticSrc = useResolvedImageUrl(spriteCandidates.static);
   const info = useSpriteSheet(animSrc);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -712,23 +741,7 @@ const AnimatedPokemonSprite: React.FC<{
     return () => window.clearInterval(timer);
   }, [displaySize, info]);
 
-  const content = !info ? (
-    <div style={{ width: displaySize, height: displaySize }} />
-  ) : !info.valid ? (
-    <img
-      src={staticSrc}
-      alt={pokemon.speciesId}
-      draggable={false}
-      onError={(e) => { e.currentTarget.src = fallbackSrc; }}
-      style={{
-        width: displaySize,
-        height: displaySize,
-        imageRendering: "pixelated",
-        objectFit: "contain",
-        display: "block",
-      }}
-    />
-  ) : (
+  const content = info?.valid ? (
     <canvas
       ref={canvasRef}
       style={{
@@ -738,6 +751,21 @@ const AnimatedPokemonSprite: React.FC<{
         display: "block",
       }}
     />
+  ) : staticSrc ? (
+    <img
+      src={staticSrc}
+      alt={pokemon.speciesId}
+      draggable={false}
+      style={{
+        width: displaySize,
+        height: displaySize,
+        imageRendering: "pixelated",
+        objectFit: "contain",
+        display: "block",
+      }}
+    />
+  ) : (
+    <div style={{ width: displaySize, height: displaySize }} />
   );
 
   return (

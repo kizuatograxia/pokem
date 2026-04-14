@@ -1,0 +1,21 @@
+﻿Loading palettes...
+
+--- Testing decryption modes on front static ---
+  Header: 12x12 tiles, tiled=0, vram=0x00000000
+  Saved: charizard-front-static-none.png
+  Saved: charizard-front-static-dp.png
+  Saved: charizard-front-static-pt.png
+
+--- Parts sheets (bitmap, no decrypt) ---
+  front parts: 32x16 tiles, tiled=1
+  Saved: charizard-front-parts.png
+  back parts: 32x16 tiles, tiled=1
+  Saved: charizard-back-parts.png
+
+--- Testing back static ---
+  Saved: charizard-back-static-none.png
+  Saved: charizard-back-static-dp.png
+  Saved: charizard-back-static-pt.png
+
+All outputs in: C:\Users\hedge\OneDrive\Desktop\pokem\tools\dex-importer\output\rom-charizard
+Done! Check the *-none, *-dp, *-pt variants to see which decryption works.
